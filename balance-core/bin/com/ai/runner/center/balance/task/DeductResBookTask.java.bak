@@ -1,0 +1,82 @@
+package com.ai.runner.center.balance.task;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import com.ai.runner.base.exception.SystemException;
+import com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetail;
+import com.ai.runner.center.balance.service.business.interfaces.IResDeductBusiSV;
+import com.ai.runner.sdk.tools.PaaSServiceTool;
+import com.ai.runner.utils.dts.base.ITask;
+import com.ai.runner.utils.dts.factory.DTSSchedulerFactory;
+import com.ai.runner.utils.util.CollectionUtil;
+import com.alibaba.fastjson.JSON;
+
+public class DeductResBookTask_Bak implements ITask {
+
+    private static final Logger LOG = LogManager.getLogger(DeductResBookTask_Bak.class);
+
+    private static IResDeductBusiSV resDeductBusiSV;
+
+    private static int threadCount = 0;
+
+    private IResDeductBusiSV getIResDeductBusiSV() {
+
+        if (resDeductBusiSV == null) {
+            ApplicationContext ac = new FileSystemXmlApplicationContext(
+                    "classpath:context/core-context.xml");
+            resDeductBusiSV = (IResDeductBusiSV) ac.getBean("resDeductBusiSVImpl");
+        }
+        return resDeductBusiSV;
+    }
+
+    private static int getThreadCount() {
+        if(threadCount==0){
+            Properties p = PaaSServiceTool.getDTSQuartzProperties();
+            if (p == null) {
+                try {
+                    p = new Properties();
+                    p.load(DTSSchedulerFactory.class.getResourceAsStream("/dts/dts-config.properties"));
+                } catch (IOException e) {
+                    throw new SystemException("读取DTS配置文件[/dts/dts-config.properties]失败", e);
+                }
+            }
+            threadCount = Integer.parseInt(p.getProperty("org.quartz.threadPool.threadCount"));
+        }
+        return threadCount;
+    }
+
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        String threadName = Thread.currentThread().getName();
+        int threadIndex = 0;
+        try {
+            threadIndex = Integer.parseInt(threadName.substring(threadName.lastIndexOf("-") + 1));
+        } catch (NumberFormatException e) {
+            LOG.error("获取当前线程编号异常：{}.请重新启动进程", e.getMessage());
+            throw new JobExecutionException("获取当前线程编号异常：" + e.getMessage() + ".请重新启动进程");
+        } /*catch (SchedulerException e) {
+            LOG.error("获取当前线程总数异常：{}.请重新启动进程", e.getMessage());
+            throw new JobExecutionException("获取当前线程总数异常：" + e.getMessage() + ".请重新启动进程");
+        }*/
+        //this.getThreadCount(),threadIndex - 1
+        List<FunResOperaDetail> operaList = this.getIResDeductBusiSV().queryWaitDeduct();
+        if (CollectionUtil.isEmpty(operaList)) {
+            // LOG.error("编号{}的线程尚未查询到数据，等待下次扫描", threadIndex);
+        } else {
+            LOG.error("编号{}的线程查询到数据{}条", threadIndex, operaList.size());
+            for (FunResOperaDetail opera : operaList) {
+                LOG.info("编号{}的线程处理数据{}", threadIndex, JSON.toJSONString(opera));
+                this.getIResDeductBusiSV().deductResBook(opera);
+            }
+        }
+    }
+}

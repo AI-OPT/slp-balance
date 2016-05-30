@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunAccountSetLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLog" >
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="pay_check" property="payCheck" jdbcType="VARCHAR" />
+    <result column="pay_password" property="payPassword" jdbcType="VARCHAR" />
+    <result column="secure_q1" property="secureQ1" jdbcType="VARCHAR" />
+    <result column="secure_q2" property="secureQ2" jdbcType="VARCHAR" />
+    <result column="secure_q3" property="secureQ3" jdbcType="VARCHAR" />
+    <result column="secure_a1" property="secureA1" jdbcType="VARCHAR" />
+    <result column="secure_a2" property="secureA2" jdbcType="VARCHAR" />
+    <result column="secure_a3" property="secureA3" jdbcType="VARCHAR" />
+    <result column="reg_type" property="regType" jdbcType="VARCHAR" />
+    <result column="reg_customer_id" property="regCustomerId" jdbcType="VARCHAR" />
+    <result column="reg_chnl_id" property="regChnlId" jdbcType="VARCHAR" />
+    <result column="reg_email" property="regEmail" jdbcType="VARCHAR" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_oper_id" property="lastUpdateOperId" jdbcType="VARCHAR" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tenant_id, account_id, login_password, pay_check, pay_password, secure_q1, secure_q2, 
+    secure_q3, secure_a1, secure_a2, secure_a3, reg_type, reg_customer_id, reg_chnl_id, 
+    reg_email, reg_time, last_update_oper_id, last_update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fun_account_set_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLogCriteria" >
+    delete from fun_account_set_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLog" >
+    insert into fun_account_set_log (tenant_id, account_id, login_password, 
+      pay_check, pay_password, secure_q1, 
+      secure_q2, secure_q3, secure_a1, 
+      secure_a2, secure_a3, reg_type, 
+      reg_customer_id, reg_chnl_id, reg_email, 
+      reg_time, last_update_oper_id, last_update_date
+      )
+    values (#{tenantId,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, #{loginPassword,jdbcType=VARCHAR}, 
+      #{payCheck,jdbcType=VARCHAR}, #{payPassword,jdbcType=VARCHAR}, #{secureQ1,jdbcType=VARCHAR}, 
+      #{secureQ2,jdbcType=VARCHAR}, #{secureQ3,jdbcType=VARCHAR}, #{secureA1,jdbcType=VARCHAR}, 
+      #{secureA2,jdbcType=VARCHAR}, #{secureA3,jdbcType=VARCHAR}, #{regType,jdbcType=VARCHAR}, 
+      #{regCustomerId,jdbcType=VARCHAR}, #{regChnlId,jdbcType=VARCHAR}, #{regEmail,jdbcType=VARCHAR}, 
+      #{regTime,jdbcType=TIMESTAMP}, #{lastUpdateOperId,jdbcType=VARCHAR}, #{lastUpdateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLog" >
+    insert into fun_account_set_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="loginPassword != null" >
+        login_password,
+      </if>
+      <if test="payCheck != null" >
+        pay_check,
+      </if>
+      <if test="payPassword != null" >
+        pay_password,
+      </if>
+      <if test="secureQ1 != null" >
+        secure_q1,
+      </if>
+      <if test="secureQ2 != null" >
+        secure_q2,
+      </if>
+      <if test="secureQ3 != null" >
+        secure_q3,
+      </if>
+      <if test="secureA1 != null" >
+        secure_a1,
+      </if>
+      <if test="secureA2 != null" >
+        secure_a2,
+      </if>
+      <if test="secureA3 != null" >
+        secure_a3,
+      </if>
+      <if test="regType != null" >
+        reg_type,
+      </if>
+      <if test="regCustomerId != null" >
+        reg_customer_id,
+      </if>
+      <if test="regChnlId != null" >
+        reg_chnl_id,
+      </if>
+      <if test="regEmail != null" >
+        reg_email,
+      </if>
+      <if test="regTime != null" >
+        reg_time,
+      </if>
+      <if test="lastUpdateOperId != null" >
+        last_update_oper_id,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="loginPassword != null" >
+        #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="payCheck != null" >
+        #{payCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="payPassword != null" >
+        #{payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="secureQ1 != null" >
+        #{secureQ1,jdbcType=VARCHAR},
+      </if>
+      <if test="secureQ2 != null" >
+        #{secureQ2,jdbcType=VARCHAR},
+      </if>
+      <if test="secureQ3 != null" >
+        #{secureQ3,jdbcType=VARCHAR},
+      </if>
+      <if test="secureA1 != null" >
+        #{secureA1,jdbcType=VARCHAR},
+      </if>
+      <if test="secureA2 != null" >
+        #{secureA2,jdbcType=VARCHAR},
+      </if>
+      <if test="secureA3 != null" >
+        #{secureA3,jdbcType=VARCHAR},
+      </if>
+      <if test="regType != null" >
+        #{regType,jdbcType=VARCHAR},
+      </if>
+      <if test="regCustomerId != null" >
+        #{regCustomerId,jdbcType=VARCHAR},
+      </if>
+      <if test="regChnlId != null" >
+        #{regChnlId,jdbcType=VARCHAR},
+      </if>
+      <if test="regEmail != null" >
+        #{regEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateOperId != null" >
+        #{lastUpdateOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from fun_account_set_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fun_account_set_log
+    <set >
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountId != null" >
+        account_id = #{record.accountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.loginPassword != null" >
+        login_password = #{record.loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payCheck != null" >
+        pay_check = #{record.payCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPassword != null" >
+        pay_password = #{record.payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secureQ1 != null" >
+        secure_q1 = #{record.secureQ1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secureQ2 != null" >
+        secure_q2 = #{record.secureQ2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secureQ3 != null" >
+        secure_q3 = #{record.secureQ3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secureA1 != null" >
+        secure_a1 = #{record.secureA1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secureA2 != null" >
+        secure_a2 = #{record.secureA2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secureA3 != null" >
+        secure_a3 = #{record.secureA3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regType != null" >
+        reg_type = #{record.regType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regCustomerId != null" >
+        reg_customer_id = #{record.regCustomerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regChnlId != null" >
+        reg_chnl_id = #{record.regChnlId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regEmail != null" >
+        reg_email = #{record.regEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regTime != null" >
+        reg_time = #{record.regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateOperId != null" >
+        last_update_oper_id = #{record.lastUpdateOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdateDate != null" >
+        last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fun_account_set_log
+    set tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      account_id = #{record.accountId,jdbcType=BIGINT},
+      login_password = #{record.loginPassword,jdbcType=VARCHAR},
+      pay_check = #{record.payCheck,jdbcType=VARCHAR},
+      pay_password = #{record.payPassword,jdbcType=VARCHAR},
+      secure_q1 = #{record.secureQ1,jdbcType=VARCHAR},
+      secure_q2 = #{record.secureQ2,jdbcType=VARCHAR},
+      secure_q3 = #{record.secureQ3,jdbcType=VARCHAR},
+      secure_a1 = #{record.secureA1,jdbcType=VARCHAR},
+      secure_a2 = #{record.secureA2,jdbcType=VARCHAR},
+      secure_a3 = #{record.secureA3,jdbcType=VARCHAR},
+      reg_type = #{record.regType,jdbcType=VARCHAR},
+      reg_customer_id = #{record.regCustomerId,jdbcType=VARCHAR},
+      reg_chnl_id = #{record.regChnlId,jdbcType=VARCHAR},
+      reg_email = #{record.regEmail,jdbcType=VARCHAR},
+      reg_time = #{record.regTime,jdbcType=TIMESTAMP},
+      last_update_oper_id = #{record.lastUpdateOperId,jdbcType=VARCHAR},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

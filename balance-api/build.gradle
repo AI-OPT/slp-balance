@@ -1,0 +1,128 @@
+apply plugin: 'APICollector'
+apply plugin: 'APIJarProcess'
+
+configurations {
+    jaxDoclet
+    runnerBaseSource
+}
+
+dependencies {
+    jaxDoclet 'com.ai.runner.plugin:apicollector:1.3-SNAPSHOT'
+    runnerBaseSource "com.ai.runner:runner-base:1.0:sources"
+    
+}
+
+// Doc Generator
+buildscript {
+    repositories {
+        maven { url mavenPublicURL }
+    }
+    dependencies {
+        classpath group: 'com.ai.runner.plugin', name: 'apicollectorplugin', version: '1.1-SNAPSHOT'
+        classpath group: 'com.ai.runner.plugin', name: 'apijarprocessplugin', version: '1.0'
+    }
+}
+
+
+
+def apiJarProcessTask=task("apiJarProcessTask",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
+	jarPaths=configurations.runnerBaseSource.files.asType(List)
+    destinationDir file("$buildDir/runner-base")
+}
+
+def List<Map<String,String>> apiList = new ArrayList<Map<String,String>>();
+Set<File> fileSet = fileTree(apiDir) { include '**/*.ini' }.getFiles();
+for(File file:fileSet){
+    File f1 = new File(file.getParent());
+    String apiName =  f1.getName();
+    String version = file.getText('UTF-8');
+
+    Map<String,String> apiMap = new HashMap<String,String>();
+    apiMap.put("apiName", apiName);
+    apiMap.put("apiArtifactId", apiName);
+    apiMap.put("apiTaskName", "A"+apiName);
+    apiMap.put("apiVersion", version);
+    apiList.add(apiMap);
+}
+
+def Map<String,Object> apiDocTaskMap = new HashMap<String,Object>();
+def Map<String,Object> apiTaskMap = new HashMap<String,Object>();
+for(Map<String,String> apiMap:apiList){
+    String apiName = apiMap.get("apiName");
+    String apiVersion = apiMap.get("apiVersion");
+    String apiArtifactId = apiMap.get("apiArtifactId");
+    String apiTaskName = apiMap.get("apiTaskName");
+    def jarTask = task("${apiTaskName}Jar", type: Jar){
+        version apiVersion
+        baseName apiArtifactId
+        from sourceSets.main.output
+        destinationDir file("$buildDir/api-libs")
+        include 'com/ai/runner/center/balance/api/'+apiName+'/**'
+        manifest {
+            attributes 'artifactId': apiArtifactId, 'Built-By': builtBy,'Built-date': new Date().format('yyyy-MM-dd HH:mm:ss'),'Manifest-Version':apiVersion
+        }
+    }
+    apiTaskMap.put(apiName, jarTask);
+
+    def apidocTask=task("${apiArtifactId}APIDoc",type:com.ai.runner.gradle.plugin.APICollectorTask){
+        dependsOn apiJarProcessTask
+	//esconfig = "[{ip:54.223.185.42, port:14999}]"
+        esconfig = "[{ip:10.1.234.160, port:14999}]"
+        source = fileTree(dir: 'src/main/java', include: 'com/ai/runner/center/balance/api/'+apiName+'/**/*.java')+fileTree(dir:"$buildDir/svn/runner-base", include:"**/*.java")
+        docletpath = configurations.jaxDoclet.files.asType(List)
+       	docletClass = 'com.ai.runner.apicollector.doclet.APIDoclet'
+    	memberLevel = 'private'
+    	encoding = 'utf-8'
+    	ownerType='runner-center'
+        owner = 'runner-balance-center'
+        belong='opt-runner'
+        groupId = 'com.ai.runner.center.balance'
+        artifactId = apiArtifactId
+        version = apiVersion
+    }
+    apiDocTaskMap.put(apiName, apidocTask);
+
+}
+
+task api2doc << {
+}
+
+api2doc.dependsOn {
+    tasks.findAll { task -> task.name.endsWith('APIDoc') }
+}
+
+publishing {
+    publications {
+        for(Map<String,String> apiMap:apiList){
+            String apiName = apiMap.get("apiName");
+            String apiVersion = apiMap.get("apiVersion");
+            String apiArtifactId = apiMap.get("apiArtifactId");
+            publishing.publications.create(apiName, MavenPublication) {
+                groupId group
+                artifactId apiArtifactId
+                version apiVersion
+                artifact  apiTaskMap.get(apiName)
+                pom.withXml {
+                    asNode().children().last() + {
+                        delegate.dependencies {
+                            delegate.dependency {
+                                delegate.groupId("com.ai.runner")
+                                delegate.artifactId("runner-base")
+                                delegate.version(runnerBaseVersion)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url  publishURL
+            credentials {
+                username = publishUserName
+                password = publishUserPassword
+            }
+        }
+    }
+}

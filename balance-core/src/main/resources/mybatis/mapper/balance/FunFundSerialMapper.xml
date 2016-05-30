@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunFundSerialMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+    <id column="pay_serial_code" property="paySerialCode" jdbcType="VARCHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
+    <result column="peer_serial_code" property="peerSerialCode" jdbcType="VARCHAR" />
+    <result column="cancel_serial_code" property="cancelSerialCode" jdbcType="VARCHAR" />
+    <result column="opt_type" property="optType" jdbcType="VARCHAR" />
+    <result column="total_amount" property="totalAmount" jdbcType="BIGINT" />
+    <result column="trans_summary" property="transSummary" jdbcType="VARCHAR" />
+    <result column="pay_rule_id" property="payRuleId" jdbcType="BIGINT" />
+    <result column="pay_status" property="payStatus" jdbcType="VARCHAR" />
+    <result column="acct_id1" property="acctId1" jdbcType="BIGINT" />
+    <result column="acct_name1" property="acctName1" jdbcType="VARCHAR" />
+    <result column="acct_id2" property="acctId2" jdbcType="BIGINT" />
+    <result column="acct_name2" property="acctName2" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="last_status_date" property="lastStatusDate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pay_serial_code, tenant_id, system_id, peer_serial_code, cancel_serial_code, opt_type, 
+    total_amount, trans_summary, pay_rule_id, pay_status, acct_id1, acct_name1, acct_id2, 
+    acct_name2, create_time, pay_time, last_status_date, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerialCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fun_fund_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fun_fund_serial
+    where pay_serial_code = #{paySerialCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fun_fund_serial
+    where pay_serial_code = #{paySerialCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerialCriteria" >
+    delete from fun_fund_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+    insert into fun_fund_serial (pay_serial_code, tenant_id, system_id, 
+      peer_serial_code, cancel_serial_code, opt_type, 
+      total_amount, trans_summary, pay_rule_id, 
+      pay_status, acct_id1, acct_name1, 
+      acct_id2, acct_name2, create_time, 
+      pay_time, last_status_date, remark
+      )
+    values (#{paySerialCode,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, 
+      #{peerSerialCode,jdbcType=VARCHAR}, #{cancelSerialCode,jdbcType=VARCHAR}, #{optType,jdbcType=VARCHAR}, 
+      #{totalAmount,jdbcType=BIGINT}, #{transSummary,jdbcType=VARCHAR}, #{payRuleId,jdbcType=BIGINT}, 
+      #{payStatus,jdbcType=VARCHAR}, #{acctId1,jdbcType=BIGINT}, #{acctName1,jdbcType=VARCHAR}, 
+      #{acctId2,jdbcType=BIGINT}, #{acctName2,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{lastStatusDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+    insert into fun_fund_serial
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paySerialCode != null" >
+        pay_serial_code,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="peerSerialCode != null" >
+        peer_serial_code,
+      </if>
+      <if test="cancelSerialCode != null" >
+        cancel_serial_code,
+      </if>
+      <if test="optType != null" >
+        opt_type,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="transSummary != null" >
+        trans_summary,
+      </if>
+      <if test="payRuleId != null" >
+        pay_rule_id,
+      </if>
+      <if test="payStatus != null" >
+        pay_status,
+      </if>
+      <if test="acctId1 != null" >
+        acct_id1,
+      </if>
+      <if test="acctName1 != null" >
+        acct_name1,
+      </if>
+      <if test="acctId2 != null" >
+        acct_id2,
+      </if>
+      <if test="acctName2 != null" >
+        acct_name2,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="lastStatusDate != null" >
+        last_status_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paySerialCode != null" >
+        #{paySerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="peerSerialCode != null" >
+        #{peerSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelSerialCode != null" >
+        #{cancelSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="optType != null" >
+        #{optType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="transSummary != null" >
+        #{transSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="payRuleId != null" >
+        #{payRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId1 != null" >
+        #{acctId1,jdbcType=BIGINT},
+      </if>
+      <if test="acctName1 != null" >
+        #{acctName1,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId2 != null" >
+        #{acctId2,jdbcType=BIGINT},
+      </if>
+      <if test="acctName2 != null" >
+        #{acctName2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastStatusDate != null" >
+        #{lastStatusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerialCriteria" resultType="java.lang.Integer" >
+    select count(*) from fun_fund_serial
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fun_fund_serial
+    <set >
+      <if test="record.paySerialCode != null" >
+        pay_serial_code = #{record.paySerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemId != null" >
+        system_id = #{record.systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peerSerialCode != null" >
+        peer_serial_code = #{record.peerSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cancelSerialCode != null" >
+        cancel_serial_code = #{record.cancelSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optType != null" >
+        opt_type = #{record.optType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.transSummary != null" >
+        trans_summary = #{record.transSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payRuleId != null" >
+        pay_rule_id = #{record.payRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payStatus != null" >
+        pay_status = #{record.payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId1 != null" >
+        acct_id1 = #{record.acctId1,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctName1 != null" >
+        acct_name1 = #{record.acctName1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId2 != null" >
+        acct_id2 = #{record.acctId2,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctName2 != null" >
+        acct_name2 = #{record.acctName2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payTime != null" >
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastStatusDate != null" >
+        last_status_date = #{record.lastStatusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fun_fund_serial
+    set pay_serial_code = #{record.paySerialCode,jdbcType=VARCHAR},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      system_id = #{record.systemId,jdbcType=VARCHAR},
+      peer_serial_code = #{record.peerSerialCode,jdbcType=VARCHAR},
+      cancel_serial_code = #{record.cancelSerialCode,jdbcType=VARCHAR},
+      opt_type = #{record.optType,jdbcType=VARCHAR},
+      total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      trans_summary = #{record.transSummary,jdbcType=VARCHAR},
+      pay_rule_id = #{record.payRuleId,jdbcType=BIGINT},
+      pay_status = #{record.payStatus,jdbcType=VARCHAR},
+      acct_id1 = #{record.acctId1,jdbcType=BIGINT},
+      acct_name1 = #{record.acctName1,jdbcType=VARCHAR},
+      acct_id2 = #{record.acctId2,jdbcType=BIGINT},
+      acct_name2 = #{record.acctName2,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      last_status_date = #{record.lastStatusDate,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+    update fun_fund_serial
+    <set >
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        system_id = #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="peerSerialCode != null" >
+        peer_serial_code = #{peerSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelSerialCode != null" >
+        cancel_serial_code = #{cancelSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="optType != null" >
+        opt_type = #{optType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="transSummary != null" >
+        trans_summary = #{transSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="payRuleId != null" >
+        pay_rule_id = #{payRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="payStatus != null" >
+        pay_status = #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId1 != null" >
+        acct_id1 = #{acctId1,jdbcType=BIGINT},
+      </if>
+      <if test="acctName1 != null" >
+        acct_name1 = #{acctName1,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId2 != null" >
+        acct_id2 = #{acctId2,jdbcType=BIGINT},
+      </if>
+      <if test="acctName2 != null" >
+        acct_name2 = #{acctName2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastStatusDate != null" >
+        last_status_date = #{lastStatusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pay_serial_code = #{paySerialCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+    update fun_fund_serial
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      system_id = #{systemId,jdbcType=VARCHAR},
+      peer_serial_code = #{peerSerialCode,jdbcType=VARCHAR},
+      cancel_serial_code = #{cancelSerialCode,jdbcType=VARCHAR},
+      opt_type = #{optType,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=BIGINT},
+      trans_summary = #{transSummary,jdbcType=VARCHAR},
+      pay_rule_id = #{payRuleId,jdbcType=BIGINT},
+      pay_status = #{payStatus,jdbcType=VARCHAR},
+      acct_id1 = #{acctId1,jdbcType=BIGINT},
+      acct_name1 = #{acctName1,jdbcType=VARCHAR},
+      acct_id2 = #{acctId2,jdbcType=BIGINT},
+      acct_name2 = #{acctName2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      last_status_date = #{lastStatusDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where pay_serial_code = #{paySerialCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

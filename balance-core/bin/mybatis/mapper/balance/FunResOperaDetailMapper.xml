@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunResOperaDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetail" >
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
+    <result column="external_id" property="externalId" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="owner_type" property="ownerType" jdbcType="INTEGER" />
+    <result column="resource_type" property="resourceType" jdbcType="INTEGER" />
+    <result column="change_amount" property="changeAmount" jdbcType="DECIMAL" />
+    <result column="opt_type" property="optType" jdbcType="INTEGER" />
+    <result column="opt_time" property="optTime" jdbcType="TIMESTAMP" />
+    <result column="book_status" property="bookStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tenant_id, system_id, external_id, owner_id, owner_type, resource_type, change_amount, 
+    opt_type, opt_time, book_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetailCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fun_res_opera_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetailCriteria" >
+    delete from fun_res_opera_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetail" >
+    insert into fun_res_opera_detail (tenant_id, system_id, external_id, 
+      owner_id, owner_type, resource_type, 
+      change_amount, opt_type, opt_time, 
+      book_status)
+    values (#{tenantId,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, #{externalId,jdbcType=VARCHAR}, 
+      #{ownerId,jdbcType=BIGINT}, #{ownerType,jdbcType=INTEGER}, #{resourceType,jdbcType=INTEGER}, 
+      #{changeAmount,jdbcType=DECIMAL}, #{optType,jdbcType=INTEGER}, #{optTime,jdbcType=TIMESTAMP}, 
+      #{bookStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetail" >
+    insert into fun_res_opera_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="externalId != null" >
+        external_id,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="ownerType != null" >
+        owner_type,
+      </if>
+      <if test="resourceType != null" >
+        resource_type,
+      </if>
+      <if test="changeAmount != null" >
+        change_amount,
+      </if>
+      <if test="optType != null" >
+        opt_type,
+      </if>
+      <if test="optTime != null" >
+        opt_time,
+      </if>
+      <if test="bookStatus != null" >
+        book_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="externalId != null" >
+        #{externalId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="ownerType != null" >
+        #{ownerType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="changeAmount != null" >
+        #{changeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="optType != null" >
+        #{optType,jdbcType=INTEGER},
+      </if>
+      <if test="optTime != null" >
+        #{optTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookStatus != null" >
+        #{bookStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetailCriteria" resultType="java.lang.Integer" >
+    select count(*) from fun_res_opera_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fun_res_opera_detail
+    <set >
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemId != null" >
+        system_id = #{record.systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externalId != null" >
+        external_id = #{record.externalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerId != null" >
+        owner_id = #{record.ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.ownerType != null" >
+        owner_type = #{record.ownerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceType != null" >
+        resource_type = #{record.resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.changeAmount != null" >
+        change_amount = #{record.changeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.optType != null" >
+        opt_type = #{record.optType,jdbcType=INTEGER},
+      </if>
+      <if test="record.optTime != null" >
+        opt_time = #{record.optTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bookStatus != null" >
+        book_status = #{record.bookStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fun_res_opera_detail
+    set tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      system_id = #{record.systemId,jdbcType=VARCHAR},
+      external_id = #{record.externalId,jdbcType=VARCHAR},
+      owner_id = #{record.ownerId,jdbcType=BIGINT},
+      owner_type = #{record.ownerType,jdbcType=INTEGER},
+      resource_type = #{record.resourceType,jdbcType=INTEGER},
+      change_amount = #{record.changeAmount,jdbcType=DECIMAL},
+      opt_type = #{record.optType,jdbcType=INTEGER},
+      opt_time = #{record.optTime,jdbcType=TIMESTAMP},
+      book_status = #{record.bookStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

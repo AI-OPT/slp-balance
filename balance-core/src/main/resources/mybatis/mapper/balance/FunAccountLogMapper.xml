@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunAccountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunAccountLog" >
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_ID" property="accountId" jdbcType="BIGINT" />
+    <result column="ACCT_NAME" property="acctName" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="BIGINT" />
+    <result column="ACCT_TYPE" property="acctType" jdbcType="VARCHAR" />
+    <result column="PAY_TYPE" property="payType" jdbcType="VARCHAR" />
+    <result column="POST_TYPE" property="postType" jdbcType="VARCHAR" />
+    <result column="ACCT_ADDR" property="acctAddr" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="TOTAL_BALANCE" property="totalBalance" jdbcType="BIGINT" />
+    <result column="CREDIT" property="credit" jdbcType="BIGINT" />
+    <result column="TEMP_CREDIT" property="tempCredit" jdbcType="BIGINT" />
+    <result column="TEMP_VALID_TIME" property="tempValidTime" jdbcType="TIMESTAMP" />
+    <result column="D_TOT_QUOTA" property="dTotQuota" jdbcType="BIGINT" />
+    <result column="D_SIG_QUOTA" property="dSigQuota" jdbcType="BIGINT" />
+    <result column="D_TRANS_QUOTA" property="dTransQuota" jdbcType="BIGINT" />
+    <result column="ACCT_STATUS" property="acctStatus" jdbcType="VARCHAR" />
+    <result column="BALANCE_CHG_DATE" property="balanceChgDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TENANT_ID, ACCOUNT_ID, ACCT_NAME, CUST_ID, ACCT_TYPE, PAY_TYPE, POST_TYPE, ACCT_ADDR, 
+    EMAIL, TOTAL_BALANCE, CREDIT, TEMP_CREDIT, TEMP_VALID_TIME, D_TOT_QUOTA, D_SIG_QUOTA, 
+    D_TRANS_QUOTA, ACCT_STATUS, BALANCE_CHG_DATE, REMARK, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fun_account_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountLogCriteria" >
+    delete from fun_account_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountLog" >
+    insert into fun_account_log (TENANT_ID, ACCOUNT_ID, ACCT_NAME, 
+      CUST_ID, ACCT_TYPE, PAY_TYPE, 
+      POST_TYPE, ACCT_ADDR, EMAIL, 
+      TOTAL_BALANCE, CREDIT, TEMP_CREDIT, 
+      TEMP_VALID_TIME, D_TOT_QUOTA, D_SIG_QUOTA, 
+      D_TRANS_QUOTA, ACCT_STATUS, BALANCE_CHG_DATE, 
+      REMARK, UPDATE_TIME)
+    values (#{tenantId,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, #{acctName,jdbcType=VARCHAR}, 
+      #{custId,jdbcType=BIGINT}, #{acctType,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, 
+      #{postType,jdbcType=VARCHAR}, #{acctAddr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{totalBalance,jdbcType=BIGINT}, #{credit,jdbcType=BIGINT}, #{tempCredit,jdbcType=BIGINT}, 
+      #{tempValidTime,jdbcType=TIMESTAMP}, #{dTotQuota,jdbcType=BIGINT}, #{dSigQuota,jdbcType=BIGINT}, 
+      #{dTransQuota,jdbcType=BIGINT}, #{acctStatus,jdbcType=VARCHAR}, #{balanceChgDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountLog" >
+    insert into fun_account_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="accountId != null" >
+        ACCOUNT_ID,
+      </if>
+      <if test="acctName != null" >
+        ACCT_NAME,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="acctType != null" >
+        ACCT_TYPE,
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE,
+      </if>
+      <if test="postType != null" >
+        POST_TYPE,
+      </if>
+      <if test="acctAddr != null" >
+        ACCT_ADDR,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="totalBalance != null" >
+        TOTAL_BALANCE,
+      </if>
+      <if test="credit != null" >
+        CREDIT,
+      </if>
+      <if test="tempCredit != null" >
+        TEMP_CREDIT,
+      </if>
+      <if test="tempValidTime != null" >
+        TEMP_VALID_TIME,
+      </if>
+      <if test="dTotQuota != null" >
+        D_TOT_QUOTA,
+      </if>
+      <if test="dSigQuota != null" >
+        D_SIG_QUOTA,
+      </if>
+      <if test="dTransQuota != null" >
+        D_TRANS_QUOTA,
+      </if>
+      <if test="acctStatus != null" >
+        ACCT_STATUS,
+      </if>
+      <if test="balanceChgDate != null" >
+        BALANCE_CHG_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="acctName != null" >
+        #{acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="acctType != null" >
+        #{acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null" >
+        #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="acctAddr != null" >
+        #{acctAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="totalBalance != null" >
+        #{totalBalance,jdbcType=BIGINT},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=BIGINT},
+      </if>
+      <if test="tempCredit != null" >
+        #{tempCredit,jdbcType=BIGINT},
+      </if>
+      <if test="tempValidTime != null" >
+        #{tempValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dTotQuota != null" >
+        #{dTotQuota,jdbcType=BIGINT},
+      </if>
+      <if test="dSigQuota != null" >
+        #{dSigQuota,jdbcType=BIGINT},
+      </if>
+      <if test="dTransQuota != null" >
+        #{dTransQuota,jdbcType=BIGINT},
+      </if>
+      <if test="acctStatus != null" >
+        #{acctStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceChgDate != null" >
+        #{balanceChgDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from fun_account_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fun_account_log
+    <set >
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountId != null" >
+        ACCOUNT_ID = #{record.accountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctName != null" >
+        ACCT_NAME = #{record.acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctType != null" >
+        ACCT_TYPE = #{record.acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null" >
+        PAY_TYPE = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postType != null" >
+        POST_TYPE = #{record.postType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctAddr != null" >
+        ACCT_ADDR = #{record.acctAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalBalance != null" >
+        TOTAL_BALANCE = #{record.totalBalance,jdbcType=BIGINT},
+      </if>
+      <if test="record.credit != null" >
+        CREDIT = #{record.credit,jdbcType=BIGINT},
+      </if>
+      <if test="record.tempCredit != null" >
+        TEMP_CREDIT = #{record.tempCredit,jdbcType=BIGINT},
+      </if>
+      <if test="record.tempValidTime != null" >
+        TEMP_VALID_TIME = #{record.tempValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dTotQuota != null" >
+        D_TOT_QUOTA = #{record.dTotQuota,jdbcType=BIGINT},
+      </if>
+      <if test="record.dSigQuota != null" >
+        D_SIG_QUOTA = #{record.dSigQuota,jdbcType=BIGINT},
+      </if>
+      <if test="record.dTransQuota != null" >
+        D_TRANS_QUOTA = #{record.dTransQuota,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctStatus != null" >
+        ACCT_STATUS = #{record.acctStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balanceChgDate != null" >
+        BALANCE_CHG_DATE = #{record.balanceChgDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fun_account_log
+    set TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      ACCOUNT_ID = #{record.accountId,jdbcType=BIGINT},
+      ACCT_NAME = #{record.acctName,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=BIGINT},
+      ACCT_TYPE = #{record.acctType,jdbcType=VARCHAR},
+      PAY_TYPE = #{record.payType,jdbcType=VARCHAR},
+      POST_TYPE = #{record.postType,jdbcType=VARCHAR},
+      ACCT_ADDR = #{record.acctAddr,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      TOTAL_BALANCE = #{record.totalBalance,jdbcType=BIGINT},
+      CREDIT = #{record.credit,jdbcType=BIGINT},
+      TEMP_CREDIT = #{record.tempCredit,jdbcType=BIGINT},
+      TEMP_VALID_TIME = #{record.tempValidTime,jdbcType=TIMESTAMP},
+      D_TOT_QUOTA = #{record.dTotQuota,jdbcType=BIGINT},
+      D_SIG_QUOTA = #{record.dSigQuota,jdbcType=BIGINT},
+      D_TRANS_QUOTA = #{record.dTransQuota,jdbcType=BIGINT},
+      ACCT_STATUS = #{record.acctStatus,jdbcType=VARCHAR},
+      BALANCE_CHG_DATE = #{record.balanceChgDate,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

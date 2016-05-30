@@ -1,0 +1,17 @@
+不经过Dubbo协议测试，不需要测试配置文件
+1.Dubbo接口实现类要注解（实际部署后这里就显得多余了）
+	@Component
+2.测试类要注解使用Sping配置文件
+	@ContextConfiguration({ "/context/core-context.xml" })
+3.测试类的Bean需要注解
+	@Autowired
+	
+经过Dubbo协议的测试
+1.先启动本机zookeeper服务，根据实际情况修改测试配置文件dubbo.properties
+2.注册Dubbo接口，使用测试类DubboServerStart，使用测试配置文件dubbo-provider.xml
+	配置文件配置的自动扫描“com.ai.runner.center.balance.api”下的dubbo服务
+3.测试类要注解测试配置文件
+	@ContextConfiguration({ "/dubbo-consumer.xml" })
+	配置文件配置的自动扫描“com.ai.runner.center.balance.test.api”下的dubbo消费
+3.测试类的Bean需要注解
+	@Reference

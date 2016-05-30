@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunSubsFreezeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+    <id column="SUBS_FREEZE_ID" property="subsFreezeId" jdbcType="BIGINT" />
+    <result column="PAY_RULE_ID" property="payRuleId" jdbcType="BIGINT" />
+    <result column="FREEZE_ID" property="freezeId" jdbcType="BIGINT" />
+    <result column="SUBS_ID" property="subsId" jdbcType="BIGINT" />
+    <result column="ACCT_ID" property="acctId" jdbcType="BIGINT" />
+    <result column="SUBJECT_ID" property="subjectId" jdbcType="BIGINT" />
+    <result column="DEST_SUBJECT_ID" property="destSubjectId" jdbcType="BIGINT" />
+    <result column="RUN_MODE" property="runMode" jdbcType="VARCHAR" />
+    <result column="CAL_MODE" property="calMode" jdbcType="VARCHAR" />
+    <result column="ORGINAL_AMOUNT" property="orginalAmount" jdbcType="BIGINT" />
+    <result column="ALLOT_MONTH" property="allotMonth" jdbcType="INTEGER" />
+    <result column="THAW_FEE" property="thawFee" jdbcType="BIGINT" />
+    <result column="THAW_SCALE" property="thawScale" jdbcType="INTEGER" />
+    <result column="ALREADY_ALLOT_AMOUNT" property="alreadyAllotAmount" jdbcType="BIGINT" />
+    <result column="ALREADY_ALLOT_MONTH" property="alreadyAllotMonth" jdbcType="INTEGER" />
+    <result column="START_ALLOT_MONTH" property="startAllotMonth" jdbcType="VARCHAR" />
+    <result column="LAST_ALLOT_MONTH" property="lastAllotMonth" jdbcType="VARCHAR" />
+    <result column="ALLOT_STATUS" property="allotStatus" jdbcType="VARCHAR" />
+    <result column="LAST_ALLOT_DATE" property="lastAllotDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVE_DATE" property="activeDate" jdbcType="TIMESTAMP" />
+    <result column="INACTIVE_DATE" property="inactiveDate" jdbcType="TIMESTAMP" />
+    <result column="CHNL_ID" property="chnlId" jdbcType="VARCHAR" />
+    <result column="CREATE_OPER_ID" property="createOperId" jdbcType="VARCHAR" />
+    <result column="FUND_ACTIVE_MONTHS" property="fundActiveMonths" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SUBS_FREEZE_ID, PAY_RULE_ID, FREEZE_ID, SUBS_ID, ACCT_ID, SUBJECT_ID, DEST_SUBJECT_ID, 
+    RUN_MODE, CAL_MODE, ORGINAL_AMOUNT, ALLOT_MONTH, THAW_FEE, THAW_SCALE, ALREADY_ALLOT_AMOUNT, 
+    ALREADY_ALLOT_MONTH, START_ALLOT_MONTH, LAST_ALLOT_MONTH, ALLOT_STATUS, LAST_ALLOT_DATE, 
+    CREATE_TIME, ACTIVE_DATE, INACTIVE_DATE, CHNL_ID, CREATE_OPER_ID, FUND_ACTIVE_MONTHS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreezeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fun_subs_freeze
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fun_subs_freeze
+    where SUBS_FREEZE_ID = #{subsFreezeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from fun_subs_freeze
+    where SUBS_FREEZE_ID = #{subsFreezeId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreezeCriteria" >
+    delete from fun_subs_freeze
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+    insert into fun_subs_freeze (SUBS_FREEZE_ID, PAY_RULE_ID, FREEZE_ID, 
+      SUBS_ID, ACCT_ID, SUBJECT_ID, 
+      DEST_SUBJECT_ID, RUN_MODE, CAL_MODE, 
+      ORGINAL_AMOUNT, ALLOT_MONTH, THAW_FEE, 
+      THAW_SCALE, ALREADY_ALLOT_AMOUNT, ALREADY_ALLOT_MONTH, 
+      START_ALLOT_MONTH, LAST_ALLOT_MONTH, ALLOT_STATUS, 
+      LAST_ALLOT_DATE, CREATE_TIME, ACTIVE_DATE, 
+      INACTIVE_DATE, CHNL_ID, CREATE_OPER_ID, 
+      FUND_ACTIVE_MONTHS)
+    values (#{subsFreezeId,jdbcType=BIGINT}, #{payRuleId,jdbcType=BIGINT}, #{freezeId,jdbcType=BIGINT}, 
+      #{subsId,jdbcType=BIGINT}, #{acctId,jdbcType=BIGINT}, #{subjectId,jdbcType=BIGINT}, 
+      #{destSubjectId,jdbcType=BIGINT}, #{runMode,jdbcType=VARCHAR}, #{calMode,jdbcType=VARCHAR}, 
+      #{orginalAmount,jdbcType=BIGINT}, #{allotMonth,jdbcType=INTEGER}, #{thawFee,jdbcType=BIGINT}, 
+      #{thawScale,jdbcType=INTEGER}, #{alreadyAllotAmount,jdbcType=BIGINT}, #{alreadyAllotMonth,jdbcType=INTEGER}, 
+      #{startAllotMonth,jdbcType=VARCHAR}, #{lastAllotMonth,jdbcType=VARCHAR}, #{allotStatus,jdbcType=VARCHAR}, 
+      #{lastAllotDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{activeDate,jdbcType=TIMESTAMP}, 
+      #{inactiveDate,jdbcType=TIMESTAMP}, #{chnlId,jdbcType=VARCHAR}, #{createOperId,jdbcType=VARCHAR}, 
+      #{fundActiveMonths,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+    insert into fun_subs_freeze
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subsFreezeId != null" >
+        SUBS_FREEZE_ID,
+      </if>
+      <if test="payRuleId != null" >
+        PAY_RULE_ID,
+      </if>
+      <if test="freezeId != null" >
+        FREEZE_ID,
+      </if>
+      <if test="subsId != null" >
+        SUBS_ID,
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+      <if test="subjectId != null" >
+        SUBJECT_ID,
+      </if>
+      <if test="destSubjectId != null" >
+        DEST_SUBJECT_ID,
+      </if>
+      <if test="runMode != null" >
+        RUN_MODE,
+      </if>
+      <if test="calMode != null" >
+        CAL_MODE,
+      </if>
+      <if test="orginalAmount != null" >
+        ORGINAL_AMOUNT,
+      </if>
+      <if test="allotMonth != null" >
+        ALLOT_MONTH,
+      </if>
+      <if test="thawFee != null" >
+        THAW_FEE,
+      </if>
+      <if test="thawScale != null" >
+        THAW_SCALE,
+      </if>
+      <if test="alreadyAllotAmount != null" >
+        ALREADY_ALLOT_AMOUNT,
+      </if>
+      <if test="alreadyAllotMonth != null" >
+        ALREADY_ALLOT_MONTH,
+      </if>
+      <if test="startAllotMonth != null" >
+        START_ALLOT_MONTH,
+      </if>
+      <if test="lastAllotMonth != null" >
+        LAST_ALLOT_MONTH,
+      </if>
+      <if test="allotStatus != null" >
+        ALLOT_STATUS,
+      </if>
+      <if test="lastAllotDate != null" >
+        LAST_ALLOT_DATE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="activeDate != null" >
+        ACTIVE_DATE,
+      </if>
+      <if test="inactiveDate != null" >
+        INACTIVE_DATE,
+      </if>
+      <if test="chnlId != null" >
+        CHNL_ID,
+      </if>
+      <if test="createOperId != null" >
+        CREATE_OPER_ID,
+      </if>
+      <if test="fundActiveMonths != null" >
+        FUND_ACTIVE_MONTHS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subsFreezeId != null" >
+        #{subsFreezeId,jdbcType=BIGINT},
+      </if>
+      <if test="payRuleId != null" >
+        #{payRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="freezeId != null" >
+        #{freezeId,jdbcType=BIGINT},
+      </if>
+      <if test="subsId != null" >
+        #{subsId,jdbcType=BIGINT},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="destSubjectId != null" >
+        #{destSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="runMode != null" >
+        #{runMode,jdbcType=VARCHAR},
+      </if>
+      <if test="calMode != null" >
+        #{calMode,jdbcType=VARCHAR},
+      </if>
+      <if test="orginalAmount != null" >
+        #{orginalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="allotMonth != null" >
+        #{allotMonth,jdbcType=INTEGER},
+      </if>
+      <if test="thawFee != null" >
+        #{thawFee,jdbcType=BIGINT},
+      </if>
+      <if test="thawScale != null" >
+        #{thawScale,jdbcType=INTEGER},
+      </if>
+      <if test="alreadyAllotAmount != null" >
+        #{alreadyAllotAmount,jdbcType=BIGINT},
+      </if>
+      <if test="alreadyAllotMonth != null" >
+        #{alreadyAllotMonth,jdbcType=INTEGER},
+      </if>
+      <if test="startAllotMonth != null" >
+        #{startAllotMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAllotMonth != null" >
+        #{lastAllotMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="allotStatus != null" >
+        #{allotStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAllotDate != null" >
+        #{lastAllotDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeDate != null" >
+        #{activeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inactiveDate != null" >
+        #{inactiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chnlId != null" >
+        #{chnlId,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperId != null" >
+        #{createOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="fundActiveMonths != null" >
+        #{fundActiveMonths,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreezeCriteria" resultType="java.lang.Integer" >
+    select count(*) from fun_subs_freeze
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fun_subs_freeze
+    <set >
+      <if test="record.subsFreezeId != null" >
+        SUBS_FREEZE_ID = #{record.subsFreezeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payRuleId != null" >
+        PAY_RULE_ID = #{record.payRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.freezeId != null" >
+        FREEZE_ID = #{record.freezeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subsId != null" >
+        SUBS_ID = #{record.subsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctId != null" >
+        ACCT_ID = #{record.acctId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectId != null" >
+        SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.destSubjectId != null" >
+        DEST_SUBJECT_ID = #{record.destSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.runMode != null" >
+        RUN_MODE = #{record.runMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calMode != null" >
+        CAL_MODE = #{record.calMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orginalAmount != null" >
+        ORGINAL_AMOUNT = #{record.orginalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.allotMonth != null" >
+        ALLOT_MONTH = #{record.allotMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.thawFee != null" >
+        THAW_FEE = #{record.thawFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.thawScale != null" >
+        THAW_SCALE = #{record.thawScale,jdbcType=INTEGER},
+      </if>
+      <if test="record.alreadyAllotAmount != null" >
+        ALREADY_ALLOT_AMOUNT = #{record.alreadyAllotAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.alreadyAllotMonth != null" >
+        ALREADY_ALLOT_MONTH = #{record.alreadyAllotMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.startAllotMonth != null" >
+        START_ALLOT_MONTH = #{record.startAllotMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastAllotMonth != null" >
+        LAST_ALLOT_MONTH = #{record.lastAllotMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allotStatus != null" >
+        ALLOT_STATUS = #{record.allotStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastAllotDate != null" >
+        LAST_ALLOT_DATE = #{record.lastAllotDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activeDate != null" >
+        ACTIVE_DATE = #{record.activeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inactiveDate != null" >
+        INACTIVE_DATE = #{record.inactiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chnlId != null" >
+        CHNL_ID = #{record.chnlId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createOperId != null" >
+        CREATE_OPER_ID = #{record.createOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fundActiveMonths != null" >
+        FUND_ACTIVE_MONTHS = #{record.fundActiveMonths,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fun_subs_freeze
+    set SUBS_FREEZE_ID = #{record.subsFreezeId,jdbcType=BIGINT},
+      PAY_RULE_ID = #{record.payRuleId,jdbcType=BIGINT},
+      FREEZE_ID = #{record.freezeId,jdbcType=BIGINT},
+      SUBS_ID = #{record.subsId,jdbcType=BIGINT},
+      ACCT_ID = #{record.acctId,jdbcType=BIGINT},
+      SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      DEST_SUBJECT_ID = #{record.destSubjectId,jdbcType=BIGINT},
+      RUN_MODE = #{record.runMode,jdbcType=VARCHAR},
+      CAL_MODE = #{record.calMode,jdbcType=VARCHAR},
+      ORGINAL_AMOUNT = #{record.orginalAmount,jdbcType=BIGINT},
+      ALLOT_MONTH = #{record.allotMonth,jdbcType=INTEGER},
+      THAW_FEE = #{record.thawFee,jdbcType=BIGINT},
+      THAW_SCALE = #{record.thawScale,jdbcType=INTEGER},
+      ALREADY_ALLOT_AMOUNT = #{record.alreadyAllotAmount,jdbcType=BIGINT},
+      ALREADY_ALLOT_MONTH = #{record.alreadyAllotMonth,jdbcType=INTEGER},
+      START_ALLOT_MONTH = #{record.startAllotMonth,jdbcType=VARCHAR},
+      LAST_ALLOT_MONTH = #{record.lastAllotMonth,jdbcType=VARCHAR},
+      ALLOT_STATUS = #{record.allotStatus,jdbcType=VARCHAR},
+      LAST_ALLOT_DATE = #{record.lastAllotDate,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      ACTIVE_DATE = #{record.activeDate,jdbcType=TIMESTAMP},
+      INACTIVE_DATE = #{record.inactiveDate,jdbcType=TIMESTAMP},
+      CHNL_ID = #{record.chnlId,jdbcType=VARCHAR},
+      CREATE_OPER_ID = #{record.createOperId,jdbcType=VARCHAR},
+      FUND_ACTIVE_MONTHS = #{record.fundActiveMonths,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+    update fun_subs_freeze
+    <set >
+      <if test="payRuleId != null" >
+        PAY_RULE_ID = #{payRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="freezeId != null" >
+        FREEZE_ID = #{freezeId,jdbcType=BIGINT},
+      </if>
+      <if test="subsId != null" >
+        SUBS_ID = #{subsId,jdbcType=BIGINT},
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID = #{acctId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectId != null" >
+        SUBJECT_ID = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="destSubjectId != null" >
+        DEST_SUBJECT_ID = #{destSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="runMode != null" >
+        RUN_MODE = #{runMode,jdbcType=VARCHAR},
+      </if>
+      <if test="calMode != null" >
+        CAL_MODE = #{calMode,jdbcType=VARCHAR},
+      </if>
+      <if test="orginalAmount != null" >
+        ORGINAL_AMOUNT = #{orginalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="allotMonth != null" >
+        ALLOT_MONTH = #{allotMonth,jdbcType=INTEGER},
+      </if>
+      <if test="thawFee != null" >
+        THAW_FEE = #{thawFee,jdbcType=BIGINT},
+      </if>
+      <if test="thawScale != null" >
+        THAW_SCALE = #{thawScale,jdbcType=INTEGER},
+      </if>
+      <if test="alreadyAllotAmount != null" >
+        ALREADY_ALLOT_AMOUNT = #{alreadyAllotAmount,jdbcType=BIGINT},
+      </if>
+      <if test="alreadyAllotMonth != null" >
+        ALREADY_ALLOT_MONTH = #{alreadyAllotMonth,jdbcType=INTEGER},
+      </if>
+      <if test="startAllotMonth != null" >
+        START_ALLOT_MONTH = #{startAllotMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAllotMonth != null" >
+        LAST_ALLOT_MONTH = #{lastAllotMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="allotStatus != null" >
+        ALLOT_STATUS = #{allotStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAllotDate != null" >
+        LAST_ALLOT_DATE = #{lastAllotDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeDate != null" >
+        ACTIVE_DATE = #{activeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inactiveDate != null" >
+        INACTIVE_DATE = #{inactiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chnlId != null" >
+        CHNL_ID = #{chnlId,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperId != null" >
+        CREATE_OPER_ID = #{createOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="fundActiveMonths != null" >
+        FUND_ACTIVE_MONTHS = #{fundActiveMonths,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SUBS_FREEZE_ID = #{subsFreezeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+    update fun_subs_freeze
+    set PAY_RULE_ID = #{payRuleId,jdbcType=BIGINT},
+      FREEZE_ID = #{freezeId,jdbcType=BIGINT},
+      SUBS_ID = #{subsId,jdbcType=BIGINT},
+      ACCT_ID = #{acctId,jdbcType=BIGINT},
+      SUBJECT_ID = #{subjectId,jdbcType=BIGINT},
+      DEST_SUBJECT_ID = #{destSubjectId,jdbcType=BIGINT},
+      RUN_MODE = #{runMode,jdbcType=VARCHAR},
+      CAL_MODE = #{calMode,jdbcType=VARCHAR},
+      ORGINAL_AMOUNT = #{orginalAmount,jdbcType=BIGINT},
+      ALLOT_MONTH = #{allotMonth,jdbcType=INTEGER},
+      THAW_FEE = #{thawFee,jdbcType=BIGINT},
+      THAW_SCALE = #{thawScale,jdbcType=INTEGER},
+      ALREADY_ALLOT_AMOUNT = #{alreadyAllotAmount,jdbcType=BIGINT},
+      ALREADY_ALLOT_MONTH = #{alreadyAllotMonth,jdbcType=INTEGER},
+      START_ALLOT_MONTH = #{startAllotMonth,jdbcType=VARCHAR},
+      LAST_ALLOT_MONTH = #{lastAllotMonth,jdbcType=VARCHAR},
+      ALLOT_STATUS = #{allotStatus,jdbcType=VARCHAR},
+      LAST_ALLOT_DATE = #{lastAllotDate,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ACTIVE_DATE = #{activeDate,jdbcType=TIMESTAMP},
+      INACTIVE_DATE = #{inactiveDate,jdbcType=TIMESTAMP},
+      CHNL_ID = #{chnlId,jdbcType=VARCHAR},
+      CREATE_OPER_ID = #{createOperId,jdbcType=VARCHAR},
+      FUND_ACTIVE_MONTHS = #{fundActiveMonths,jdbcType=INTEGER}
+    where SUBS_FREEZE_ID = #{subsFreezeId,jdbcType=BIGINT}
+  </update>
+</mapper>
