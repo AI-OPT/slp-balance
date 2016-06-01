@@ -3,12 +3,12 @@ apply plugin: 'APIJarProcess'
 
 configurations {
     jaxDoclet
-    runnerBaseSource
+    optBaseSource
 }
 
 dependencies {
     jaxDoclet 'com.ai.runner.plugin:apicollector:1.3-SNAPSHOT'
-    runnerBaseSource "com.ai.runner:runner-base:1.0:sources"
+    optBaseSource "com.ai.opt:opt-base:1.0-SNAPSHOT:sources"
     
 }
 
@@ -26,7 +26,7 @@ buildscript {
 
 
 def apiJarProcessTask=task("apiJarProcessTask",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
-	jarPaths=configurations.runnerBaseSource.files.asType(List)
+	jarPaths=configurations.optBaseSource.files.asType(List)
     destinationDir file("$buildDir/runner-base")
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
-	<classpathentry sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.ai.runner/runner-base/1.0/95c10c4e4050fe14243eb9cc2fa5766f346ca095/runner-base-1.0-sources.jar" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.ai.runner/runner-base/1.0/6803494da789276ef36f7edbe5eafbcb01da23a8/runner-base-1.0.jar" exported="true"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
