@@ -28,7 +28,7 @@ public interface FunResOperaDetailAttachMapper{
     //1.自己编写映射
     //@Results({ @Result(id=true,column="owner_id",property="ownerId")})
     //2.使用配置文件映射
-    @ResultMap("com.ai.runner.center.balance.dao.mapper.interfaces.FunResOperaDetailMapper.BaseResultMap")
+    @ResultMap("com.ai.slp.balance.dao.mapper.interfaces.FunResOperaDetailMapper.BaseResultMap")
     public List<FunResOperaDetail> getWaitDeductOpera(@Param("optType") List<Integer> optTypes,
             @Param("status") String status, @Param("count") int count, @Param("mod") int mod);
 }
