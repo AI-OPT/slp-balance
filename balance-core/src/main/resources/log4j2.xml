@@ -30,6 +30,10 @@
 			<AppenderRef ref="RollingFile" />
 			<AppenderRef ref="STDOUT" />
 		</logger>
+		<logger name="com.ai.slp" level="info" additivity="false">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="STDOUT" />
+		</logger>
 		<Root level="error">
 			<AppenderRef ref="RollingFile" />
 			<AppenderRef ref="STDOUT" />
