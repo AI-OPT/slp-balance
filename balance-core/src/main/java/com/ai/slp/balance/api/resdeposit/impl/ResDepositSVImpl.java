@@ -5,10 +5,10 @@ import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
-import com.ai.runner.base.exception.BusinessException;
 import com.ai.slp.balance.api.resdeposit.interfaces.IResDepositSV;
 import com.ai.slp.balance.api.resdeposit.param.ResourceDeposit;
 import com.ai.slp.balance.constants.BalancesCostants;

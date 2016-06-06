@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
-import com.ai.runner.base.exception.CallerException;
 import com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV;
 import com.ai.slp.balance.api.accountmaintain.param.AccountUpdateParam;
 import com.ai.slp.balance.api.accountmaintain.param.RegAccReq;
@@ -158,7 +158,7 @@ public class AccountMaintainSVImplTest extends TestCase {
      * @author fanpw
      * @ApiDocMethod
      */
-    @Test(expected = CallerException.class)
+    @Test(expected = BusinessException.class)
     public void testUpdateAccountCase3() {
         AccountUpdateParam param = new AccountUpdateParam();
         param.setTenantId("1");

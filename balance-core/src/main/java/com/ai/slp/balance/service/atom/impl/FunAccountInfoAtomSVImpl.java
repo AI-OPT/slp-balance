@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.ai.runner.base.exception.BusinessException;
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdxCriteria;

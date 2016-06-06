@@ -2,9 +2,9 @@ package com.ai.slp.balance.util;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
-import com.ai.runner.base.exception.SystemException;
-import com.ai.runner.center.common.api.subject.interfaces.IGnSubjectQuerySV;
+import com.ai.slp.common.api.subject.interfaces.IGnSubjectQuerySV;
 
 public final class DubboUtil {
 

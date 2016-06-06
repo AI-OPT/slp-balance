@@ -2,7 +2,7 @@ package com.ai.slp.balance.service.business.interfaces;
 
 import java.util.List;
 
-import com.ai.runner.base.exception.BusinessException;
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.slp.balance.dao.mapper.bo.FunSubject;
 import com.ai.slp.balance.dao.mapper.bo.FunSubjectFund;
 

@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.paas.ipaas.util.StringUtil;
-import com.ai.runner.base.exception.BusinessException;
 import com.ai.slp.balance.constants.BalancesCostants;
 import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.dao.mapper.bo.FunResBook;

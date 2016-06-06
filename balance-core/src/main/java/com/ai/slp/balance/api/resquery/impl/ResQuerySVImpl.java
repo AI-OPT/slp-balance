@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.StringUtil;
-import com.ai.runner.base.exception.BusinessException;
 import com.ai.slp.balance.api.resquery.interfaces.IResQuerySV;
 import com.ai.slp.balance.api.resquery.param.ResAmount;
 import com.ai.slp.balance.api.resquery.param.ResAmountQuery;

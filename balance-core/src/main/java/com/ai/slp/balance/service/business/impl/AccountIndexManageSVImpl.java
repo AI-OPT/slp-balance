@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ai.runner.base.exception.BusinessException;
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByExternalIdIdx;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;

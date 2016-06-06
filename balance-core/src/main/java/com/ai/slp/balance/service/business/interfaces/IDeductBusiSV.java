@@ -1,6 +1,6 @@
 package com.ai.slp.balance.service.business.interfaces;
 
-import com.ai.runner.base.exception.BusinessException;
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.slp.balance.api.deduct.param.DeductAccount;
 import com.ai.slp.balance.api.deduct.param.DeductParam;
 import com.ai.slp.balance.api.deduct.param.ForegiftDeduct;

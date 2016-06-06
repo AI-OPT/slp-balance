@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.StringUtil;
-import com.ai.runner.base.exception.BusinessException;
 import com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV;
 import com.ai.slp.balance.api.accountmaintain.param.AccountUpdateParam;
 import com.ai.slp.balance.api.accountmaintain.param.RegAccReq;

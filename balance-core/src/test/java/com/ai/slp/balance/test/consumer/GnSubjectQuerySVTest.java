@@ -10,10 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ai.opt.sdk.util.StringUtil;
-import com.ai.runner.center.common.api.subject.interfaces.IGnSubjectQuerySV;
-import com.ai.runner.center.common.api.subject.param.SubjectFund;
-import com.ai.runner.center.common.api.subject.param.SubjectIdParam;
 import com.ai.slp.balance.util.DubboUtil;
+import com.ai.slp.common.api.subject.interfaces.IGnSubjectQuerySV;
+import com.ai.slp.common.api.subject.param.SubjectFund;
+import com.ai.slp.common.api.subject.param.SubjectIdParam;
 import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringJUnit4ClassRunner.class)

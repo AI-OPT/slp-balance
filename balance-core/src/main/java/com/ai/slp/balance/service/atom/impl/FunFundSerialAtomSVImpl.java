@@ -6,9 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
-import com.ai.runner.base.exception.BusinessException;
 import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.dao.mapper.bo.FunFundSerial;
 import com.ai.slp.balance.dao.mapper.bo.FunFundSerialByAcctIdIdx;

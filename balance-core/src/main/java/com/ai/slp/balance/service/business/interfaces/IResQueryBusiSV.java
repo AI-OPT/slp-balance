@@ -2,7 +2,7 @@ package com.ai.slp.balance.service.business.interfaces;
 
 import java.util.List;
 
-import com.ai.runner.base.exception.BusinessException;
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.slp.balance.api.resquery.param.ResAmount;
 import com.ai.slp.balance.api.resquery.param.ResAmountQuery;
 import com.ai.slp.balance.api.resquery.param.ResPkgInfo;
