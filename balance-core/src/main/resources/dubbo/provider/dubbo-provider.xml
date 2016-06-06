@@ -28,7 +28,7 @@
 	<dubbo:provider filter="DubboRequestTrackFilter" timeout="${dubbo.provider.timeout}" retries="0" threads="300" />
 	<dubbo:monitor protocol="registry" />
 
-	<dubbo:annotation package="com.ai.runner.center.balance.api" />
+	<dubbo:annotation package="com.ai.slp.balance.api" />
 
 	<import resource="../../context/core-context.xml" />
 </beans>

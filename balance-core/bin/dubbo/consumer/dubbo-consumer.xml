@@ -18,11 +18,11 @@
 	<dubbo:application name="consumer-of-${dubbo.appname}" />
 
 	<dubbo:registry protocol="${dubbo.registry.protocol}"
-		address="${center.dubbo.registry.address}" />
+		address="${dubbo.registry.address}" />
 	<dubbo:monitor protocol="registry" />
 
 	<!-- <dubbo:consumer timeout="${dubbo.consoumer.timeout}" /> -->
 
 	<dubbo:reference id="IGnSubjectQuerySV"
-		interface="com.ai.runner.center.common.api.subject.interfaces.IGnSubjectQuerySV" />
+		interface="com.ai.slp.common.api.subject.interfaces.IGnSubjectQuerySV" />
 </beans>
