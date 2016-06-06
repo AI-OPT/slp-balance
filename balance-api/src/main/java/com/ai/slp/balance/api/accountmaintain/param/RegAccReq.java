@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.accountmaintain.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 创建账户 <br>

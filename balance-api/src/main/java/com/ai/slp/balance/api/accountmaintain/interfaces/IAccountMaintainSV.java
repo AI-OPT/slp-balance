@@ -1,6 +1,7 @@
 package com.ai.slp.balance.api.accountmaintain.interfaces;
 
-import com.ai.runner.base.exception.CallerException;
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.accountmaintain.param.AccountUpdateParam;
 import com.ai.slp.balance.api.accountmaintain.param.RegAccReq;
 
@@ -24,18 +25,18 @@ public interface IAccountMaintainSV {
      * @ApiDocMethod
      * @ApiCode ABM_0011
      */
-    public long createAccount(RegAccReq regAccReq) throws CallerException;
+    public long createAccount(RegAccReq regAccReq) throws BusinessException,SystemException;
 
     /**
      * 账户资料修改.<br>
      * 对账户资料进行修改<br>
      * 
      * @param param
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0015
      */
-    public void updateAccount(AccountUpdateParam param) throws CallerException;
+    public void updateAccount(AccountUpdateParam param) throws BusinessException,SystemException;
 
 }

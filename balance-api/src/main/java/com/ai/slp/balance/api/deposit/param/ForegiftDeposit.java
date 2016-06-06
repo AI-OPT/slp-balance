@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.deposit.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 押金存入请求参数 <br>

@@ -1,6 +1,7 @@
 package com.ai.slp.balance.api.deduct.interfaces;
 
-import com.ai.runner.base.exception.CallerException;
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.deduct.param.DeductAccount;
 import com.ai.slp.balance.api.deduct.param.DeductParam;
 import com.ai.slp.balance.api.deduct.param.ForegiftDeduct;
@@ -25,7 +26,7 @@ public interface IDeductSV {
      * @ApiDocMethod
      * @ApiCode ABM_0019
      */
-    public String deductFund(DeductParam param) throws CallerException;
+    public String deductFund(DeductParam param) throws BusinessException,SystemException;
 
     /**
      * 销账扣款 (扣减).<br>
@@ -34,12 +35,12 @@ public interface IDeductSV {
      * 
      * @param param
      * @return 交易流水号
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0037
      */
-    public String settleAccount(SettleParam param) throws CallerException;
+    public String settleAccount(SettleParam param) throws BusinessException,SystemException;
 
     /**
      * 押金扣减.<br>
@@ -47,12 +48,12 @@ public interface IDeductSV {
      * 
      * @param param
      * @return 交易流水号
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0006
      */
-    public String deductForegift(ForegiftDeduct param) throws CallerException;
+    public String deductForegift(ForegiftDeduct param) throws BusinessException,SystemException;
 
     /**
      * 
@@ -60,10 +61,10 @@ public interface IDeductSV {
      * 
      * @param param
      * @return 未抵扣的金额
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0047
      */
-    public long deductPartFundByAccount(DeductAccount param) throws CallerException;
+    public long deductPartFundByAccount(DeductAccount param) throws BusinessException,SystemException;
 }

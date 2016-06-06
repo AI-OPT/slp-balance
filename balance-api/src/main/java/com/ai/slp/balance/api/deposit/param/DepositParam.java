@@ -2,7 +2,7 @@ package com.ai.slp.balance.api.deposit.param;
 
 import java.util.List;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 现金存入请求参数 <br>

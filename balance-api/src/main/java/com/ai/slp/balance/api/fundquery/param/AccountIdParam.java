@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.fundquery.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 账号查询请求参数

@@ -1,6 +1,7 @@
 package com.ai.slp.balance.api.deposit.interfaces;
 
-import com.ai.runner.base.exception.CallerException;
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.deposit.param.DepositParam;
 import com.ai.slp.balance.api.deposit.param.ForegiftDeposit;
 
@@ -20,12 +21,12 @@ public interface IDepositSV {
      * 
      * @param param
      * @return 交易流水号
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0016
      */
-    public String depositFund(DepositParam param) throws CallerException;
+    public String depositFund(DepositParam param) throws BusinessException,SystemException;
 
     /**
      * 押金存入.<br>
@@ -33,10 +34,10 @@ public interface IDepositSV {
      * 
      * @param param
      * @return 交易流水号
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0005
      */
-    public String depositForegift(ForegiftDeposit param) throws CallerException;
+    public String depositForegift(ForegiftDeposit param) throws BusinessException,SystemException;
 }

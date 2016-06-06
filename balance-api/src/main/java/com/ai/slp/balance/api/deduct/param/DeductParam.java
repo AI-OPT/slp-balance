@@ -2,7 +2,7 @@ package com.ai.slp.balance.api.deduct.param;
 
 import java.util.List;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 普通扣款参数<br>

@@ -1,6 +1,7 @@
 package com.ai.slp.balance.api.resdeposit.interfaces;
 
-import com.ai.runner.base.exception.CallerException;
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.resdeposit.param.ResourceDeposit;
 
 /**
@@ -17,10 +18,10 @@ public interface IResDepositSV {
      * 提供将资源量入账本的操作，支持月初套餐资源自动入账本、单笔资源入账。支持新入账的资源抵扣原来超出套餐部分的资源<br>
      * 
      * @param param
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0027
      */
-    public void depositResource(ResourceDeposit param) throws CallerException;
+    public void depositResource(ResourceDeposit param) throws BusinessException,SystemException;
 }

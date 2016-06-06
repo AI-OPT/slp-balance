@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.resdeposit.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 public class ResourceDeposit extends BaseInfo {
 

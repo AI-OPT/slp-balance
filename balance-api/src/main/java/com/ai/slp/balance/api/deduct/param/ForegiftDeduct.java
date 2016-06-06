@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.deduct.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 押金扣减请求参数

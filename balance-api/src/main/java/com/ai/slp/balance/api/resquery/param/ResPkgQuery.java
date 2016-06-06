@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.resquery.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 套餐余量查询请求参数

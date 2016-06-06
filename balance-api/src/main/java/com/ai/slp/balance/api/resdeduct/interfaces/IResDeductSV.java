@@ -1,6 +1,7 @@
 package com.ai.slp.balance.api.resdeduct.interfaces;
 
-import com.ai.runner.base.exception.CallerException;
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.resdeduct.param.ResourceDeduct;
 
 /**
@@ -20,11 +21,11 @@ public interface IResDeductSV {
      * 
      * @param param
      * @return 扣减结果
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0029
      */
-    public void deductResource(ResourceDeduct param) throws CallerException;
+    public void deductResource(ResourceDeduct param) throws BusinessException,SystemException;
 
 }

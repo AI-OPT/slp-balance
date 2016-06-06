@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.accountmaintain.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 /**
  * 账户设置入参.<br>

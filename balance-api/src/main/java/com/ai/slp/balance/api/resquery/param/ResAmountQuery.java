@@ -1,6 +1,6 @@
 package com.ai.slp.balance.api.resquery.param;
 
-import com.ai.runner.base.vo.BaseInfo;
+import com.ai.opt.base.vo.BaseInfo;
 
 public class ResAmountQuery extends BaseInfo{
 

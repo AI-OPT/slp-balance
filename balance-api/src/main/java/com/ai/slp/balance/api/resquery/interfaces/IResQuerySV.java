@@ -2,7 +2,8 @@ package com.ai.slp.balance.api.resquery.interfaces;
 
 import java.util.List;
 
-import com.ai.runner.base.exception.CallerException;
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.resquery.param.ResAmount;
 import com.ai.slp.balance.api.resquery.param.ResAmountQuery;
 import com.ai.slp.balance.api.resquery.param.ResDetailQuery;
@@ -26,12 +27,12 @@ public interface IResQuerySV {
      * 
      * @param param
      * @return 可用总量
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0045
      */
-    public ResAmount queryUsableAmount(ResAmountQuery param) throws CallerException;
+    public ResAmount queryUsableAmount(ResAmountQuery param) throws BusinessException,SystemException;
 
     /**
      * 套餐余量查询.<br>
@@ -39,20 +40,20 @@ public interface IResQuerySV {
      * 
      * @param param
      * @return 套餐列表
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0042
      */
-    public List<ResPkgInfo> queryResPackage(ResPkgQuery param) throws CallerException;
+    public List<ResPkgInfo> queryResPackage(ResPkgQuery param) throws BusinessException,SystemException;
 
     /**
      * 资源可用余量查询,未规划
      * 
      * @param param
      * @return 可用资源列表
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      */
-    public ResUsableDetail queryUsableDetail(ResDetailQuery param) throws CallerException;
+    public ResUsableDetail queryUsableDetail(ResDetailQuery param) throws BusinessException,SystemException;
 }

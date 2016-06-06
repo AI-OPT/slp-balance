@@ -2,7 +2,8 @@ package com.ai.slp.balance.api.accountquery.interfaces;
 
 import java.util.List;
 
-import com.ai.runner.base.exception.CallerException;
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.accountquery.param.AccountIdParam;
 import com.ai.slp.balance.api.accountquery.param.AccountInfoVo;
 import com.ai.slp.balance.api.accountquery.param.CustIdParam;
@@ -23,12 +24,12 @@ public interface IAccountQuerySV {
      * 
      * @param accountId
      * @return 账户信息
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0012
      */
-    public AccountInfoVo queryAccontById(AccountIdParam accountId) throws CallerException;
+    public AccountInfoVo queryAccontById(AccountIdParam accountId) throws BusinessException,SystemException;
 
     /**
      * 按客户查询账户资料.<br>
@@ -36,11 +37,11 @@ public interface IAccountQuerySV {
      * 
      * @param custId
      * @return 账户信息列表
-     * @throws CallerException
+     * @throws BusinessException,SystemException
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0013
      */
-    public List<AccountInfoVo> queryAccontByCustId(CustIdParam custId) throws CallerException;
+    public List<AccountInfoVo> queryAccontByCustId(CustIdParam custId) throws BusinessException,SystemException;
 
 }
