@@ -39,11 +39,11 @@
      -->
     <!-- 配置单库数据源 -->
     <!-- 配置DBS数据源 -->
-    <bean id="dataSource" class="com.ai.runner.sdk.datasource.RunnerHikariDataSource">
-         <constructor-arg name="dataSourceName" value="balance-center-db"/>
+	<bean id="dataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource">
+         <constructor-arg name="dataSourceName" value="slp-balance-db"/>
     </bean>
     <bean id="seqDataSourceLoader"
-        class="com.ai.runner.sdk.sequence.normal.datasource.SeqDataSourceLoader"
+		class="com.ai.opt.sdk.components.sequence.datasource.SeqDataSourceLoader"
         init-method="init">
         <property name="ds" ref="dataSource" />
     </bean>
@@ -55,7 +55,7 @@
         <property name="mapperLocations" value="classpath*:mybatis/mapper/balance/*.xml"/>
     </bean>
     <!-- 扫描Mapper,需要添加mybatis前缀绑定 -->
-	<mybatis:scan base-package="com.ai.runner.center.balance.dao.mapper.attach" />
+	<mybatis:scan base-package="com.ai.slp.balance.dao.mapper.attach" />
     <!-- 配置SqlSessionTemplate -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
@@ -67,9 +67,6 @@
     <bean id="transactionManager" class="com.ai.paas.ipaas.txs.dtm.spring.DistributedTransactionManager">
     	<property name="dataSource" ref="dataSource"/>
 	</bean>
-	<!-- PaaSTXS授权-->
-    <bean id="paaSTransactionUserAuth" class="com.ai.runner.sdk.txs.auth.PaaSTransactionUserAuth" init-method="init">
-    </bean>
     
     <!-- 使用annotation注解方式配置事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -89,6 +86,6 @@
     <!-- 启动注解扫描 -->
     <context:annotation-config/>
     <!-- 设定注解扫描基础包 -->
-    <context:component-scan base-package="com.ai.runner.center.balance"/>
+    <context:component-scan base-package="com.ai.slp.balance"/>
 
 </beans>

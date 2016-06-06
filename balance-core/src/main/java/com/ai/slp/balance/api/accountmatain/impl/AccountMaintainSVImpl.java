@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.runner.base.exception.BusinessException;
-import com.ai.runner.base.exception.CallerException;
 import com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV;
 import com.ai.slp.balance.api.accountmaintain.param.AccountUpdateParam;
 import com.ai.slp.balance.api.accountmaintain.param.RegAccReq;
@@ -28,7 +28,7 @@ public class AccountMaintainSVImpl implements IAccountMaintainSV {
     private IAccountManagerSV accountSV;
 
     @Override
-    public long createAccount(RegAccReq regAccReq) throws CallerException {
+    public long createAccount(RegAccReq regAccReq) throws BusinessException,SystemException {
         log.debug("创建账户---开始");
         long newAccountId = 0;
         try {
@@ -115,7 +115,7 @@ public class AccountMaintainSVImpl implements IAccountMaintainSV {
     }
 
     @Override
-    public void updateAccount(AccountUpdateParam param) throws CallerException {
+    public void updateAccount(AccountUpdateParam param) throws BusinessException,SystemException {
         log.debug("更新余额中心账户开始");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "获取参数失败:账户设置入参不能为空");

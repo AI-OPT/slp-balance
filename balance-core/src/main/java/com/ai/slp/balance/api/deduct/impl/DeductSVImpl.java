@@ -5,10 +5,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.runner.base.exception.BusinessException;
-import com.ai.runner.base.exception.CallerException;
 import com.ai.slp.balance.api.deduct.interfaces.IDeductSV;
 import com.ai.slp.balance.api.deduct.param.DeductAccount;
 import com.ai.slp.balance.api.deduct.param.DeductParam;
@@ -31,7 +31,7 @@ public class DeductSVImpl implements IDeductSV {
     private IDeductBusiSV deductBusiSV;
 
     @Override
-    public String deductFund(DeductParam param) throws CallerException {
+    public String deductFund(DeductParam param) throws BusinessException,SystemException {
         log.debug("开始普通扣款服务");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -64,7 +64,7 @@ public class DeductSVImpl implements IDeductSV {
     }
 
     @Override
-    public String settleAccount(SettleParam param) throws CallerException {
+    public String settleAccount(SettleParam param) throws BusinessException,SystemException {
         log.debug("开始销账扣款服务");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -102,7 +102,7 @@ public class DeductSVImpl implements IDeductSV {
     }
 
     @Override
-    public String deductForegift(ForegiftDeduct param) throws CallerException {
+    public String deductForegift(ForegiftDeduct param) throws BusinessException,SystemException {
         log.debug("开始押金扣减服务");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -129,7 +129,7 @@ public class DeductSVImpl implements IDeductSV {
     }
 
     @Override
-    public long deductPartFundByAccount(DeductAccount param) throws CallerException {
+    public long deductPartFundByAccount(DeductAccount param) throws BusinessException,SystemException {
         log.debug("开始按照账户部分扣款服务");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");

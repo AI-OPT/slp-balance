@@ -7,13 +7,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.runner.base.exception.BusinessException;
-import com.ai.runner.base.exception.CallerException;
 import com.ai.slp.balance.api.accountquery.interfaces.IAccountQuerySV;
+import com.ai.slp.balance.api.accountquery.param.AccountIdParam;
 import com.ai.slp.balance.api.accountquery.param.AccountInfoVo;
 import com.ai.slp.balance.api.accountquery.param.CustIdParam;
-import com.ai.slp.balance.api.accountquery.param.AccountIdParam;
 import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.service.business.interfaces.IAccountManagerSV;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -28,7 +28,7 @@ public class AccountQuerySVImpl implements IAccountQuerySV {
     private IAccountManagerSV accountSV;
 
     @Override
-    public AccountInfoVo queryAccontById(AccountIdParam accountId) throws CallerException {
+    public AccountInfoVo queryAccontById(AccountIdParam accountId) throws BusinessException,SystemException {
         log.debug("按账户ID查询账户开始");
         AccountInfoVo accountInfoVo = null;
         if (accountId == null) {
@@ -47,7 +47,7 @@ public class AccountQuerySVImpl implements IAccountQuerySV {
     }
 
     @Override
-    public List<AccountInfoVo> queryAccontByCustId(CustIdParam custId) throws CallerException {
+    public List<AccountInfoVo> queryAccontByCustId(CustIdParam custId) throws BusinessException,SystemException {
 
         log.debug("按客户UD查询账户开始");
         if (custId == null) {

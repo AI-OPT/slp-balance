@@ -5,11 +5,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.runner.base.exception.BusinessException;
-import com.ai.runner.base.exception.CallerException;
 import com.ai.slp.balance.api.deposit.interfaces.IDepositSV;
 import com.ai.slp.balance.api.deposit.param.DepositParam;
 import com.ai.slp.balance.api.deposit.param.ForegiftDeposit;
@@ -29,7 +29,7 @@ public class DepositSVImpl implements IDepositSV {
     private IDepositBusiSV depositSV;
 
     @Override
-    public String depositFund(DepositParam param) throws CallerException {
+    public String depositFund(DepositParam param) throws BusinessException,SystemException {
         log.debug("开始存款服务");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -66,7 +66,7 @@ public class DepositSVImpl implements IDepositSV {
     }
 
     @Override
-    public String depositForegift(ForegiftDeposit param) throws CallerException {
+    public String depositForegift(ForegiftDeposit param) throws BusinessException,SystemException {
         log.debug("开始存入押金服务");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");

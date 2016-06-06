@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.runner.base.exception.BusinessException;
-import com.ai.runner.base.exception.CallerException;
 import com.ai.slp.balance.api.fundquery.interfaces.IFundQuerySV;
 import com.ai.slp.balance.api.fundquery.param.AccountIdParam;
 import com.ai.slp.balance.api.fundquery.param.ForegiftInfo;
@@ -31,7 +31,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
     private IFundQueryBusiSV fundQueryBusiSV;
 
     @Override
-    public List<ForegiftInfo> queryForegift(ForegiftQuery param) throws CallerException {
+    public List<ForegiftInfo> queryForegift(ForegiftQuery param) throws BusinessException,SystemException {
         LOG.debug("按账户ID查询押金开始");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -48,7 +48,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
     }
 
     @Override
-    public FundInfo queryFund(AccountIdParam accountId) throws CallerException {
+    public FundInfo queryFund(AccountIdParam accountId) throws BusinessException,SystemException {
         LOG.debug("按账户ID查询账户余额");
         if (accountId == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -65,7 +65,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
     }
 
     @Override
-    public FundInfo queryUsableFund(AccountIdParam accountId) throws CallerException {
+    public FundInfo queryUsableFund(AccountIdParam accountId) throws BusinessException,SystemException {
         LOG.debug("按账户ID查询账户可用余额");
         if (accountId == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -82,7 +82,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
     }
 
     @Override
-    public FundInfo queryFrozenFund(AccountIdParam accountId) throws CallerException {
+    public FundInfo queryFrozenFund(AccountIdParam accountId) throws BusinessException,SystemException {
         LOG.debug("按账户ID查询账户冻结资金");
         if (accountId == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -99,7 +99,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
     }
 
     @Override
-    public FundInfo queryUsableTeleFund(AccountIdParam accountId) throws CallerException {
+    public FundInfo queryUsableTeleFund(AccountIdParam accountId) throws BusinessException,SystemException {
         LOG.debug("按账户ID查询可用通信资金");
         if (accountId == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -116,7 +116,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
     }
 
     @Override
-    public FundInfo queryFundBySubjectId(SubjectId subjectId) throws CallerException {
+    public FundInfo queryFundBySubjectId(SubjectId subjectId) throws BusinessException,SystemException {
         LOG.debug("按科目ID查询资金账本");
         if (subjectId == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
@@ -134,7 +134,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
     }
 
     @Override
-    public List<String> queryCoupon(AccountIdParam accountId) throws CallerException {
+    public List<String> queryCoupon(AccountIdParam accountId) throws BusinessException,SystemException {
         // TODO
         return new ArrayList<String>();
     }
