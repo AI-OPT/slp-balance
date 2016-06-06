@@ -21,7 +21,7 @@ allprojects {
     sourceCompatibility = 1.7
 
     configurations.all { resolutionStrategy.cacheChangingModulesFor 0, 'seconds' }
-    group="com.ai.runner.center.balance"
+    group="com.ai.slp.balance"
 }
 
 subprojects {
@@ -48,13 +48,13 @@ subprojects {
         }
     }
 
-    dependencies { compile "com.ai.runner:runner-base:${runnerBaseVersion}" }
+    dependencies { compile "com.ai.opt:opt-base:1.0-SNAPSHOT" }
 }
 
 project("balance-api") {
     project.ext {
         appName = "balance-api"
-        apiDir =  "src/main/java/com/ai/runner/center/balance/api/"
+        apiDir =  "src/main/java/com/ai/slp/balance/api/"
     }
 
     jar {
@@ -73,7 +73,7 @@ project("balance-core") {
     jar {
         baseName appName
         version moduleVersion
-        include "com/ai/runner/center/balance/*/**"
+        include "com/ai/slp/balance/*/**"
         manifest {
             attributes 'packageName': appName, 'Built-By': builtBy, 'create-date': new Date().format('yyyy-MM-dd HH:mm:ss')
         }
