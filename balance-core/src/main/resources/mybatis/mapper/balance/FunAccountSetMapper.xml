@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunAccountSetMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSet" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.FunAccountSetMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunAccountSet" >
     <id column="account_id" property="accountId" jdbcType="BIGINT" />
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
     <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
@@ -84,7 +84,7 @@
     secure_q3, secure_a1, secure_a2, secure_a3, reg_type, reg_customer_id, reg_chnl_id, 
     reg_email, reg_time, update_oper_id, update_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -112,13 +112,13 @@
     delete from fun_account_set
     where account_id = #{accountId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetCriteria" >
     delete from fun_account_set
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSet" >
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSet" >
     insert into fun_account_set (account_id, tenant_id, login_password, 
       pay_check, pay_password, secure_q1, 
       secure_q2, secure_q3, secure_a1, 
@@ -134,7 +134,7 @@
       #{regTime,jdbcType=TIMESTAMP}, #{updateOperId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSet" >
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSet" >
     insert into fun_account_set
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="accountId != null" >
@@ -249,7 +249,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetCriteria" resultType="java.lang.Integer" >
     select count(*) from fun_account_set
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -341,7 +341,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSet" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSet" >
     update fun_account_set
     <set >
       <if test="tenantId != null" >
@@ -398,7 +398,7 @@
     </set>
     where account_id = #{accountId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSet" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSet" >
     update fun_account_set
     set tenant_id = #{tenantId,jdbcType=VARCHAR},
       login_password = #{loginPassword,jdbcType=VARCHAR},

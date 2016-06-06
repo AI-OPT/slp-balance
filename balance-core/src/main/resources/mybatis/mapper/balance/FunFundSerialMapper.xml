@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunFundSerialMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.FunFundSerialMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunFundSerial" >
     <id column="pay_serial_code" property="paySerialCode" jdbcType="VARCHAR" />
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
     <result column="system_id" property="systemId" jdbcType="VARCHAR" />
@@ -84,7 +84,7 @@
     total_amount, trans_summary, pay_rule_id, pay_status, acct_id1, acct_name1, acct_id2, 
     acct_name2, create_time, pay_time, last_status_date, remark
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerialCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunFundSerialCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -112,13 +112,13 @@
     delete from fun_fund_serial
     where pay_serial_code = #{paySerialCode,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerialCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunFundSerialCriteria" >
     delete from fun_fund_serial
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunFundSerial" >
     insert into fun_fund_serial (pay_serial_code, tenant_id, system_id, 
       peer_serial_code, cancel_serial_code, opt_type, 
       total_amount, trans_summary, pay_rule_id, 
@@ -134,7 +134,7 @@
       #{payTime,jdbcType=TIMESTAMP}, #{lastStatusDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunFundSerial" >
     insert into fun_fund_serial
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="paySerialCode != null" >
@@ -249,7 +249,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerialCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunFundSerialCriteria" resultType="java.lang.Integer" >
     select count(*) from fun_fund_serial
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -341,7 +341,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunFundSerial" >
     update fun_fund_serial
     <set >
       <if test="tenantId != null" >
@@ -398,7 +398,7 @@
     </set>
     where pay_serial_code = #{paySerialCode,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunFundSerial" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.FunFundSerial" >
     update fun_fund_serial
     set tenant_id = #{tenantId,jdbcType=VARCHAR},
       system_id = #{systemId,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunSubsFreezeMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.FunSubsFreezeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunSubsFreeze" >
     <id column="SUBS_FREEZE_ID" property="subsFreezeId" jdbcType="BIGINT" />
     <result column="PAY_RULE_ID" property="payRuleId" jdbcType="BIGINT" />
     <result column="FREEZE_ID" property="freezeId" jdbcType="BIGINT" />
@@ -92,7 +92,7 @@
     ALREADY_ALLOT_MONTH, START_ALLOT_MONTH, LAST_ALLOT_MONTH, ALLOT_STATUS, LAST_ALLOT_DATE, 
     CREATE_TIME, ACTIVE_DATE, INACTIVE_DATE, CHNL_ID, CREATE_OPER_ID, FUND_ACTIVE_MONTHS
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreezeCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubsFreezeCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -120,13 +120,13 @@
     delete from fun_subs_freeze
     where SUBS_FREEZE_ID = #{subsFreezeId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreezeCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubsFreezeCriteria" >
     delete from fun_subs_freeze
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubsFreeze" >
     insert into fun_subs_freeze (SUBS_FREEZE_ID, PAY_RULE_ID, FREEZE_ID, 
       SUBS_ID, ACCT_ID, SUBJECT_ID, 
       DEST_SUBJECT_ID, RUN_MODE, CAL_MODE, 
@@ -146,7 +146,7 @@
       #{inactiveDate,jdbcType=TIMESTAMP}, #{chnlId,jdbcType=VARCHAR}, #{createOperId,jdbcType=VARCHAR}, 
       #{fundActiveMonths,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubsFreeze" >
     insert into fun_subs_freeze
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="subsFreezeId != null" >
@@ -303,7 +303,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreezeCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubsFreezeCriteria" resultType="java.lang.Integer" >
     select count(*) from fun_subs_freeze
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -423,7 +423,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubsFreeze" >
     update fun_subs_freeze
     <set >
       <if test="payRuleId != null" >
@@ -501,7 +501,7 @@
     </set>
     where SUBS_FREEZE_ID = #{subsFreezeId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubsFreeze" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubsFreeze" >
     update fun_subs_freeze
     set PAY_RULE_ID = #{payRuleId,jdbcType=BIGINT},
       FREEZE_ID = #{freezeId,jdbcType=BIGINT},

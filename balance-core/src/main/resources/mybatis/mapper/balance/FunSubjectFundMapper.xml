@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunSubjectFundMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFund" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.FunSubjectFundMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunSubjectFund" >
     <id column="subject_id" property="subjectId" jdbcType="BIGINT" />
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
     <result column="fund_type" property="fundType" jdbcType="VARCHAR" />
@@ -79,7 +79,7 @@
     subject_id, tenant_id, fund_type, is_cash, use_mode, can_settle_all, valid_type, 
     use_pri, refund_rate, can_trans, can_clean_fund, can_del_book, cal_score, print_mode
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFundCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubjectFundCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -107,13 +107,13 @@
     delete from fun_subject_fund
     where subject_id = #{subjectId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFundCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubjectFundCriteria" >
     delete from fun_subject_fund
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFund" >
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubjectFund" >
     insert into fun_subject_fund (subject_id, tenant_id, fund_type, 
       is_cash, use_mode, can_settle_all, 
       valid_type, use_pri, refund_rate, 
@@ -125,7 +125,7 @@
       #{canTrans,jdbcType=VARCHAR}, #{canCleanFund,jdbcType=VARCHAR}, #{canDelBook,jdbcType=VARCHAR}, 
       #{calScore,jdbcType=VARCHAR}, #{printMode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFund" >
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubjectFund" >
     insert into fun_subject_fund
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="subjectId != null" >
@@ -216,7 +216,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFundCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubjectFundCriteria" resultType="java.lang.Integer" >
     select count(*) from fun_subject_fund
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -292,7 +292,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFund" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubjectFund" >
     update fun_subject_fund
     <set >
       <if test="tenantId != null" >
@@ -337,7 +337,7 @@
     </set>
     where subject_id = #{subjectId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunSubjectFund" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.FunSubjectFund" >
     update fun_subject_fund
     set tenant_id = #{tenantId,jdbcType=VARCHAR},
       fund_type = #{fundType,jdbcType=VARCHAR},

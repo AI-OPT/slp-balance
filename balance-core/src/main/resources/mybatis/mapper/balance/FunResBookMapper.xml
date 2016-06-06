@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunResBookMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunResBook" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.FunResBookMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunResBook" >
     <id column="book_id" property="bookId" jdbcType="BIGINT" />
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
     <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
@@ -86,7 +86,7 @@
     effect_time, expire_time, total_amount, deduct_amount, present_amount, exchange_amount, 
     book_status, allow_present, allow_convert, allow_clear, source_type, source_id, use_version
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResBookCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResBookCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -114,13 +114,13 @@
     delete from fun_res_book
     where book_id = #{bookId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResBookCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResBookCriteria" >
     delete from fun_res_book
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResBook" >
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResBook" >
     insert into fun_res_book (book_id, tenant_id, owner_id, 
       owner_type, subject_id, resource_type, 
       create_time, effect_time, expire_time, 
@@ -136,7 +136,7 @@
       #{allowConvert,jdbcType=INTEGER}, #{allowClear,jdbcType=INTEGER}, #{sourceType,jdbcType=INTEGER}, 
       #{sourceId,jdbcType=BIGINT}, #{useVersion,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResBook" >
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResBook" >
     insert into fun_res_book
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="bookId != null" >
@@ -263,7 +263,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResBookCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResBookCriteria" resultType="java.lang.Integer" >
     select count(*) from fun_res_book
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -363,7 +363,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResBook" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResBook" >
     update fun_res_book
     <set >
       <if test="tenantId != null" >
@@ -426,7 +426,7 @@
     </set>
     where book_id = #{bookId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResBook" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResBook" >
     update fun_res_book
     set tenant_id = #{tenantId,jdbcType=VARCHAR},
       owner_id = #{ownerId,jdbcType=BIGINT},

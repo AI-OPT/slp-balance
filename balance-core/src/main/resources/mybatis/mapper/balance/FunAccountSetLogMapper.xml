@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunAccountSetLogMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLog" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.FunAccountSetLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunAccountSetLog" >
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
     <result column="account_id" property="accountId" jdbcType="BIGINT" />
     <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
@@ -84,7 +84,7 @@
     secure_q3, secure_a1, secure_a2, secure_a3, reg_type, reg_customer_id, reg_chnl_id, 
     reg_email, reg_time, last_update_oper_id, last_update_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLogCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetLogCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -102,13 +102,13 @@
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLogCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetLogCriteria" >
     delete from fun_account_set_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLog" >
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetLog" >
     insert into fun_account_set_log (tenant_id, account_id, login_password, 
       pay_check, pay_password, secure_q1, 
       secure_q2, secure_q3, secure_a1, 
@@ -124,7 +124,7 @@
       #{regTime,jdbcType=TIMESTAMP}, #{lastUpdateOperId,jdbcType=VARCHAR}, #{lastUpdateDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLog" >
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetLog" >
     insert into fun_account_set_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="tenantId != null" >
@@ -239,7 +239,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunAccountSetLogCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountSetLogCriteria" resultType="java.lang.Integer" >
     select count(*) from fun_account_set_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

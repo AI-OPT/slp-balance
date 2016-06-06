@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.runner.center.balance.dao.mapper.interfaces.FunResOperaDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetail" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.FunResOperaDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunResOperaDetail" >
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
     <result column="system_id" property="systemId" jdbcType="VARCHAR" />
     <result column="external_id" property="externalId" jdbcType="VARCHAR" />
@@ -75,7 +75,7 @@
     tenant_id, system_id, external_id, owner_id, owner_type, resource_type, change_amount, 
     opt_type, opt_time, book_status
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetailCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResOperaDetailCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -93,13 +93,13 @@
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetailCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResOperaDetailCriteria" >
     delete from fun_res_opera_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetail" >
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResOperaDetail" >
     insert into fun_res_opera_detail (tenant_id, system_id, external_id, 
       owner_id, owner_type, resource_type, 
       change_amount, opt_type, opt_time, 
@@ -109,7 +109,7 @@
       #{changeAmount,jdbcType=DECIMAL}, #{optType,jdbcType=INTEGER}, #{optTime,jdbcType=TIMESTAMP}, 
       #{bookStatus,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetail" >
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResOperaDetail" >
     insert into fun_res_opera_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="tenantId != null" >
@@ -176,7 +176,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.runner.center.balance.dao.mapper.bo.FunResOperaDetailCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.FunResOperaDetailCriteria" resultType="java.lang.Integer" >
     select count(*) from fun_res_opera_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
