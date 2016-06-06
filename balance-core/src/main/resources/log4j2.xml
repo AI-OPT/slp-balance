@@ -22,11 +22,11 @@
 		</Async>
 	</Appenders>
 	<Loggers>
-		<logger name="com.ai.runner.utils" level="info" additivity="false">
+		<logger name="com.ai.opt.base" level="info" additivity="false">
 			<AppenderRef ref="RollingFile" />
 			<AppenderRef ref="STDOUT" />
 		</logger>
-		<logger name="com.ai.runner.sdk" level="info" additivity="false">
+		<logger name="com.ai.opt.sdk" level="info" additivity="false">
 			<AppenderRef ref="RollingFile" />
 			<AppenderRef ref="STDOUT" />
 		</logger>
