@@ -5,5 +5,5 @@ public final class CacheNSMapper {
     private CacheNSMapper() {
     }
 
-    public static final String CACHE_FUN_SUBJECT = "com.ai.runner.center.balance.cache.funsubject";
+    public static final String CACHE_FUN_SUBJECT = "com.ai.slp.balance.cache.funsubject";
 }

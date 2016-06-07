@@ -26,6 +26,17 @@ public interface IFunAccountInfoAtomSV {
      */
     public List<FunAccountInfoByCustIdIdx> getAccountIdByCustId(String tenantId,long custId);
     
+
+    /**
+     * CustID直接查询
+     * @param tenantId
+     * @param custId
+     * @return
+     * @author LiangMeng
+     * @ApiDocMethod
+     */
+    public List<FunAccountInfo> getAccountInfoByCustId(String tenantId,long custId);
+    
     /**
      * 根据主键修改账户信息表
      * @param info

@@ -24,7 +24,6 @@ import com.ai.slp.balance.dao.mapper.bo.FunFundBook;
 import com.ai.slp.balance.dao.mapper.bo.FunFundDetail;
 import com.ai.slp.balance.dao.mapper.bo.FunFundSerial;
 import com.ai.slp.balance.dao.mapper.bo.FunFundSerialByAcctIdIdx;
-import com.ai.slp.balance.service.atom.interfaces.IATSSenderAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IDepositAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunFundBookAtomSV;
@@ -55,8 +54,8 @@ public class DepositAtomSVImpl implements IDepositAtomSV {
     @Autowired
     private IFunAccountInfoAtomSV funAccountInfoAtomSV;
 
-    @Autowired
-    private IATSSenderAtomSV iATSSSenderAtomSV;
+//    @Autowired
+//    private IATSSenderAtomSV iATSSSenderAtomSV;
 
     @Override
     public void validAccountInfo(long accountId, String tenantId) {
@@ -276,6 +275,6 @@ public class DepositAtomSVImpl implements IDepositAtomSV {
         log.debug("异步创建索引FunFundSerialByAcctIdIdx：[AcctId1=" + idx.getAcctId1()
                 + ",PeerSerialCode=" + idx.getPeerSerialCode() + ",TenantId=" + idx.getTenantId()
                 + "]");
-        iATSSSenderAtomSV.sendAtsAddFunFundSerialByAcctIdIdx(idx);
+//        iATSSSenderAtomSV.sendAtsAddFunFundSerialByAcctIdIdx(idx);
     }
 }

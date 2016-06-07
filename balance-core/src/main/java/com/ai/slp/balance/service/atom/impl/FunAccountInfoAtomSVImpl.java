@@ -10,6 +10,7 @@ import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdxCriteria;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByExternalIdIdx;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByExternalIdIdxCriteria;
+import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoCriteria;
 import com.ai.slp.balance.dao.mapper.factory.MapperFactory;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 
@@ -70,5 +71,12 @@ public class FunAccountInfoAtomSVImpl implements IFunAccountInfoAtomSV {
     @Override
     public int addBalance(long account, long amount) {
         return MapperFactory.getFunAccountInfoAttachMapper().addBalance(account, amount);
+    }
+
+    @Override
+    public List<FunAccountInfo> getAccountInfoByCustId(String tenantId, long custId) {
+        FunAccountInfoCriteria example = new FunAccountInfoCriteria();
+        example.createCriteria().andCustIdEqualTo(custId).andTenantIdEqualTo(tenantId);
+        return MapperFactory.getFunAccountInfoMapper().selectByExample(example);
     }
 }

@@ -27,7 +27,6 @@ import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByExternalIdIdx;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountLog;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountSet;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountSetLog;
-import com.ai.slp.balance.service.atom.interfaces.IATSSenderAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountLogAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountSetAtomSV;
@@ -56,8 +55,8 @@ public class AccountManagerSVImpl implements IAccountManagerSV {
     @Autowired
     private IFunFundBookAtomSV funFundBookSV;
 
-    @Autowired
-    private IATSSenderAtomSV iATSSSenderAtomSV;
+//    @Autowired
+//    private IATSSenderAtomSV iATSSSenderAtomSV;
 
     @Override
     public long createAccount(RegAccReq regAccReq) throws BusinessException {
@@ -87,20 +86,21 @@ public class AccountManagerSVImpl implements IAccountManagerSV {
         /* 四、返回结果 --- 返回创建账户的ID信息 */
         LOG.debug("创建账户成功");
         /* 五、写入 账户的 两张索引表 FunAccountInfoByExternalIdIdx 和 FunAccountInfoByCustIdIdx */
-        if (!StringUtil.isBlank(regAccReq.getExternalId())
-                && !StringUtil.isBlank(regAccReq.getSystemId())) {
-            FunAccountInfoByExternalIdIdx info = new FunAccountInfoByExternalIdIdx();
-            BeanUtils.copyProperties(info, regAccReq);
-            info.setAccountId(newAccountId);
-            iATSSSenderAtomSV.sendAtsInsertFunAccountInfoByExternalIdIdx(info);
-        }
-        if (!StringUtil.isBlank(regAccReq.getRegCustomerId())) {
-            FunAccountInfoByCustIdIdx info = new FunAccountInfoByCustIdIdx();
-            info.setTenantId(regAccReq.getTenantId());
-            info.setCustId(Long.parseLong(regAccReq.getRegCustomerId()));
-            info.setAccountId(newAccountId);
-            iATSSSenderAtomSV.sendAtsInsertFunAccountInfoByCustIdIdx(info);
-        }
+//        if (!StringUtil.isBlank(regAccReq.getExternalId())
+//                && !StringUtil.isBlank(regAccReq.getSystemId())) {
+//            FunAccountInfoByExternalIdIdx info = new FunAccountInfoByExternalIdIdx();
+//            BeanUtils.copyProperties(info, regAccReq);
+//            info.setAccountId(newAccountId);
+////            iATSSSenderAtomSV.sendAtsInsertFunAccountInfoByExternalIdIdx(info);
+//        }
+//        if (!StringUtil.isBlank(regAccReq.getRegCustomerId())) {
+//            FunAccountInfoByCustIdIdx info = new FunAccountInfoByCustIdIdx();
+//            info.setTenantId(regAccReq.getTenantId());
+//            info.setCustId(Long.parseLong(regAccReq.getRegCustomerId()));
+//            info.setAccountId(newAccountId);
+////            iATSSSenderAtomSV.sendAtsInsertFunAccountInfoByCustIdIdx(info);
+//        }
+        
         return newAccountId;
     }
 
@@ -456,9 +456,9 @@ public class AccountManagerSVImpl implements IAccountManagerSV {
     public List<AccountInfoVo> queryAccountInfoByCustId(String tenantId, long custId)
             throws BusinessException {
         List<AccountInfoVo> accountInfoVoList = new ArrayList<AccountInfoVo>();
-        List<FunAccountInfoByCustIdIdx> accountIdList = funAccountInfoSV.getAccountIdByCustId(
+        List<FunAccountInfo> accountIdList = funAccountInfoSV.getAccountInfoByCustId(
                 tenantId, custId);
-        for (FunAccountInfoByCustIdIdx accountId : accountIdList) {
+        for (FunAccountInfo accountId : accountIdList) {
             // TODO 事务层不能互相调用；对象转换的convert方法是否也不能定义在事物层
             accountInfoVoList.add(this.queryAccountInfoById(accountId.getTenantId(),
                     accountId.getAccountId()));
