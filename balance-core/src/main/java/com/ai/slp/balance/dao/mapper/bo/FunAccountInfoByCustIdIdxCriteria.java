@@ -264,52 +264,62 @@ public class FunAccountInfoByCustIdIdxCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andCustIdEqualTo(Long value) {
+        public Criteria andCustIdEqualTo(String value) {
             addCriterion("cust_id =", value, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdNotEqualTo(Long value) {
+        public Criteria andCustIdNotEqualTo(String value) {
             addCriterion("cust_id <>", value, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdGreaterThan(Long value) {
+        public Criteria andCustIdGreaterThan(String value) {
             addCriterion("cust_id >", value, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andCustIdGreaterThanOrEqualTo(String value) {
             addCriterion("cust_id >=", value, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdLessThan(Long value) {
+        public Criteria andCustIdLessThan(String value) {
             addCriterion("cust_id <", value, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdLessThanOrEqualTo(Long value) {
+        public Criteria andCustIdLessThanOrEqualTo(String value) {
             addCriterion("cust_id <=", value, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdIn(List<Long> values) {
+        public Criteria andCustIdLike(String value) {
+            addCriterion("cust_id like", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdNotLike(String value) {
+            addCriterion("cust_id not like", value, "custId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustIdIn(List<String> values) {
             addCriterion("cust_id in", values, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdNotIn(List<Long> values) {
+        public Criteria andCustIdNotIn(List<String> values) {
             addCriterion("cust_id not in", values, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdBetween(Long value1, Long value2) {
+        public Criteria andCustIdBetween(String value1, String value2) {
             addCriterion("cust_id between", value1, value2, "custId");
             return (Criteria) this;
         }
 
-        public Criteria andCustIdNotBetween(Long value1, Long value2) {
+        public Criteria andCustIdNotBetween(String value1, String value2) {
             addCriterion("cust_id not between", value1, value2, "custId");
             return (Criteria) this;
         }

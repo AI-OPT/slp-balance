@@ -5,7 +5,7 @@ public class FunAccountInfoByCustIdIdx {
 
     private String tenantId;
 
-    private Long custId;
+    private String custId;
 
     public Long getAccountId() {
         return accountId;
@@ -23,11 +23,11 @@ public class FunAccountInfoByCustIdIdx {
         this.tenantId = tenantId == null ? null : tenantId.trim();
     }
 
-    public Long getCustId() {
+    public String getCustId() {
         return custId;
     }
 
-    public void setCustId(Long custId) {
-        this.custId = custId;
+    public void setCustId(String custId) {
+        this.custId = custId == null ? null : custId.trim();
     }
 }

@@ -23,7 +23,7 @@ public class FunAccountInfoAtomSVImpl implements IFunAccountInfoAtomSV {
     }
 
     @Override
-    public List<FunAccountInfoByCustIdIdx> getAccountIdByCustId(String tenantId,long custId) {
+    public List<FunAccountInfoByCustIdIdx> getAccountIdByCustId(String tenantId,String custId) {
         FunAccountInfoByCustIdIdxCriteria custIdExample = new FunAccountInfoByCustIdIdxCriteria();
         custIdExample.createCriteria().andTenantIdEqualTo(tenantId).andCustIdEqualTo(custId);
         List<FunAccountInfoByCustIdIdx> accountIdxList = MapperFactory
@@ -74,7 +74,7 @@ public class FunAccountInfoAtomSVImpl implements IFunAccountInfoAtomSV {
     }
 
     @Override
-    public List<FunAccountInfo> getAccountInfoByCustId(String tenantId, long custId) {
+    public List<FunAccountInfo> getAccountInfoByCustId(String tenantId, String custId) {
         FunAccountInfoCriteria example = new FunAccountInfoCriteria();
         example.createCriteria().andCustIdEqualTo(custId).andTenantIdEqualTo(tenantId);
         return MapperFactory.getFunAccountInfoMapper().selectByExample(example);

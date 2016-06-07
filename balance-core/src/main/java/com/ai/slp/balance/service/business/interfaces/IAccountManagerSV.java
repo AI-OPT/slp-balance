@@ -48,6 +48,6 @@ public interface IAccountManagerSV {
      * @author lilg
      * @ApiDocMethod
      */
-    public List<AccountInfoVo> queryAccountInfoByCustId(String tenantId, long accountId) throws BusinessException;
+    public List<AccountInfoVo> queryAccountInfoByCustId(String tenantId, String custId) throws BusinessException;
 
 }

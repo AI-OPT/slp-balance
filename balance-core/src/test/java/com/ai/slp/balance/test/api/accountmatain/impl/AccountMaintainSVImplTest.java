@@ -98,7 +98,7 @@ public class AccountMaintainSVImplTest extends TestCase {
     public void testQueryAccontByCustId() throws Exception {
         CustIdParam accountId  = new CustIdParam();
         accountId.setTenantId("SLP");
-        accountId.setCustId(10);
+        accountId.setCustId("10");
         List<AccountInfoVo> accountList = accountQuerySV.queryAccontByCustId(accountId);
         assertFalse("账户不存在",CollectionUtil.isEmpty(accountList));
         log.error("按照客户查询账户结果:{}",JSON.toJSONString(accountList));

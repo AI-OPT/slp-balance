@@ -187,7 +187,7 @@ public class AccountManagerSVImpl implements IAccountManagerSV {
         vo.setAccountId(newAccountId); // 账户ID
         vo.setTenantId(regAccReq.getTenantId());// 租户ID
         vo.setAcctName(regAccReq.getAcctName());// 账户名称
-        vo.setCustId(Long.valueOf(regAccReq.getRegCustomerId())); // 客户ID
+        vo.setCustId(regAccReq.getRegCustomerId()); // 客户ID
         vo.setAcctType(regAccReq.getAcctType());// 账户类型
         vo.setPayType(regAccReq.getPayType()); // 付款方式
         vo.setPostType(String.valueOf(regAccReq.getAcctMailType())); // 账单邮寄方式
@@ -453,7 +453,7 @@ public class AccountManagerSVImpl implements IAccountManagerSV {
     }
 
     @Override
-    public List<AccountInfoVo> queryAccountInfoByCustId(String tenantId, long custId)
+    public List<AccountInfoVo> queryAccountInfoByCustId(String tenantId, String custId)
             throws BusinessException {
         List<AccountInfoVo> accountInfoVoList = new ArrayList<AccountInfoVo>();
         List<FunAccountInfo> accountIdList = funAccountInfoSV.getAccountInfoByCustId(

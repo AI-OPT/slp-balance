@@ -56,7 +56,7 @@ public class AccountQuerySVImpl implements IAccountQuerySV {
         if (StringUtil.isBlank(custId.getTenantId())) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
         }
-        if (custId.getCustId() == 0) {
+        if (StringUtil.isBlank(custId.getCustId())) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "客户ID不能为空");
         }
         List<AccountInfoVo> accountInfoVoList = accountSV.queryAccountInfoByCustId(

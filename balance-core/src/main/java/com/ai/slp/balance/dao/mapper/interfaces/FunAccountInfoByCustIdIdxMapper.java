@@ -1,11 +1,9 @@
 package com.ai.slp.balance.dao.mapper.interfaces;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdxCriteria;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface FunAccountInfoByCustIdIdxMapper {
     int countByExample(FunAccountInfoByCustIdIdxCriteria example);

@@ -31,7 +31,7 @@ public class AccountInfoVo implements Serializable {
     /**
      * 客户编号
      */
-    private long regCustomerId;
+    private String regCustomerId;
 
     /**
      * 渠道编号
@@ -172,11 +172,11 @@ public class AccountInfoVo implements Serializable {
         this.regType = regType;
     }
 
-    public long getRegCustomerId() {
+    public String getRegCustomerId() {
         return regCustomerId;
     }
 
-    public void setRegCustomerId(long regCustomerId) {
+    public void setRegCustomerId(String regCustomerId) {
         this.regCustomerId = regCustomerId;
     }
 

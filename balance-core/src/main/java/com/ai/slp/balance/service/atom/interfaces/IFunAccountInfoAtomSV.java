@@ -24,7 +24,7 @@ public interface IFunAccountInfoAtomSV {
      * @author lilg
      * @ApiDocMethod
      */
-    public List<FunAccountInfoByCustIdIdx> getAccountIdByCustId(String tenantId,long custId);
+    public List<FunAccountInfoByCustIdIdx> getAccountIdByCustId(String tenantId,String custId);
     
 
     /**
@@ -35,7 +35,7 @@ public interface IFunAccountInfoAtomSV {
      * @author LiangMeng
      * @ApiDocMethod
      */
-    public List<FunAccountInfo> getAccountInfoByCustId(String tenantId,long custId);
+    public List<FunAccountInfo> getAccountInfoByCustId(String tenantId,String custId);
     
     /**
      * 根据主键修改账户信息表

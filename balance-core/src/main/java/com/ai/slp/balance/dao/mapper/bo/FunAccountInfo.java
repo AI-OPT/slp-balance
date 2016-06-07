@@ -13,7 +13,7 @@ public class FunAccountInfo {
 
     private String acctName;
 
-    private Long custId;
+    private String custId;
 
     private String acctType;
 
@@ -87,12 +87,12 @@ public class FunAccountInfo {
         this.acctName = acctName == null ? null : acctName.trim();
     }
 
-    public Long getCustId() {
+    public String getCustId() {
         return custId;
     }
 
-    public void setCustId(Long custId) {
-        this.custId = custId;
+    public void setCustId(String custId) {
+        this.custId = custId == null ? null : custId.trim();
     }
 
     public String getAcctType() {

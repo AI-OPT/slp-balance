@@ -16,14 +16,16 @@ public class CustIdParam extends BaseInfo {
     /**
      * 客户ID，必填
      */
-    private long custId;
+    private String custId;
 
-    public long getCustId() {
+    public String getCustId() {
         return custId;
     }
 
-    public void setCustId(long custId) {
+    public void setCustId(String custId) {
         this.custId = custId;
     }
+
+    
 
 }
