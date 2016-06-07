@@ -52,7 +52,7 @@ public class AccountMaintainSVImplTest extends TestCase {
         vo.setExternalId(UUIDUtil.genId32());// 外部流水号ID
         vo.setSystemId("SLP-UAC_WEB");// 系统ID
         vo.setTenantId("SLP");// 租户ID
-        vo.setRegCustomerId("10");
+        vo.setRegCustomerId("101");
         vo.setAcctName("加多宝");
         vo.setAcctType("0");// 账户类型， 0 后付费
         vo.setRegType("3");//注册方式网站注册
@@ -98,7 +98,7 @@ public class AccountMaintainSVImplTest extends TestCase {
     public void testQueryAccontByCustId() throws Exception {
         CustIdParam accountId  = new CustIdParam();
         accountId.setTenantId("SLP");
-        accountId.setCustId("10");
+        accountId.setCustId("101");
         List<AccountInfoVo> accountList = accountQuerySV.queryAccontByCustId(accountId);
         assertFalse("账户不存在",CollectionUtil.isEmpty(accountList));
         log.error("按照客户查询账户结果:{}",JSON.toJSONString(accountList));
@@ -114,9 +114,9 @@ public class AccountMaintainSVImplTest extends TestCase {
     public void testUpdateAccountCase1() throws Exception {
         AccountUpdateParam param = new AccountUpdateParam();
         param.setTenantId("SLP");
-        param.setAcctId(11151);
+        param.setAcctId(11181);
         param.setAcctMailType(2);
-        param.setAcctName("louis");
+        param.setAcctName("louis1111111111111");
         param.setPayCheck(1);
         param.setPayPassword("123%aa");
         param.setTempCredit(100l);

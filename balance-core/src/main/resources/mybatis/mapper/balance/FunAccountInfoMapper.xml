@@ -7,7 +7,7 @@
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
     <result column="external_id" property="externalId" jdbcType="VARCHAR" />
     <result column="acct_name" property="acctName" jdbcType="VARCHAR" />
-    <result column="cust_id" property="custId" jdbcType="BIGINT" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
     <result column="acct_type" property="acctType" jdbcType="VARCHAR" />
     <result column="pay_type" property="payType" jdbcType="VARCHAR" />
     <result column="post_type" property="postType" jdbcType="VARCHAR" />
@@ -133,7 +133,7 @@
       acct_status, balance_chg_date, create_time, 
       remark)
     values (#{accountId,jdbcType=BIGINT}, #{systemId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
-      #{externalId,jdbcType=VARCHAR}, #{acctName,jdbcType=VARCHAR}, #{custId,jdbcType=BIGINT}, 
+      #{externalId,jdbcType=VARCHAR}, #{acctName,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
       #{acctType,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, #{postType,jdbcType=VARCHAR}, 
       #{acctAddr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{totalBalance,jdbcType=BIGINT}, 
       #{credit,jdbcType=BIGINT}, #{tempCredit,jdbcType=BIGINT}, #{tempValidTime,jdbcType=TIMESTAMP}, 
@@ -228,7 +228,7 @@
         #{acctName,jdbcType=VARCHAR},
       </if>
       <if test="custId != null" >
-        #{custId,jdbcType=BIGINT},
+        #{custId,jdbcType=VARCHAR},
       </if>
       <if test="acctType != null" >
         #{acctType,jdbcType=VARCHAR},
@@ -305,7 +305,7 @@
         acct_name = #{record.acctName,jdbcType=VARCHAR},
       </if>
       <if test="record.custId != null" >
-        cust_id = #{record.custId,jdbcType=BIGINT},
+        cust_id = #{record.custId,jdbcType=VARCHAR},
       </if>
       <if test="record.acctType != null" >
         acct_type = #{record.acctType,jdbcType=VARCHAR},
@@ -367,7 +367,7 @@
       tenant_id = #{record.tenantId,jdbcType=VARCHAR},
       external_id = #{record.externalId,jdbcType=VARCHAR},
       acct_name = #{record.acctName,jdbcType=VARCHAR},
-      cust_id = #{record.custId,jdbcType=BIGINT},
+      cust_id = #{record.custId,jdbcType=VARCHAR},
       acct_type = #{record.acctType,jdbcType=VARCHAR},
       pay_type = #{record.payType,jdbcType=VARCHAR},
       post_type = #{record.postType,jdbcType=VARCHAR},
@@ -404,7 +404,7 @@
         acct_name = #{acctName,jdbcType=VARCHAR},
       </if>
       <if test="custId != null" >
-        cust_id = #{custId,jdbcType=BIGINT},
+        cust_id = #{custId,jdbcType=VARCHAR},
       </if>
       <if test="acctType != null" >
         acct_type = #{acctType,jdbcType=VARCHAR},
@@ -463,7 +463,7 @@
       tenant_id = #{tenantId,jdbcType=VARCHAR},
       external_id = #{externalId,jdbcType=VARCHAR},
       acct_name = #{acctName,jdbcType=VARCHAR},
-      cust_id = #{custId,jdbcType=BIGINT},
+      cust_id = #{custId,jdbcType=VARCHAR},
       acct_type = #{acctType,jdbcType=VARCHAR},
       pay_type = #{payType,jdbcType=VARCHAR},
       post_type = #{postType,jdbcType=VARCHAR},

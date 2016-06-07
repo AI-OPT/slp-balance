@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx" >
     <id column="account_id" property="accountId" jdbcType="BIGINT" />
     <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
-    <result column="cust_id" property="custId" jdbcType="BIGINT" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -104,7 +104,7 @@
   <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx" >
     insert into fun_account_info_by_cust_id_idx (account_id, tenant_id, cust_id
       )
-    values (#{accountId,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{custId,jdbcType=BIGINT}
+    values (#{accountId,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx" >
@@ -128,7 +128,7 @@
         #{tenantId,jdbcType=VARCHAR},
       </if>
       <if test="custId != null" >
-        #{custId,jdbcType=BIGINT},
+        #{custId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -148,7 +148,7 @@
         tenant_id = #{record.tenantId,jdbcType=VARCHAR},
       </if>
       <if test="record.custId != null" >
-        cust_id = #{record.custId,jdbcType=BIGINT},
+        cust_id = #{record.custId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -159,7 +159,7 @@
     update fun_account_info_by_cust_id_idx
     set account_id = #{record.accountId,jdbcType=BIGINT},
       tenant_id = #{record.tenantId,jdbcType=VARCHAR},
-      cust_id = #{record.custId,jdbcType=BIGINT}
+      cust_id = #{record.custId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -171,7 +171,7 @@
         tenant_id = #{tenantId,jdbcType=VARCHAR},
       </if>
       <if test="custId != null" >
-        cust_id = #{custId,jdbcType=BIGINT},
+        cust_id = #{custId,jdbcType=VARCHAR},
       </if>
     </set>
     where account_id = #{accountId,jdbcType=BIGINT}
@@ -179,7 +179,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx" >
     update fun_account_info_by_cust_id_idx
     set tenant_id = #{tenantId,jdbcType=VARCHAR},
-      cust_id = #{custId,jdbcType=BIGINT}
+      cust_id = #{custId,jdbcType=VARCHAR}
     where account_id = #{accountId,jdbcType=BIGINT}
   </update>
 </mapper>
