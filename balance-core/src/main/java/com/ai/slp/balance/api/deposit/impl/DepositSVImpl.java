@@ -34,9 +34,6 @@ public class DepositSVImpl implements IDepositSV {
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
         }
-        if (StringUtil.isBlank(param.getSystemId())) {
-            throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "系统ID不能为空");
-        }
         if (param.getAccountId() == 0) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "存款账户号不能为空");
         }
@@ -70,9 +67,6 @@ public class DepositSVImpl implements IDepositSV {
         log.debug("开始存入押金服务");
         if (param == null) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
-        }
-        if (StringUtil.isBlank(param.getSystemId())) {
-            throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "系统ID不能为空");
         }
         if (param.getSubjectId() == 0) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "科目不能为空");
