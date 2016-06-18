@@ -13,6 +13,8 @@ import com.ai.opt.base.vo.BaseInfo;
  */
 public class DepositParam extends BaseInfo {
 
+    private static final long serialVersionUID = 787806499466278335L;
+
     /**
      * 系统ID，必填
      */

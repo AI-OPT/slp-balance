@@ -35,6 +35,14 @@ public class DeductParam extends BaseInfo {
     private long accountId;
 
     /**
+     * 是否校验支付密码
+     */
+    private int checkPwd;
+    /**
+     * 支付密码
+     */
+    private String password;
+    /**
      * 扣款总金额，必填
      */
     private long totalAmount;
@@ -82,6 +90,22 @@ public class DeductParam extends BaseInfo {
 
     public void setAccountId(long accountId) {
         this.accountId = accountId;
+    }
+
+    public int getCheckPwd() {
+        return checkPwd;
+    }
+
+    public void setCheckPwd(int checkPwd) {
+        this.checkPwd = checkPwd;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public long getTotalAmount() {

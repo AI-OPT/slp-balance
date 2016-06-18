@@ -22,7 +22,14 @@ public class DeductAccount extends BaseInfo {
      * 账户ID，必填
      */
     private long accountId;
-
+    /**
+     * 是否校验支付密码
+     */
+    private int checkPwd;
+    /**
+     * 支付密码
+     */
+    private String password;
     /**
      * 扣款总金额，必填
      */
@@ -34,6 +41,22 @@ public class DeductAccount extends BaseInfo {
      * 2.未指定－本次扣款只从非专款中扣减 <br>
      */
     private long subsId;
+
+    public int getCheckPwd() {
+        return checkPwd;
+    }
+
+    public void setCheckPwd(int checkPwd) {
+        this.checkPwd = checkPwd;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getSystemId() {
         return systemId;

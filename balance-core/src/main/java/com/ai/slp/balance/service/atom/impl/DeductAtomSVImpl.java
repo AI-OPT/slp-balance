@@ -17,12 +17,14 @@ import com.ai.slp.balance.constants.BalancesCostants;
 import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.constants.SeqConstants;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
+import com.ai.slp.balance.dao.mapper.bo.FunAccountSet;
 import com.ai.slp.balance.dao.mapper.bo.FunFundBook;
 import com.ai.slp.balance.dao.mapper.bo.FunFundDetail;
 import com.ai.slp.balance.dao.mapper.bo.FunFundSerial;
 import com.ai.slp.balance.dao.mapper.bo.FunFundSerialByAcctIdIdx;
 import com.ai.slp.balance.service.atom.interfaces.IDeductAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
+import com.ai.slp.balance.service.atom.interfaces.IFunAccountSetAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunFundBookAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunFundDetailAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunFundSerialAtomSV;
@@ -47,13 +49,19 @@ public class DeductAtomSVImpl implements IDeductAtomSV {
 
     @Autowired
     private IFunAccountInfoAtomSV funAccountInfoAtomSV;
+    
+
+    @Autowired
+    private IFunAccountSetAtomSV funAccountSetAtomSV;
 
 //    @Autowired
 //    private IATSSenderAtomSV iATSSSenderAtomSV;
 
     @Override
-    public void validAccountInfo(long accountId, String tenantId) {
+    public void validAccountInfo(long accountId, String tenantId,int checkPwd,String password) {
         FunAccountInfo accountInfo = funAccountInfoAtomSV.getBeanByPrimaryKey(accountId);
+        FunAccountSet accountSet = funAccountSetAtomSV.getFunAccountSet(accountId);
+        
         if (accountInfo == null
                 || !accountInfo.getTenantId().equals(tenantId)
                 || BalancesCostants.FunAccountInfo.AcctStatus.IN_VALID.equals(accountInfo
@@ -66,6 +74,17 @@ public class DeductAtomSVImpl implements IDeductAtomSV {
             log.debug("账户已被冻结,租户[{}],账户ID[{}]", tenantId, accountId);
             throw new BusinessException(ExceptCodeConstants.Account.ACCOUNT_NOT_FOUND,
                     "账户已被冻结,租户ID[" + tenantId + "],账户ID[" + accountId + "]");
+        } 
+        
+        if(checkPwd==0){
+            if(accountSet==null){
+                log.debug("账户扩展信息不存在,租户[{}],账户ID[{}]", tenantId, accountId);
+                throw new BusinessException(ExceptCodeConstants.Account.ACCOUNT_SET_INFO_CHECK_FAILED,
+                        "账户扩展信息不存在,租户ID[" + tenantId + "],账户ID[" + accountId + "]"); 
+            }else if(!password.equals(accountSet.getPayPassword())){
+                throw new BusinessException(ExceptCodeConstants.Account.ACCOUNT_SET_INFO_CHECK_FAILED,
+                        "账户支付密码错误,租户ID[" + tenantId + "],账户ID[" + accountId + "]"); 
+            }
         }
     }
 

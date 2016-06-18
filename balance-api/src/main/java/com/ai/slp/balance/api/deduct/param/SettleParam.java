@@ -30,7 +30,14 @@ public class SettleParam extends BaseInfo {
      * 账户ID，必填
      */
     private long accountId;
-
+    /**
+     * 是否校验支付密码
+     */
+    private int checkPwd;
+    /**
+     * 支付密码
+     */
+    private String password;
     /**
      * 交易摘要，至少1个
      */
@@ -67,4 +74,21 @@ public class SettleParam extends BaseInfo {
     public void setTransSummary(List<SettleSummary> transSummary) {
         this.transSummary = transSummary;
     }
+
+    public int getCheckPwd() {
+        return checkPwd;
+    }
+
+    public void setCheckPwd(int checkPwd) {
+        this.checkPwd = checkPwd;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 }

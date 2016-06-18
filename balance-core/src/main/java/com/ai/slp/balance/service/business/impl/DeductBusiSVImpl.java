@@ -58,7 +58,7 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
         }
         /* 1.数据校验 */
         /* 账户校验 */
-        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId());
+        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId(),param.getCheckPwd(),param.getPassword());
         /* 幂等性校验 */
         String paySerialCode = deductAtomSV.validIdempotent(deductVo);
         if (!StringUtil.isBlank(paySerialCode)) {
@@ -245,7 +245,7 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
         }
         /* 1.数据校验 */
         /* 账户校验 */
-        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId());
+        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId(),param.getCheckPwd(),param.getPassword());
         /* 幂等性校验 */
         String paySerialCode = deductAtomSV.validIdempotent(deductVo);
         if (!StringUtil.isBlank(paySerialCode)) {
@@ -289,7 +289,7 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
         BeanUtils.copyProperties(transSummary, param);
         /* 1.数据校验 */
         /* 账户校验 */
-        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId());
+        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId(),param.getCheckPwd(),param.getPassword());
         /* 幂等性校验 */
         String paySerialCode = deductAtomSV.validIdempotent(deductVo);
         if (!StringUtil.isBlank(paySerialCode)) {
@@ -331,7 +331,7 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
         BeanUtils.copyProperties(deductVo, param);
         /* 1.数据校验 */
         /* 账户校验 */
-        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId());
+        deductAtomSV.validAccountInfo(deductVo.getAccountId(), deductVo.getTenantId(),param.getCheckPwd(),param.getPassword());
         /* 幂等性校验 */
         String paySerialCode = deductAtomSV.validIdempotent(deductVo);
         if (!StringUtil.isBlank(paySerialCode)) {

@@ -25,7 +25,7 @@ public interface IDeductAtomSV {
      * @ApiDocMethod
      * @ApiCode
      */
-    public void validAccountInfo(long accountId,String tenantId);
+    public void validAccountInfo(long accountId,String tenantId,int checkPwd,String password);
 
     /**
      * 幂等性校验，幂等返回存款流水号，否则返回null

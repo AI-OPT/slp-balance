@@ -30,7 +30,14 @@ public class ForegiftDeduct extends BaseInfo {
      * 账户ID，必填
      */
     private long accountId;
-
+    /**
+     * 是否校验支付密码
+     */
+    private int checkPwd;
+    /**
+     * 支付密码
+     */
+    private String password;
     /**
      * 押金金额，单位：厘，必填
      */
@@ -100,6 +107,22 @@ public class ForegiftDeduct extends BaseInfo {
 
     public void setExternalId(String externalId) {
         this.externalId = externalId;
+    }
+
+    public int getCheckPwd() {
+        return checkPwd;
+    }
+
+    public void setCheckPwd(int checkPwd) {
+        this.checkPwd = checkPwd;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

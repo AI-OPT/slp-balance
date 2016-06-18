@@ -45,6 +45,11 @@ public class DeductSVImpl implements IDeductSV {
         if (param.getAccountId() == 0) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "账户号不能为空");
         }
+        
+
+        if (param.getCheckPwd() == 1 && StringUtil.isBlank(param.getPassword())) {
+            throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "校验支付密码后支付密码不能为空");
+        }
         if (StringUtil.isBlank(param.getExternalId())) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "外部流水号不能为空");
         }
