@@ -113,7 +113,7 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
         // 5.更新账户信息余额
         deductAtomSV.addAccountInfoBalance(destDeductVo);
         // 6.异步更新索引表，索引建立在交易订单FUN_FUND_SERIAL表的ACCT_ID1字段上
-        deductAtomSV.sendAtsAddFunFundSerialByAcctIdIdx(destDeductVo);
+//        deductAtomSV.sendAtsAddFunFundSerialByAcctIdIdx(destDeductVo);
         return paySerialCode;
     }
 

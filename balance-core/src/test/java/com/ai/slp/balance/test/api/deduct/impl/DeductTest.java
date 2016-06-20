@@ -17,6 +17,7 @@ import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.slp.balance.api.deduct.interfaces.IDeductSV;
 import com.ai.slp.balance.api.deduct.param.DeductAccount;
 import com.ai.slp.balance.api.deduct.param.DeductParam;
+import com.ai.slp.balance.api.deduct.param.DeductResponse;
 import com.ai.slp.balance.api.deduct.param.ForegiftDeduct;
 import com.ai.slp.balance.api.deduct.param.SettleParam;
 import com.ai.slp.balance.api.deduct.param.SettleSummary;
@@ -69,7 +70,7 @@ public class DeductTest extends TestCase {
         param.setTenantId("BIS-ST");
         param.setTenantPwd("111");
         param.setTotalAmount(1);
-        String result = deductSV.deductFund(param);
+        DeductResponse result = deductSV.deductFund(param);
         assertNotNull("返回结果空，扣款失败", result);
         assertFalse("返回结果空，扣款失败", "".equals(result));
         log.debug("扣减成功，交易流水：" + result);

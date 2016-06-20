@@ -4,6 +4,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.deduct.param.DeductAccount;
 import com.ai.slp.balance.api.deduct.param.DeductParam;
+import com.ai.slp.balance.api.deduct.param.DeductResponse;
 import com.ai.slp.balance.api.deduct.param.ForegiftDeduct;
 import com.ai.slp.balance.api.deduct.param.SettleParam;
 
@@ -26,7 +27,7 @@ public interface IDeductSV {
      * @ApiDocMethod
      * @ApiCode ABM_0019
      */
-    public String deductFund(DeductParam param) throws BusinessException,SystemException;
+    public DeductResponse deductFund(DeductParam param) throws BusinessException,SystemException;
 
     /**
      * 销账扣款 (扣减).<br>
