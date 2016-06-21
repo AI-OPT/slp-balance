@@ -135,7 +135,7 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
         IMessageSender msgSender = MDSClientFactory
                 .getSenderClient(BalancesCostants.OrdOrder.SLP_CHARGE_TOPIC);
 
-        msgSender.send(JSON.toJSONString(request), 1);// 第二个参数为分区键，如果不分区，传入0
+        msgSender.send(JSON.toJSONString(request), 0);// 第二个参数为分区键，如果不分区，传入0
         log.info("----mds sender success");
     }
     
