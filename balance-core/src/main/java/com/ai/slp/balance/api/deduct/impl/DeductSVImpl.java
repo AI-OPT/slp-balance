@@ -54,7 +54,7 @@ public class DeductSVImpl implements IDeductSV {
             }
             
 
-            if (param.getCheckPwd() == 1 && StringUtil.isBlank(param.getPassword())) {
+            if (param.getCheckPwd() == 0 && StringUtil.isBlank(param.getPassword())) {
                 throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "校验支付密码后支付密码不能为空");
             }
             if (StringUtil.isBlank(param.getExternalId())) {

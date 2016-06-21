@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.sdk.components.mds.MDSClientFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
+import com.ai.paas.ipaas.mds.IMessageSender;
 import com.ai.slp.balance.api.deduct.param.DeductAccount;
 import com.ai.slp.balance.api.deduct.param.DeductParam;
 import com.ai.slp.balance.api.deduct.param.ForegiftDeduct;
@@ -31,6 +33,7 @@ import com.ai.slp.balance.service.business.interfaces.IDeductBusiSV;
 import com.ai.slp.balance.util.FunSubjectUtil;
 import com.ai.slp.balance.vo.DeductVo;
 import com.ai.slp.balance.vo.DeductVo.TransSummaryVo;
+import com.alibaba.fastjson.JSON;
 import com.ai.slp.balance.vo.SubjectFundVo;
 
 @Service
@@ -114,9 +117,28 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
         deductAtomSV.addAccountInfoBalance(destDeductVo);
         // 6.异步更新索引表，索引建立在交易订单FUN_FUND_SERIAL表的ACCT_ID1字段上
 //        deductAtomSV.sendAtsAddFunFundSerialByAcctIdIdx(destDeductVo);
+        //扣款结束，发送MDS消息
+        log.info("---发起mds");
+        this.chargeMds(deductVo);
+        log.info("---结束mds");
+        //
         return paySerialCode;
     }
+    /**
+     * 扣款业务,发送MDS消息
+     * @param request
+     * @author zhangzd
+     * @ApiDocMethod
+     * @ApiCode
+     */
+    private void chargeMds(DeductVo request) {
+        IMessageSender msgSender = MDSClientFactory
+                .getSenderClient(BalancesCostants.OrdOrder.SLP_CHARGE_TOPIC);
 
+        msgSender.send(JSON.toJSONString(request), 0);// 第二个参数为分区键，如果不分区，传入0
+        log.info("----mds sender success");
+    }
+    
     /**
      * 按照科目扣减，规则：失效时间越早越️优先
      * 

@@ -14,7 +14,16 @@ import com.ai.opt.sdk.util.DateUtil;
  * @author fanpw
  */
 public final class BalancesCostants {
-
+	/**
+	 * 订单支付MDS所有topic信息
+	 *
+	 * Date: 2016年6月21日 <br>
+	 * Copyright (c) 2016 asiainfo.com <br>
+	 * @author zhangzd
+	 */
+	public static final class OrdOrder {
+		public static final String SLP_CHARGE_TOPIC = "slpChargeTopic";
+	}
     private BalancesCostants() {
     }
 
