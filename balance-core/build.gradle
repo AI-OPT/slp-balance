@@ -6,7 +6,9 @@ dependencies {
     compile 'org.springframework:spring-tx:4.1.7.RELEASE'
     compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
 
-    compile 'com.ai.opt.sdk:opt-sdk:2.0-SNAPSHOT'
+    compile ("com.ai.opt.sdk:opt-sdk:2.0-SNAPSHOT") {
+        //exclude group: 'org.apache.logging.log4j', module: 'log4j-1.2-api'
+    }
     //科目
     compile 'com.ai.slp.common:subject:1.0-SNAPSHOT'
 
@@ -14,7 +16,7 @@ dependencies {
             "org.springframework:spring-test:4.1.7.RELEASE",
             "junit:junit:4.12",
             //多线程测试
-            "net.sourceforge.groboutils:groboutils-core:5"
+            //"net.sourceforge.groboutils:groboutils-core:5"
     )
 
 }
