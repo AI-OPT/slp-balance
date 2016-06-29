@@ -119,6 +119,7 @@ public class DeductBusiSVImpl implements IDeductBusiSV {
 //        deductAtomSV.sendAtsAddFunFundSerialByAcctIdIdx(destDeductVo);
         //扣款结束，发送MDS消息
         log.info("---发起mds");
+        deductVo.setBusiType(BalancesCostants.BusiType.ORDER_CHARGE);
         this.chargeMds(deductVo);
         log.info("---结束mds");
         //

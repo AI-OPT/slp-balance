@@ -24,6 +24,25 @@ public final class BalancesCostants {
 	public static final class OrdOrder {
 		public static final String SLP_CHARGE_TOPIC = "slpChargeTopic";
 	}
+	
+	public static final class BusiType {
+        
+        private BusiType() {
+            
+        }
+        
+        /**
+         * 1、订单收费类
+         */
+        public static final String ORDER_CHARGE = "1";
+        
+        /**
+         * 2、缴费充值类
+         */
+        public static final String ACCOUNT_CHARGE = "2";
+        
+    }
+	
     private BalancesCostants() {
     }
 
