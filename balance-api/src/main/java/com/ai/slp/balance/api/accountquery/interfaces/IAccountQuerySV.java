@@ -22,7 +22,7 @@ import com.ai.slp.balance.api.accountquery.param.CustIdParam;
  * 
  * @author lilg
  */
-@Path("/accountservice")
+@Path("/accountQueryService")
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IAccountQuerySV {
