@@ -1,5 +1,11 @@
 package com.ai.slp.balance.api.deduct.interfaces;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.deduct.param.DeductAccount;
@@ -16,6 +22,9 @@ import com.ai.slp.balance.api.deduct.param.SettleParam;
  * 
  * @author lilg
  */
+@Path("/deductService")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IDeductSV {
     /**
      * 扣款 (扣减).<br>
@@ -26,7 +35,10 @@ public interface IDeductSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0019
+     * @RestRelativeURL deductService/deductFund
      */
+	@POST
+	@Path("/deductFund")
     public DeductResponse deductFund(DeductParam param) throws BusinessException,SystemException;
 
     /**
@@ -40,7 +52,10 @@ public interface IDeductSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0037
+     * @RestRelativeURL deductService/settleAccount
      */
+	@POST
+	@Path("/settleAccount")
     public String settleAccount(SettleParam param) throws BusinessException,SystemException;
 
     /**
@@ -53,7 +68,10 @@ public interface IDeductSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0006
+     * @RestRelativeURL deductService/deductForegift
      */
+	@POST
+	@Path("/deductForegift")
     public String deductForegift(ForegiftDeduct param) throws BusinessException,SystemException;
 
     /**
@@ -66,6 +84,9 @@ public interface IDeductSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0047
+     * @RestRelativeURL deductService/deductPartFundByAccount
      */
+	@POST
+	@Path("/deductPartFundByAccount")
     public long deductPartFundByAccount(DeductAccount param) throws BusinessException,SystemException;
 }

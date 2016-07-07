@@ -1,5 +1,11 @@
 package com.ai.slp.balance.api.fundquery.interfaces;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import java.util.List;
 
 import com.ai.opt.base.exception.BusinessException;
@@ -18,6 +24,9 @@ import com.ai.slp.balance.api.fundquery.param.SubjectId;
  * 
  * @author lilg
  */
+@Path("/fundQueryService")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IFundQuerySV {
     /**
      * 押金查询.<br>
@@ -30,7 +39,10 @@ public interface IFundQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0007
+     * @RestRelativeURL fundQueryService/queryForegift
      */
+	@POST
+	@Path("/queryForegift")
     public List<ForegiftInfo> queryForegift(ForegiftQuery param) throws BusinessException,SystemException;
 
     /**
@@ -43,7 +55,10 @@ public interface IFundQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0008
+     * @RestRelativeURL fundQueryService/queryFund
      */
+	@POST
+	@Path("/queryFund")
     public FundInfo queryFund(AccountIdParam accountId) throws BusinessException,SystemException;
 
     /**
@@ -56,7 +71,10 @@ public interface IFundQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0009
+     * @RestRelativeURL fundQueryService/queryUsableFund
      */
+	@POST
+	@Path("/queryUsableFund")
     public FundInfo queryUsableFund(AccountIdParam accountId) throws BusinessException,SystemException;
 
     /**
@@ -69,7 +87,10 @@ public interface IFundQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0010
+     * @RestRelativeURL fundQueryService/queryFrozenFund
      */
+	@POST
+	@Path("/queryFrozenFund")
     public FundInfo queryFrozenFund(AccountIdParam accountId) throws BusinessException,SystemException;
 
     /**
@@ -82,7 +103,10 @@ public interface IFundQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0036
+     * @RestRelativeURL fundQueryService/queryUsableTeleFund
      */
+	@POST
+	@Path("/queryUsableTeleFund")
     public FundInfo queryUsableTeleFund(AccountIdParam accountId) throws BusinessException,SystemException;
 
     /**
@@ -94,7 +118,10 @@ public interface IFundQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0048
+     * @RestRelativeURL fundQueryService/queryFundBySubjectId
      */
+	@POST
+	@Path("/queryFundBySubjectId")
     public FundInfo queryFundBySubjectId(SubjectId subjectId) throws BusinessException,SystemException;
 
     /**
@@ -104,6 +131,9 @@ public interface IFundQuerySV {
      * @return
      * @throws BusinessException,SystemException
      * @author lilg
+     * @RestRelativeURL fundQueryService/queryCoupon
      */
+	@POST
+	@Path("/queryCoupon")
     public List<String> queryCoupon(AccountIdParam accountId) throws BusinessException,SystemException;
 }

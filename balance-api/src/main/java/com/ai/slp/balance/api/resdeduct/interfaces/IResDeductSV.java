@@ -1,5 +1,9 @@
 package com.ai.slp.balance.api.resdeduct.interfaces;
-
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.resdeduct.param.ResourceDeduct;
@@ -12,6 +16,9 @@ import com.ai.slp.balance.api.resdeduct.param.ResourceDeduct;
  * 
  * @author lilg
  */
+@Path("/resDeductService")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IResDeductSV {
 
     /**
@@ -25,7 +32,10 @@ public interface IResDeductSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0029
+     * @RestRelativeURL resDeductService/deductResource
      */
+	@POST
+	@Path("/deductResource")
     public void deductResource(ResourceDeduct param) throws BusinessException,SystemException;
 
 }

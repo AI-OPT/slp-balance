@@ -1,5 +1,11 @@
 package com.ai.slp.balance.api.deposit.interfaces;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.deposit.param.DepositParam;
@@ -13,6 +19,9 @@ import com.ai.slp.balance.api.deposit.param.ForegiftDeposit;
  * 
  * @author lilg
  */
+@Path("/depositService")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IDepositSV {
 
     /**
@@ -25,7 +34,10 @@ public interface IDepositSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0016
+     * @RestRelativeURL depositService/depositFund
      */
+	@POST
+	@Path("/depositFund")
     public String depositFund(DepositParam param) throws BusinessException,SystemException;
 
     /**
@@ -38,6 +50,9 @@ public interface IDepositSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0005
+     * @RestRelativeURL depositService/depositForegift
      */
+	@POST
+	@Path("/depositForegift")
     public String depositForegift(ForegiftDeposit param) throws BusinessException,SystemException;
 }

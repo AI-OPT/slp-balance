@@ -1,5 +1,11 @@
 package com.ai.slp.balance.api.resdeposit.interfaces;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.resdeposit.param.ResourceDeposit;
@@ -12,6 +18,9 @@ import com.ai.slp.balance.api.resdeposit.param.ResourceDeposit;
  * 
  * @author lilg
  */
+@Path("/resDeposit")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IResDepositSV {
     /**
      * 资源入账.<br>
@@ -22,6 +31,9 @@ public interface IResDepositSV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0027
+     * @RestRelativeURL resDeposit/depositResource
      */
+	@POST
+	@Path("/depositResource")
     public void depositResource(ResourceDeposit param) throws BusinessException,SystemException;
 }

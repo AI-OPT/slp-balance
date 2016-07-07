@@ -1,5 +1,11 @@
 package com.ai.slp.balance.api.resquery.interfaces;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import java.util.List;
 
 import com.ai.opt.base.exception.BusinessException;
@@ -19,6 +25,9 @@ import com.ai.slp.balance.api.resquery.param.ResUsableDetail;
  * 
  * @author lilg
  */
+@Path("/resQueryService")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IResQuerySV {
 
     /**
@@ -31,7 +40,10 @@ public interface IResQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0045
+     * @RestRelativeURL resQueryService/queryUsableAmount
      */
+	@POST
+	@Path("/queryUsableAmount")
     public ResAmount queryUsableAmount(ResAmountQuery param) throws BusinessException,SystemException;
 
     /**
@@ -44,7 +56,10 @@ public interface IResQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0042
+     * @RestRelativeURL resQueryService/queryResPackage
      */
+	@POST
+	@Path("/queryResPackage")
     public List<ResPkgInfo> queryResPackage(ResPkgQuery param) throws BusinessException,SystemException;
 
     /**
@@ -54,6 +69,9 @@ public interface IResQuerySV {
      * @return 可用资源列表
      * @throws BusinessException,SystemException
      * @author lilg
+     * @RestRelativeURL resQueryService/queryUsableDetail
      */
+	@POST
+	@Path("/queryUsableDetail")
     public ResUsableDetail queryUsableDetail(ResDetailQuery param) throws BusinessException,SystemException;
 }
