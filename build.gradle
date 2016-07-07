@@ -48,7 +48,10 @@ subprojects {
         }
     }
 	
-    dependencies { compile "com.ai.opt:opt-base:1.0-SNAPSHOT" }
+    dependencies { 
+		compile "com.ai.opt:opt-base:1.0-SNAPSHOT"
+		compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+	}
 }
 
 project("balance-api") {
