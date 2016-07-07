@@ -2,6 +2,12 @@ package com.ai.slp.balance.api.accountquery.interfaces;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.accountquery.param.AccountIdParam;
@@ -16,6 +22,9 @@ import com.ai.slp.balance.api.accountquery.param.CustIdParam;
  * 
  * @author lilg
  */
+@Path("/accountservice")
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IAccountQuerySV {
 
     /**
@@ -29,6 +38,8 @@ public interface IAccountQuerySV {
      * @ApiDocMethod
      * @ApiCode ABM_0012
      */
+	@POST
+	@Path("/queryAccontById")
     public AccountInfoVo queryAccontById(AccountIdParam accountId) throws BusinessException,SystemException;
 
     /**
@@ -42,6 +53,8 @@ public interface IAccountQuerySV {
      * @ApiDocMethod
      * @ApiCode ABM_0013
      */
+	@POST
+	@Path("/queryAccontByCustId")
     public List<AccountInfoVo> queryAccontByCustId(CustIdParam custId) throws BusinessException,SystemException;
 
 }
