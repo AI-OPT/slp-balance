@@ -37,6 +37,7 @@ public interface IAccountQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0012
+     * @RestRelativeURL accountQueryService/queryAccontById
      */
 	@POST
 	@Path("/queryAccontById")
@@ -52,6 +53,7 @@ public interface IAccountQuerySV {
      * @author lilg
      * @ApiDocMethod
      * @ApiCode ABM_0013
+     * @RestRelativeURL accountQueryService/queryAccontByCustId
      */
 	@POST
 	@Path("/queryAccontByCustId")
