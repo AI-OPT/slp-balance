@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
@@ -44,7 +45,7 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		 String userId = request.getUserId();
 		 Timestamp payDay;
 		 String tenantId = request.getTenantId();
-		 String billItemSeq ="1" ;
+		 String billItemSeq =String.valueOf(SeqUtil.getNewId("bill_account$bill_item_seq$SEQ")) ;
 		 Long accountId = Long.valueOf(request.getAccountId());
 		 
 		 //查询账期id
