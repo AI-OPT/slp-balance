@@ -13,6 +13,7 @@ import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
 import com.ai.slp.balance.dao.mapper.bo.BillAccount;
+import com.ai.slp.balance.dao.mapper.bo.BillAccountKey;
 import com.ai.slp.balance.dao.mapper.bo.BillCycleDef;
 import com.ai.slp.balance.dao.mapper.bo.BillOrder2fee;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
@@ -72,18 +73,40 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 				subjectId = billOrder2fee.getSubjectId();
 			}
 		 }
+		 //判断根据主键查询 信息是否存在
+		 BillAccountKey billAccountKey = new BillAccountKey();
+		 billAccountKey.setAccountId(accountId);
+		 billAccountKey.setBillCycleId(billCycleId);
+		 billAccountKey.setSubjectId(subjectId);
 		 //
-		 billAccount.setFee(fee);
-		 billAccount.setOverdraftQuota(overdraftQuota);
-		 billAccount.setUserId(userId);
-		 billAccount.setTenantId(tenantId);
-		 billAccount.setAccountId(accountId);
-		 billAccount.setSubjectId(subjectId);
-		 billAccount.setBillItemSeq(billItemSeq);
-		 billAccount.setBillCycleId(billCycleId);
-		 billAccount.setPayDay(DateUtil.getSysDate());
-		 //
-		 this.billAccountAtomSV.insert(billAccount);
+		 BillAccount billAccountPrimaryKey = this.billAccountAtomSV.getBillAccount(billAccountKey);
+		 //如果存在
+		 if(null != billAccountPrimaryKey){
+			 billAccount.setFee(fee+billAccountPrimaryKey.getFee());
+			 billAccount.setOverdraftQuota(overdraftQuota+billAccountPrimaryKey.getFee());
+			 billAccount.setUserId(userId);
+			 billAccount.setTenantId(tenantId);
+			 billAccount.setAccountId(accountId);
+			 billAccount.setSubjectId(subjectId);
+			 billAccount.setBillCycleId(billCycleId);
+			 billAccount.setPayDay(DateUtil.getSysDate());
+			 //修改信息
+			 this.billAccountAtomSV.updateBillAccountByPrimaryKeySelective(billAccount);
+		 }else{
+		 //不存在
+			 billAccount.setFee(fee);
+			 billAccount.setOverdraftQuota(overdraftQuota);
+			 billAccount.setUserId(userId);
+			 billAccount.setTenantId(tenantId);
+			 billAccount.setAccountId(accountId);
+			 billAccount.setSubjectId(subjectId);
+			 billAccount.setBillItemSeq(billItemSeq);
+			 billAccount.setBillCycleId(billCycleId);
+			 billAccount.setPayDay(DateUtil.getSysDate());
+			 //
+			 this.billAccountAtomSV.insert(billAccount);
+		 }
+		 
 	}
 
 }
