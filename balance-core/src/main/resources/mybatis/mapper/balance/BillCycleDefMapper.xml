@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.BillCycleDefMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.BillCycleDef" >
+    <id column="bill_cycle_def_id" property="billCycleDefId" jdbcType="INTEGER" />
+    <result column="bill_gen_type" property="billGenType" jdbcType="CHAR" />
+    <result column="postpay_units" property="postpayUnits" jdbcType="INTEGER" />
+    <result column="postpay_type" property="postpayType" jdbcType="CHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bill_cycle_def_id, bill_gen_type, postpay_units, postpay_type, tenant_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.BillCycleDefCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bill_cycle_def
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bill_cycle_def
+    where bill_cycle_def_id = #{billCycleDefId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from bill_cycle_def
+    where bill_cycle_def_id = #{billCycleDefId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.BillCycleDefCriteria" >
+    delete from bill_cycle_def
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.BillCycleDef" >
+    insert into bill_cycle_def (bill_cycle_def_id, bill_gen_type, postpay_units, 
+      postpay_type, tenant_id)
+    values (#{billCycleDefId,jdbcType=INTEGER}, #{billGenType,jdbcType=CHAR}, #{postpayUnits,jdbcType=INTEGER}, 
+      #{postpayType,jdbcType=CHAR}, #{tenantId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.BillCycleDef" >
+    insert into bill_cycle_def
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billCycleDefId != null" >
+        bill_cycle_def_id,
+      </if>
+      <if test="billGenType != null" >
+        bill_gen_type,
+      </if>
+      <if test="postpayUnits != null" >
+        postpay_units,
+      </if>
+      <if test="postpayType != null" >
+        postpay_type,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billCycleDefId != null" >
+        #{billCycleDefId,jdbcType=INTEGER},
+      </if>
+      <if test="billGenType != null" >
+        #{billGenType,jdbcType=CHAR},
+      </if>
+      <if test="postpayUnits != null" >
+        #{postpayUnits,jdbcType=INTEGER},
+      </if>
+      <if test="postpayType != null" >
+        #{postpayType,jdbcType=CHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.BillCycleDefCriteria" resultType="java.lang.Integer" >
+    select count(*) from bill_cycle_def
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bill_cycle_def
+    <set >
+      <if test="record.billCycleDefId != null" >
+        bill_cycle_def_id = #{record.billCycleDefId,jdbcType=INTEGER},
+      </if>
+      <if test="record.billGenType != null" >
+        bill_gen_type = #{record.billGenType,jdbcType=CHAR},
+      </if>
+      <if test="record.postpayUnits != null" >
+        postpay_units = #{record.postpayUnits,jdbcType=INTEGER},
+      </if>
+      <if test="record.postpayType != null" >
+        postpay_type = #{record.postpayType,jdbcType=CHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bill_cycle_def
+    set bill_cycle_def_id = #{record.billCycleDefId,jdbcType=INTEGER},
+      bill_gen_type = #{record.billGenType,jdbcType=CHAR},
+      postpay_units = #{record.postpayUnits,jdbcType=INTEGER},
+      postpay_type = #{record.postpayType,jdbcType=CHAR},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.balance.dao.mapper.bo.BillCycleDef" >
+    update bill_cycle_def
+    <set >
+      <if test="billGenType != null" >
+        bill_gen_type = #{billGenType,jdbcType=CHAR},
+      </if>
+      <if test="postpayUnits != null" >
+        postpay_units = #{postpayUnits,jdbcType=INTEGER},
+      </if>
+      <if test="postpayType != null" >
+        postpay_type = #{postpayType,jdbcType=CHAR},
+      </if>
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bill_cycle_def_id = #{billCycleDefId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.BillCycleDef" >
+    update bill_cycle_def
+    set bill_gen_type = #{billGenType,jdbcType=CHAR},
+      postpay_units = #{postpayUnits,jdbcType=INTEGER},
+      postpay_type = #{postpayType,jdbcType=CHAR},
+      tenant_id = #{tenantId,jdbcType=VARCHAR}
+    where bill_cycle_def_id = #{billCycleDefId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -11,6 +11,11 @@ import com.ai.slp.balance.dao.mapper.attach.FunFundBookAttachMapper;
 import com.ai.slp.balance.dao.mapper.attach.FunResBookAttachMapper;
 import com.ai.slp.balance.dao.mapper.attach.FunResBookRestAmountAttachMapper;
 import com.ai.slp.balance.dao.mapper.attach.FunResOperaDetailAttachMapper;
+import com.ai.slp.balance.dao.mapper.interfaces.BillAccountMapper;
+import com.ai.slp.balance.dao.mapper.interfaces.BillCycleDefMapper;
+import com.ai.slp.balance.dao.mapper.interfaces.BillOrder2feeMapper;
+import com.ai.slp.balance.dao.mapper.interfaces.BillPayDetailMapper;
+import com.ai.slp.balance.dao.mapper.interfaces.BillPayLogMapper;
 import com.ai.slp.balance.dao.mapper.interfaces.FunAccountInfoByCustIdIdxMapper;
 import com.ai.slp.balance.dao.mapper.interfaces.FunAccountInfoByExternalIdIdxMapper;
 import com.ai.slp.balance.dao.mapper.interfaces.FunAccountInfoMapper;
@@ -129,6 +134,23 @@ public class MapperFactory {
         return sqlSessionTemplate.getMapper(FunResOperaDetailAttachMapper.class);
     }
     
+    public static BillAccountMapper getBillAccountMapper() {
+        return sqlSessionTemplate.getMapper(BillAccountMapper.class);
+    }
     
-
+    public static BillCycleDefMapper getBillCycleDefMapper() {
+        return sqlSessionTemplate.getMapper(BillCycleDefMapper.class);
+    }
+    
+    public static BillPayDetailMapper getBillPayDetailMapper() {
+        return sqlSessionTemplate.getMapper(BillPayDetailMapper.class);
+    }
+    
+    public static BillPayLogMapper getBillPayLogMapper() {
+        return sqlSessionTemplate.getMapper(BillPayLogMapper.class);
+    }
+    
+    public static BillOrder2feeMapper getBillOrder2feeMapper() {
+        return sqlSessionTemplate.getMapper(BillOrder2feeMapper.class);
+    }
 }

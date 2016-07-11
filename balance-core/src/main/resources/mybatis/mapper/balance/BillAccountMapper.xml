@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.slp.balance.dao.mapper.interfaces.BillAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.balance.dao.mapper.bo.BillAccount" >
+    <id column="account_id" property="accountId" jdbcType="BIGINT" />
+    <id column="bill_cycle_id" property="billCycleId" jdbcType="VARCHAR" />
+    <id column="subject_id" property="subjectId" jdbcType="VARCHAR" />
+    <result column="fee" property="fee" jdbcType="BIGINT" />
+    <result column="overdraft_quota" property="overdraftQuota" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="pay_day" property="payDay" jdbcType="DATE" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="bill_item_seq" property="billItemSeq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    account_id, bill_cycle_id, subject_id, fee, overdraft_quota, user_id, pay_day, tenant_id, 
+    bill_item_seq
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccountCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bill_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccountKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from bill_account
+    where account_id = #{accountId,jdbcType=BIGINT}
+      and bill_cycle_id = #{billCycleId,jdbcType=VARCHAR}
+      and subject_id = #{subjectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccountKey" >
+    delete from bill_account
+    where account_id = #{accountId,jdbcType=BIGINT}
+      and bill_cycle_id = #{billCycleId,jdbcType=VARCHAR}
+      and subject_id = #{subjectId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccountCriteria" >
+    delete from bill_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccount" >
+    insert into bill_account (account_id, bill_cycle_id, subject_id, 
+      fee, overdraft_quota, user_id, 
+      pay_day, tenant_id, bill_item_seq
+      )
+    values (#{accountId,jdbcType=BIGINT}, #{billCycleId,jdbcType=VARCHAR}, #{subjectId,jdbcType=VARCHAR}, 
+      #{fee,jdbcType=BIGINT}, #{overdraftQuota,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, 
+      #{payDay,jdbcType=DATE}, #{tenantId,jdbcType=VARCHAR}, #{billItemSeq,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccount" >
+    insert into bill_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="billCycleId != null" >
+        bill_cycle_id,
+      </if>
+      <if test="subjectId != null" >
+        subject_id,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="overdraftQuota != null" >
+        overdraft_quota,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="payDay != null" >
+        pay_day,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="billItemSeq != null" >
+        bill_item_seq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="billCycleId != null" >
+        #{billCycleId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=BIGINT},
+      </if>
+      <if test="overdraftQuota != null" >
+        #{overdraftQuota,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="payDay != null" >
+        #{payDay,jdbcType=DATE},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="billItemSeq != null" >
+        #{billItemSeq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccountCriteria" resultType="java.lang.Integer" >
+    select count(*) from bill_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bill_account
+    <set >
+      <if test="record.accountId != null" >
+        account_id = #{record.accountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.billCycleId != null" >
+        bill_cycle_id = #{record.billCycleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectId != null" >
+        subject_id = #{record.subjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fee != null" >
+        fee = #{record.fee,jdbcType=BIGINT},
+      </if>
+      <if test="record.overdraftQuota != null" >
+        overdraft_quota = #{record.overdraftQuota,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payDay != null" >
+        pay_day = #{record.payDay,jdbcType=DATE},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billItemSeq != null" >
+        bill_item_seq = #{record.billItemSeq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bill_account
+    set account_id = #{record.accountId,jdbcType=BIGINT},
+      bill_cycle_id = #{record.billCycleId,jdbcType=VARCHAR},
+      subject_id = #{record.subjectId,jdbcType=VARCHAR},
+      fee = #{record.fee,jdbcType=BIGINT},
+      overdraft_quota = #{record.overdraftQuota,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      pay_day = #{record.payDay,jdbcType=DATE},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      bill_item_seq = #{record.billItemSeq,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccount" >
+    update bill_account
+    <set >
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=BIGINT},
+      </if>
+      <if test="overdraftQuota != null" >
+        overdraft_quota = #{overdraftQuota,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="payDay != null" >
+        pay_day = #{payDay,jdbcType=DATE},
+      </if>
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="billItemSeq != null" >
+        bill_item_seq = #{billItemSeq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=BIGINT}
+      and bill_cycle_id = #{billCycleId,jdbcType=VARCHAR}
+      and subject_id = #{subjectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.balance.dao.mapper.bo.BillAccount" >
+    update bill_account
+    set fee = #{fee,jdbcType=BIGINT},
+      overdraft_quota = #{overdraftQuota,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=VARCHAR},
+      pay_day = #{payDay,jdbcType=DATE},
+      tenant_id = #{tenantId,jdbcType=VARCHAR},
+      bill_item_seq = #{billItemSeq,jdbcType=VARCHAR}
+    where account_id = #{accountId,jdbcType=BIGINT}
+      and bill_cycle_id = #{billCycleId,jdbcType=VARCHAR}
+      and subject_id = #{subjectId,jdbcType=VARCHAR}
+  </update>
+</mapper>
