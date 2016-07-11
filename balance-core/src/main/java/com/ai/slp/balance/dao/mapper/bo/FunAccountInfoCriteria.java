@@ -1564,6 +1564,136 @@ public class FunAccountInfoCriteria {
             addCriterion("remark not between", value1, value2, "remark");
             return (Criteria) this;
         }
+
+        public Criteria andBillCycleDefIdIsNull() {
+            addCriterion("bill_cycle_def_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdIsNotNull() {
+            addCriterion("bill_cycle_def_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdEqualTo(Long value) {
+            addCriterion("bill_cycle_def_id =", value, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdNotEqualTo(Long value) {
+            addCriterion("bill_cycle_def_id <>", value, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdGreaterThan(Long value) {
+            addCriterion("bill_cycle_def_id >", value, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("bill_cycle_def_id >=", value, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdLessThan(Long value) {
+            addCriterion("bill_cycle_def_id <", value, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdLessThanOrEqualTo(Long value) {
+            addCriterion("bill_cycle_def_id <=", value, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdIn(List<Long> values) {
+            addCriterion("bill_cycle_def_id in", values, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdNotIn(List<Long> values) {
+            addCriterion("bill_cycle_def_id not in", values, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdBetween(Long value1, Long value2) {
+            addCriterion("bill_cycle_def_id between", value1, value2, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillCycleDefIdNotBetween(Long value1, Long value2) {
+            addCriterion("bill_cycle_def_id not between", value1, value2, "billCycleDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdIsNull() {
+            addCriterion("top_bill_cycle_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdIsNotNull() {
+            addCriterion("top_bill_cycle_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdEqualTo(String value) {
+            addCriterion("top_bill_cycle_id =", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdNotEqualTo(String value) {
+            addCriterion("top_bill_cycle_id <>", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdGreaterThan(String value) {
+            addCriterion("top_bill_cycle_id >", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdGreaterThanOrEqualTo(String value) {
+            addCriterion("top_bill_cycle_id >=", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdLessThan(String value) {
+            addCriterion("top_bill_cycle_id <", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdLessThanOrEqualTo(String value) {
+            addCriterion("top_bill_cycle_id <=", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdLike(String value) {
+            addCriterion("top_bill_cycle_id like", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdNotLike(String value) {
+            addCriterion("top_bill_cycle_id not like", value, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdIn(List<String> values) {
+            addCriterion("top_bill_cycle_id in", values, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdNotIn(List<String> values) {
+            addCriterion("top_bill_cycle_id not in", values, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdBetween(String value1, String value2) {
+            addCriterion("top_bill_cycle_id between", value1, value2, "topBillCycleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBillCycleIdNotBetween(String value1, String value2) {
+            addCriterion("top_bill_cycle_id not between", value1, value2, "topBillCycleId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

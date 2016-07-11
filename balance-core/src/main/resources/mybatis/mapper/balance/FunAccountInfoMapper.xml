@@ -24,6 +24,8 @@
     <result column="balance_chg_date" property="balanceChgDate" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="bill_cycle_def_id" property="billCycleDefId" jdbcType="BIGINT" />
+    <result column="top_bill_cycle_id" property="topBillCycleId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -87,14 +89,13 @@
     account_id, system_id, tenant_id, external_id, acct_name, cust_id, acct_type, pay_type, 
     post_type, acct_addr, email, total_balance, credit, temp_credit, temp_valid_time, 
     d_tot_quota, d_sig_quota, d_trans_quota, acct_status, balance_chg_date, create_time, 
-    remark
+    remark, bill_cycle_def_id, top_bill_cycle_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountInfoCriteria" >
     select
     <if test="distinct" >
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from fun_account_info
     <if test="_parameter != null" >
@@ -131,7 +132,8 @@
       credit, temp_credit, temp_valid_time, 
       d_tot_quota, d_sig_quota, d_trans_quota, 
       acct_status, balance_chg_date, create_time, 
-      remark)
+      remark, bill_cycle_def_id, top_bill_cycle_id
+      )
     values (#{accountId,jdbcType=BIGINT}, #{systemId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
       #{externalId,jdbcType=VARCHAR}, #{acctName,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
       #{acctType,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, #{postType,jdbcType=VARCHAR}, 
@@ -139,7 +141,8 @@
       #{credit,jdbcType=BIGINT}, #{tempCredit,jdbcType=BIGINT}, #{tempValidTime,jdbcType=TIMESTAMP}, 
       #{dTotQuota,jdbcType=BIGINT}, #{dSigQuota,jdbcType=BIGINT}, #{dTransQuota,jdbcType=BIGINT}, 
       #{acctStatus,jdbcType=VARCHAR}, #{balanceChgDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR}, #{billCycleDefId,jdbcType=BIGINT}, #{topBillCycleId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountInfo" >
     insert into fun_account_info
@@ -210,6 +213,12 @@
       <if test="remark != null" >
         remark,
       </if>
+      <if test="billCycleDefId != null" >
+        bill_cycle_def_id,
+      </if>
+      <if test="topBillCycleId != null" >
+        top_bill_cycle_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="accountId != null" >
@@ -277,6 +286,12 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="billCycleDefId != null" >
+        #{billCycleDefId,jdbcType=BIGINT},
+      </if>
+      <if test="topBillCycleId != null" >
+        #{topBillCycleId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -355,6 +370,12 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
+      <if test="record.billCycleDefId != null" >
+        bill_cycle_def_id = #{record.billCycleDefId,jdbcType=BIGINT},
+      </if>
+      <if test="record.topBillCycleId != null" >
+        top_bill_cycle_id = #{record.topBillCycleId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -383,7 +404,9 @@
       acct_status = #{record.acctStatus,jdbcType=VARCHAR},
       balance_chg_date = #{record.balanceChgDate,jdbcType=TIMESTAMP},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      remark = #{record.remark,jdbcType=VARCHAR}
+      remark = #{record.remark,jdbcType=VARCHAR},
+      bill_cycle_def_id = #{record.billCycleDefId,jdbcType=BIGINT},
+      top_bill_cycle_id = #{record.topBillCycleId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -454,6 +477,12 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="billCycleDefId != null" >
+        bill_cycle_def_id = #{billCycleDefId,jdbcType=BIGINT},
+      </if>
+      <if test="topBillCycleId != null" >
+        top_bill_cycle_id = #{topBillCycleId,jdbcType=VARCHAR},
+      </if>
     </set>
     where account_id = #{accountId,jdbcType=BIGINT}
   </update>
@@ -479,7 +508,9 @@
       acct_status = #{acctStatus,jdbcType=VARCHAR},
       balance_chg_date = #{balanceChgDate,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      remark = #{remark,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR},
+      bill_cycle_def_id = #{billCycleDefId,jdbcType=BIGINT},
+      top_bill_cycle_id = #{topBillCycleId,jdbcType=VARCHAR}
     where account_id = #{accountId,jdbcType=BIGINT}
   </update>
 </mapper>

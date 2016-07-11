@@ -47,6 +47,10 @@ public class FunAccountInfo {
 
     private String remark;
 
+    private Long billCycleDefId;
+
+    private String topBillCycleId;
+
     public Long getAccountId() {
         return accountId;
     }
@@ -221,5 +225,21 @@ public class FunAccountInfo {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Long getBillCycleDefId() {
+        return billCycleDefId;
+    }
+
+    public void setBillCycleDefId(Long billCycleDefId) {
+        this.billCycleDefId = billCycleDefId;
+    }
+
+    public String getTopBillCycleId() {
+        return topBillCycleId;
+    }
+
+    public void setTopBillCycleId(String topBillCycleId) {
+        this.topBillCycleId = topBillCycleId == null ? null : topBillCycleId.trim();
     }
 }
