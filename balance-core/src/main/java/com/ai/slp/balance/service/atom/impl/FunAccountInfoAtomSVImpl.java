@@ -79,4 +79,12 @@ public class FunAccountInfoAtomSVImpl implements IFunAccountInfoAtomSV {
         example.createCriteria().andCustIdEqualTo(custId).andTenantIdEqualTo(tenantId);
         return MapperFactory.getFunAccountInfoMapper().selectByExample(example);
     }
+    @Override
+    public void updateCredit(FunAccountInfo funAccountInfo){
+    	FunAccountInfo funAccountInfoNew = new FunAccountInfo();
+    	funAccountInfoNew.setAccountId(funAccountInfo.getAccountId());
+    	funAccountInfoNew.setCredit(funAccountInfo.getCredit());
+    	//
+    	MapperFactory.getFunAccountInfoMapper().updateByPrimaryKeySelective(funAccountInfo);
+    }
 }

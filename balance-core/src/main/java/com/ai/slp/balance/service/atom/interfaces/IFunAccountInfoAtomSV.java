@@ -94,4 +94,12 @@ public interface IFunAccountInfoAtomSV {
      * @ApiDocMethod
      */
     public int addBalance(long account,long amount);
+    /**
+     * 根据账户id修改账户信用额度
+     * @param funAccountInfo
+     * @author zhangzd
+     * @ApiDocMethod
+     * @ApiCode
+     */
+    public void updateCredit(FunAccountInfo funAccountInfo);
 }
