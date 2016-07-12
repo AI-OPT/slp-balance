@@ -1,5 +1,7 @@
 package com.ai.slp.balance.service.atom.interfaces;
 
-public interface IBillPayLogAtomSV {
+import com.ai.slp.balance.dao.mapper.bo.BillPayLog;
 
+public interface IBillPayLogAtomSV {
+	public void insert(BillPayLog billPayLog);
 }
