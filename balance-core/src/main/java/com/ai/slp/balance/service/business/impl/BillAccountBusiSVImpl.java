@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -26,8 +28,11 @@ import com.ai.slp.balance.service.atom.interfaces.IBillOrder2feeAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.business.interfaces.IBillAccountBusiSV;
 import com.ai.slp.balance.util.BillCycleUtil;
+import com.esotericsoftware.minlog.Log;
 @Service
 public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
+	private static final Logger log = LogManager.getLogger(BillAccountBusiSVImpl.class);
+	
 	@Autowired
 	private IBillAccountAtomSV billAccountAtomSV;
 	
@@ -42,6 +47,9 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 	
 	@Override
 	public void orderToBillAccount(BillGenRequest request) throws BusinessException, SystemException {
+		//验证账户逾期是否欠费
+		validateArrearage(request);
+		
 		//账户信用额度校验 是否超限
 		validateOverdraftQuota(request);
 		
@@ -153,5 +161,23 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 			throw new BusinessException("000002","账户信用度不足");
 		}
 		
+	}
+	/**
+	 * 验证账户逾期是否欠费
+	 * @param request
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	public void validateArrearage(BillGenRequest request){
+		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccount(request.getTenantId(), request.getAccountId());
+		if(!CollectionUtil.isEmpty(billAccountList)){
+			for(BillAccount billAccount : billAccountList){
+				log.info("是否逾期欠费："+request.getOrderTime().after(billAccount.getPayDay()));
+				if(request.getOrderTime().after(billAccount.getPayDay())){
+					throw new BusinessException("000001","账户存在逾期欠费");
+				}
+			}
+		}
 	}
 }
