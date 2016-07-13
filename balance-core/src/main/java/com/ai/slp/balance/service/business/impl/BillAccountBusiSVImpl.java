@@ -1,6 +1,8 @@
 package com.ai.slp.balance.service.business.impl;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +10,6 @@ import org.springframework.stereotype.Service;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
-import com.ai.opt.sdk.util.BeanUtils;
-import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
 import com.ai.slp.balance.dao.mapper.bo.BillAccount;
@@ -22,6 +22,7 @@ import com.ai.slp.balance.service.atom.interfaces.IBillCycleDefAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IBillOrder2feeAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.business.interfaces.IBillAccountBusiSV;
+import com.ai.slp.balance.util.BillCycleUtil;
 @Service
 public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 	@Autowired
@@ -59,10 +60,18 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 			 if(!StringUtil.isBlank(String.valueOf(funAccountInfo.getBillCycleDefId()))){
 				 billCycleDef = this.billCycleDefAtomSV.getBillCycleDef(Integer.valueOf(funAccountInfo.getBillCycleDefId().toString())); 
 			 }
+		 }else {
+			 throw new BusinessException("", "账期信息表为空");
 		 }
 		 String billGenType = billCycleDef.getBillGenType();
-		 if(!StringUtil.isBlank(billGenType) && billGenType.equals("D")){
-			 billCycleId = DateUtil.getDateString(request.getOrderTime(), "YYYYMMddHHmmss");
+		 Integer amount = billCycleDef.getPostpayUnits();
+		 //
+		 if(!StringUtil.isBlank(billGenType)){
+			 Map<String,Object> billCycleMap = new HashMap<String,Object>();
+			 //
+			 billCycleMap = BillCycleUtil.getBillCycleIdAndPayDate(billGenType, amount);
+			 billCycleId = billCycleMap.get(BillCycleUtil.BILL_CYCLE_ID).toString();
+			 billAccount.setPayDay(Timestamp.valueOf(billCycleMap.get(BillCycleUtil.PAY_DATE_NEW).toString()));
 		 }
 		 //根据商品类目id查询科目id
 		 BillOrder2fee billOrder2fee = this.billOrder2feeAtomSV.getBillOrder2fee(request.getProductCatId());
@@ -89,7 +98,7 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 			 billAccount.setAccountId(accountId);
 			 billAccount.setSubjectId(subjectId);
 			 billAccount.setBillCycleId(billCycleId);
-			 billAccount.setPayDay(DateUtil.getSysDate());
+			 
 			 //修改信息
 			 this.billAccountAtomSV.updateBillAccountByPrimaryKeySelective(billAccount);
 		 }else{
@@ -102,7 +111,6 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 			 billAccount.setSubjectId(subjectId);
 			 billAccount.setBillItemSeq(billItemSeq);
 			 billAccount.setBillCycleId(billCycleId);
-			 billAccount.setPayDay(DateUtil.getSysDate());
 			 //
 			 this.billAccountAtomSV.insert(billAccount);
 		 }
