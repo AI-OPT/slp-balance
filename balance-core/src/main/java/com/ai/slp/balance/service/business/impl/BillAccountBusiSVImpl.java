@@ -2,14 +2,17 @@ package com.ai.slp.balance.service.business.impl;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
 import com.ai.slp.balance.dao.mapper.bo.BillAccount;
@@ -39,7 +42,9 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 	
 	@Override
 	public void orderToBillAccount(BillGenRequest request) throws BusinessException, SystemException {
-		//String 
+		//账户信用额度校验 是否超限
+		validateOverdraftQuota(request);
+		
 		BillAccount billAccount = new BillAccount();
 		//
 		 Long fee = request.getFee();
@@ -57,11 +62,13 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		 BillCycleDef billCycleDef = new BillCycleDef();
 		 if(null != funAccountInfo){
 			 //
-			 if(!StringUtil.isBlank(String.valueOf(funAccountInfo.getBillCycleDefId()))){
+			 if(!StringUtils.isEmpty(funAccountInfo.getBillCycleDefId())){
 				 billCycleDef = this.billCycleDefAtomSV.getBillCycleDef(Integer.valueOf(funAccountInfo.getBillCycleDefId().toString())); 
+			 }else{
+				 throw new BusinessException("", "fun_account_info未配置账期信息"); 
 			 }
 		 }else {
-			 throw new BusinessException("", "账期信息表为空");
+			 throw new BusinessException("", "fun_account_info 信息表为空");
 		 }
 		 String billGenType = billCycleDef.getBillGenType();
 		 Integer amount = billCycleDef.getPostpayUnits();
@@ -116,5 +123,35 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		 }
 		 
 	}
-
+	/**
+	 * 验证账户透支金额是否超限
+	 * @param request
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	public void validateOverdraftQuota(BillGenRequest request){
+		//订单消费额度
+		Long fee = request.getFee();
+		//
+		FunAccountInfo funAccountInfo = this.funAccountInfoAtomSV.getBeanByPrimaryKey(Long.valueOf(request.getAccountId()));
+		//查询当前账户的信用额度
+		Long credit = 0l;
+		if(null != funAccountInfo){
+			credit = funAccountInfo.getCredit();
+		}
+		//查询当前账户的总透支额
+		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccount(request.getTenantId(), request.getAccountId());
+		Long overdraftQuotaTotal = 0l;
+		if(!CollectionUtil.isEmpty(billAccountList)){
+			for(BillAccount billAccount : billAccountList){
+				overdraftQuotaTotal += billAccount.getOverdraftQuota();
+			}
+		}
+		//如果消费额 小于或等于 总信用额度减去账户总透支额 就返回 000002账户信用度不足
+		if(fee >= (credit - overdraftQuotaTotal)){
+			throw new BusinessException("000002","账户信用度不足");
+		}
+		
+	}
 }
