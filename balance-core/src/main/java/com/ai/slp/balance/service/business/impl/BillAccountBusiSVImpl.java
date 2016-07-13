@@ -149,7 +149,7 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 			credit = funAccountInfo.getCredit();
 		}
 		//查询当前账户的总透支额
-		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccount(request.getTenantId(), request.getAccountId());
+		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccountOverdraftQuotaGreaterThanZero(request.getTenantId(), request.getAccountId());
 		Long overdraftQuotaTotal = 0l;
 		if(!CollectionUtil.isEmpty(billAccountList)){
 			for(BillAccount billAccount : billAccountList){
@@ -170,7 +170,7 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 	 * @ApiCode
 	 */
 	public void validateArrearage(BillGenRequest request){
-		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccount(request.getTenantId(), request.getAccountId());
+		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccountOverdraftQuotaGreaterThanZero(request.getTenantId(), request.getAccountId());
 		if(!CollectionUtil.isEmpty(billAccountList)){
 			for(BillAccount billAccount : billAccountList){
 				log.info("是否逾期欠费："+request.getOrderTime().after(billAccount.getPayDay()));

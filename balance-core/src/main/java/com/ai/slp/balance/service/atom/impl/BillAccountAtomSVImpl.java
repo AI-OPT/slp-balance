@@ -33,7 +33,7 @@ public class BillAccountAtomSVImpl implements IBillAccountAtomSV {
 	 * 查询透支额度大于零的当前账户的列表信息
 	 */
 	@Override
-	public List<BillAccount> queryBillAccount(String tenantId, String accountId) {
+	public List<BillAccount> queryBillAccountOverdraftQuotaGreaterThanZero(String tenantId, String accountId) {
 		BillAccountCriteria example = new BillAccountCriteria();
 		BillAccountCriteria.Criteria criteria = example.createCriteria();
 		criteria.andTenantIdEqualTo(tenantId);

@@ -25,7 +25,7 @@ public interface IBillAccountAtomSV {
 	 */
 	public void updateBillAccountByPrimaryKeySelective(BillAccount billAccount);
 	/**
-	 * 根据账户id和租户id查询当前账单信息
+	 * 根据账户id和租户id查询当前账单透支额信息大于0的信息
 	 * @param tenantId
 	 * @param accountId
 	 * @return
@@ -33,7 +33,7 @@ public interface IBillAccountAtomSV {
 	 * @ApiDocMethod
 	 * @ApiCode
 	 */
-	public List<BillAccount> queryBillAccount(String tenantId,String accountId);
+	public List<BillAccount> queryBillAccountOverdraftQuotaGreaterThanZero(String tenantId,String accountId);
 	/**
 	 * 通过billItemSeq 修改透支额
 	 * @param billItemSeq

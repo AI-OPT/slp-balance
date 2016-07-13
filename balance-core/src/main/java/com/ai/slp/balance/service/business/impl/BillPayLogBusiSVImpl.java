@@ -30,7 +30,7 @@ public class BillPayLogBusiSVImpl implements IBillPayLogBusiSV {
 	@Transactional
 	public void payFee(PayFeeRequest request) throws BusinessException, SystemException {
 		
-		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccount(request.getTenantId(), request.getAccountId());
+		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccountOverdraftQuotaGreaterThanZero(request.getTenantId(), request.getAccountId());
 		//判断支付金额是否大于所有欠费金额，如果大于 提示重新输入
 		Integer payFeeTotal = 0;
 		for(BillAccount billAccount : billAccountList){
