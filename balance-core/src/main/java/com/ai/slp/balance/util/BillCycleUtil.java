@@ -96,7 +96,7 @@ public final class BillCycleUtil {
      */
     public static Map<String,Object> getBillCycleIdAndPayDate(String billGenType,int amount){
     	LOG.info("当前账单周期类型："+billGenType);
-    	LOG.info("当前还款实现周期数："+amount);
+    	LOG.info("当前还款时限周期数："+amount);
     	Map<String,Object> timeMap = new HashMap<String,Object>();
 		String dateFormatStr = "";
 		int DateType = Calendar.DAY_OF_MONTH;
