@@ -45,8 +45,8 @@ public class OrderToBillAccountTest extends TestCase {
     @Test
     public void orderToBillAccount(){
     	BillGenRequest billgenRequest = new BillGenRequest();
-    	billgenRequest.setAccountId("21111");
-    	billgenRequest.setFee(5555l);
+    	billgenRequest.setAccountId("10001");
+    	billgenRequest.setFee(1l);
     	billgenRequest.setOrderTime(DateUtil.getSysDate());
     	billgenRequest.setOverdraftQuota(11l);
     	billgenRequest.setProductCatId("111");
