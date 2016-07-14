@@ -1,11 +1,9 @@
 package com.ai.slp.balance.dao.mapper.interfaces;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.ai.slp.balance.dao.mapper.bo.FunAccountLog;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountLogCriteria;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface FunAccountLogMapper {
     int countByExample(FunAccountLogCriteria example);

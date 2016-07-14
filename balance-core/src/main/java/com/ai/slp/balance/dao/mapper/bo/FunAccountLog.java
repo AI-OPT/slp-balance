@@ -43,6 +43,10 @@ public class FunAccountLog {
 
     private Timestamp updateTime;
 
+    private Long billCycleDefId;
+
+    private String topBillCycleId;
+
     public String getTenantId() {
         return tenantId;
     }
@@ -67,14 +71,12 @@ public class FunAccountLog {
         this.acctName = acctName == null ? null : acctName.trim();
     }
 
-   
-
     public String getCustId() {
         return custId;
     }
 
     public void setCustId(String custId) {
-        this.custId = custId;
+        this.custId = custId == null ? null : custId.trim();
     }
 
     public String getAcctType() {
@@ -203,5 +205,21 @@ public class FunAccountLog {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Long getBillCycleDefId() {
+        return billCycleDefId;
+    }
+
+    public void setBillCycleDefId(Long billCycleDefId) {
+        this.billCycleDefId = billCycleDefId;
+    }
+
+    public String getTopBillCycleId() {
+        return topBillCycleId;
+    }
+
+    public void setTopBillCycleId(String topBillCycleId) {
+        this.topBillCycleId = topBillCycleId == null ? null : topBillCycleId.trim();
     }
 }
