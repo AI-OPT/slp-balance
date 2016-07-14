@@ -24,7 +24,7 @@ public class CustCreditManageTest  extends TestCase {
 		CustCreditRequest request = new CustCreditRequest();
 		//
 		request.setAccountId("10001");
-		request.setCredit(15555l);
+		request.setCredit(15566l);
 		//
 		this.custCreditManageSV.updateCredit(request);
 	}
