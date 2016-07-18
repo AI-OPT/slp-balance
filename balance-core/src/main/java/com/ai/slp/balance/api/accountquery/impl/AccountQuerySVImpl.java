@@ -106,6 +106,9 @@ public class AccountQuerySVImpl implements IAccountQuerySV {
 	        	responseHeader.setResultMessage("未找到指定账户");
 	        	listAccountResponse.setResponseHeader(responseHeader);
 	        }else{
+	        	responseHeader.setResultCode("0000");
+	        	responseHeader.setResultMessage("成功");
+	        	responseHeader.setIsSuccess(true);
 	        	listAccountResponse.setResponseHeader(responseHeader);
 	        }
 	        //
