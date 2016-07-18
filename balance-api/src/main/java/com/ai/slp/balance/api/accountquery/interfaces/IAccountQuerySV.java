@@ -13,6 +13,7 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.balance.api.accountquery.param.AccountIdParam;
 import com.ai.slp.balance.api.accountquery.param.AccountInfoVo;
 import com.ai.slp.balance.api.accountquery.param.CustIdParam;
+import com.ai.slp.balance.api.accountquery.param.ListAccountResponse;
 
 /**
  * 账户查询接口类 <br>
@@ -58,5 +59,21 @@ public interface IAccountQuerySV {
 	@POST
 	@Path("/queryAccontByCustId")
     public List<AccountInfoVo> queryAccontByCustId(CustIdParam custId) throws BusinessException,SystemException;
+	
+	/**
+     * 按客户查询账户资料.<br>
+     * 按照账户查询账户的基本资料<br>
+     * 
+     * @param custId
+     * @return 账户信息列表
+     * @throws BusinessException,SystemException
+     * @author lilg
+     * @ApiDocMethod
+     * @ApiCode ABM_00131
+     * @RestRelativeURL accountQueryService/queryAccontByCustIdNew
+     */
+	@POST
+	@Path("/queryAccontByCustIdNew")
+    public ListAccountResponse queryAccontByCustIdNew(CustIdParam custId) throws BusinessException,SystemException;
 
 }
