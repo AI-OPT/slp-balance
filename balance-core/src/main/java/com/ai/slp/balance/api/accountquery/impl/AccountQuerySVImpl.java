@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
+import com.ai.opt.base.vo.ResponseHeader;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.accountquery.interfaces.IAccountQuerySV;
 import com.ai.slp.balance.api.accountquery.param.AccountIdParam;
@@ -62,6 +65,15 @@ public class AccountQuerySVImpl implements IAccountQuerySV {
         List<AccountInfoVo> accountInfoVoList = accountSV.queryAccountInfoByCustId(
                 custId.getTenantId(), custId.getCustId());
         log.debug("账户查询结束");
+        BaseResponse response = new BaseResponse();
+        ResponseHeader responseHeader = new ResponseHeader();
+        if(CollectionUtil.isEmpty(accountInfoVoList)){
+//        	responseHeader.setIsSuccess(false);
+//        	responseHeader.setResultCode("0001");
+//        	responseHeader.setResultMessage("未找到指定账户");
+//        	response.setResponseHeader(responseHeader);
+        	throw new BusinessException("0001","未找到指定账户");
+        }
         return accountInfoVoList;
     }
 
