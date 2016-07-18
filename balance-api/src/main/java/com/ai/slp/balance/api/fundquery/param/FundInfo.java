@@ -3,6 +3,8 @@ package com.ai.slp.balance.api.fundquery.param;
 import java.io.Serializable;
 import java.util.List;
 
+import com.ai.opt.base.vo.BaseResponse;
+
 /**
  * 余额查询结果对象
  *
@@ -11,8 +13,13 @@ import java.util.List;
  * 
  * @author lilg
  */
-public class FundInfo implements Serializable {
+public class FundInfo extends BaseResponse implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 租户ID
      */
     private String tenantId;
