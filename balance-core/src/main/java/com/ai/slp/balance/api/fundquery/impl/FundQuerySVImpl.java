@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.ResponseHeader;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.fundquery.interfaces.IFundQuerySV;
 import com.ai.slp.balance.api.fundquery.param.AccountIdParam;
@@ -65,9 +66,10 @@ public class FundQuerySVImpl implements IFundQuerySV {
         try{
         	fundInfo = fundQueryBusiSV.queryFund(accountId);
         	LOG.debug("余额查询结束");
-        	if(null != fundInfo){
+        	if(!CollectionUtil.isEmpty(fundInfo.getFundBooks())){
         		responseHeader.setResultCode("0000");
         		responseHeader.setResultMessage("成功");
+        		responseHeader.setIsSuccess(true);
         		fundInfo.setResponseHeader(responseHeader);
         	}else{
         		responseHeader.setResultCode("0001");
