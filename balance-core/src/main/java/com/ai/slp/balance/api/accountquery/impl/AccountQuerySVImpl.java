@@ -17,6 +17,7 @@ import com.ai.slp.balance.api.accountquery.interfaces.IAccountQuerySV;
 import com.ai.slp.balance.api.accountquery.param.AccountIdParam;
 import com.ai.slp.balance.api.accountquery.param.AccountInfoVo;
 import com.ai.slp.balance.api.accountquery.param.CustIdParam;
+import com.ai.slp.balance.api.accountquery.param.ListAccountResponse;
 import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.service.business.interfaces.IAccountManagerSV;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -76,5 +77,33 @@ public class AccountQuerySVImpl implements IAccountQuerySV {
         }
         return accountInfoVoList;
     }
+
+	@Override
+	public ListAccountResponse queryAccontByCustIdNew(CustIdParam custId) throws BusinessException, SystemException {
+
+        log.debug("按客户UD查询账户开始");
+        if (custId == null) {
+            throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
+        }
+        if (StringUtil.isBlank(custId.getTenantId())) {
+            throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
+        }
+        if (StringUtil.isBlank(custId.getCustId())) {
+            throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "客户ID不能为空");
+        }
+        List<AccountInfoVo> accountInfoVoList = accountSV.queryAccountInfoByCustId(
+                custId.getTenantId(), custId.getCustId());
+        log.debug("账户查询结束");
+        ResponseHeader responseHeader = new ResponseHeader();
+        ListAccountResponse listAccountResponse = new ListAccountResponse();
+        listAccountResponse.setAccountInfoVoList(accountInfoVoList);
+        if(CollectionUtil.isEmpty(accountInfoVoList)){
+        	responseHeader.setResultCode("0001");
+        	responseHeader.setResultMessage("未找到指定账户");
+        	listAccountResponse.setResponseHeader(responseHeader);
+        }
+        //
+        return listAccountResponse;
+	}
 
 }
