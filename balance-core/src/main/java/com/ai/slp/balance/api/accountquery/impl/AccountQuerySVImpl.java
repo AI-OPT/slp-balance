@@ -91,19 +91,34 @@ public class AccountQuerySVImpl implements IAccountQuerySV {
         if (StringUtil.isBlank(custId.getCustId())) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "客户ID不能为空");
         }
-        List<AccountInfoVo> accountInfoVoList = accountSV.queryAccountInfoByCustId(
-                custId.getTenantId(), custId.getCustId());
-        log.debug("账户查询结束");
-        ResponseHeader responseHeader = new ResponseHeader();
-        ListAccountResponse listAccountResponse = new ListAccountResponse();
-        listAccountResponse.setAccountInfoVoList(accountInfoVoList);
-        if(CollectionUtil.isEmpty(accountInfoVoList)){
-        	responseHeader.setResultCode("0001");
-        	responseHeader.setResultMessage("未找到指定账户");
-        	listAccountResponse.setResponseHeader(responseHeader);
-        }
+        
         //
-        return listAccountResponse;
+        ListAccountResponse listAccountResponse = new ListAccountResponse();
+        ResponseHeader responseHeader = new ResponseHeader();
+        try{
+	        List<AccountInfoVo> accountInfoVoList = accountSV.queryAccountInfoByCustId(
+	                custId.getTenantId(), custId.getCustId());
+	        log.debug("账户查询结束");
+	        
+	        listAccountResponse.setAccountInfoVoList(accountInfoVoList);
+	        if(CollectionUtil.isEmpty(accountInfoVoList)){
+	        	responseHeader.setResultCode("0001");
+	        	responseHeader.setResultMessage("未找到指定账户");
+	        	listAccountResponse.setResponseHeader(responseHeader);
+	        }else{
+	        	listAccountResponse.setResponseHeader(responseHeader);
+	        }
+	        //
+	        return listAccountResponse;
+        }catch(Exception e){
+        	responseHeader.setResultCode("0002");
+        	responseHeader.setResultMessage("查询资料失败");
+        	listAccountResponse.setResponseHeader(responseHeader);
+        	//
+        	return listAccountResponse;
+        }
+        
+        //
 	}
 
 }
