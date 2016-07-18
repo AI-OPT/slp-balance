@@ -63,6 +63,9 @@ public class FundQuerySVImpl implements IFundQuerySV {
         try{
         	fundInfo = fundQueryBusiSV.queryFund(accountId);
         	LOG.debug("余额查询结束");
+        	if(null == fundInfo){
+        		throw new BusinessException("0001","未查询到余额信息");
+        	}
         }catch(Exception e){
         	throw new BusinessException("0002","账户余额查询失败");
         }
