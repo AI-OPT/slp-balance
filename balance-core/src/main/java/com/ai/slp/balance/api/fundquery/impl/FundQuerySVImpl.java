@@ -59,8 +59,13 @@ public class FundQuerySVImpl implements IFundQuerySV {
         if (accountId.getAccountId() == 0) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "账户ID不能为空");
         }
-        FundInfo fundInfo = fundQueryBusiSV.queryFund(accountId);
-        LOG.debug("余额查询结束");
+        FundInfo fundInfo = null;
+        try{
+        	fundInfo = fundQueryBusiSV.queryFund(accountId);
+        	LOG.debug("余额查询结束");
+        }catch(Exception e){
+        	throw new BusinessException("0002","账户余额查询失败");
+        }
         return fundInfo;
     }
 
