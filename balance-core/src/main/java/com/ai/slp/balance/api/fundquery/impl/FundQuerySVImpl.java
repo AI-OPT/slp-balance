@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.fundquery.interfaces.IFundQuerySV;
 import com.ai.slp.balance.api.fundquery.param.AccountIdParam;
@@ -59,17 +60,29 @@ public class FundQuerySVImpl implements IFundQuerySV {
         if (accountId.getAccountId() == 0) {
             throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "账户ID不能为空");
         }
-        FundInfo fundInfo = null;
+        FundInfo fundInfo = new FundInfo();
+        ResponseHeader responseHeader = new ResponseHeader();
         try{
         	fundInfo = fundQueryBusiSV.queryFund(accountId);
         	LOG.debug("余额查询结束");
-        	if(null == fundInfo){
-        		throw new BusinessException("0001","未查询到余额信息");
+        	if(null != fundInfo){
+        		responseHeader.setResultCode("0000");
+        		responseHeader.setResultMessage("成功");
+        		fundInfo.setResponseHeader(responseHeader);
+        	}else{
+        		responseHeader.setResultCode("0001");
+        		responseHeader.setResultMessage("未查询到余额信息");
+        		fundInfo.setResponseHeader(responseHeader);
         	}
+        	//
+        	return fundInfo;
         }catch(Exception e){
-        	throw new BusinessException("0002","账户余额查询失败");
+        	responseHeader.setResultCode("0002");
+    		responseHeader.setResultMessage("账户余额查询失败");
+    		fundInfo.setResponseHeader(responseHeader);
+    		return fundInfo;
         }
-        return fundInfo;
+        
     }
 
     @Override
