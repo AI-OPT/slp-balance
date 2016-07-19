@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
 @Path("/orderToBillAccountService")
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -25,5 +26,5 @@ public interface IOrderToBillAccountSV {
      */
 	@POST
 	@Path("/orderToBillAccount")
-	public void orderToBillAccount(BillGenRequest billgenRequest) throws BusinessException,SystemException;
+	public BaseResponse orderToBillAccount(BillGenRequest billgenRequest) throws BusinessException,SystemException;
 }
