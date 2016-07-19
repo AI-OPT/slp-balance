@@ -31,6 +31,13 @@ public class OrderToBillAccountSVImpl implements IOrderToBillAccountSV {
 			response.setResponseHeader(responseHeader);
 			//
 			return response;
+		}catch(BusinessException businessException){
+			responseHeader.setIsSuccess(false);
+			responseHeader.setResultCode(businessException.getErrorCode());
+			responseHeader.setResultMessage(businessException.getErrorMessage());
+			response.setResponseHeader(responseHeader);
+			//
+			return response;
 		}catch(Exception e){
 			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode("000001");
