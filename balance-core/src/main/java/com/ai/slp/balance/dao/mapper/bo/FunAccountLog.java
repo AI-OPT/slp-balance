@@ -47,6 +47,10 @@ public class FunAccountLog {
 
     private String topBillCycleId;
 
+    private Timestamp creditActiveTime;
+
+    private Timestamp creditExpireTime;
+
     public String getTenantId() {
         return tenantId;
     }
@@ -221,5 +225,21 @@ public class FunAccountLog {
 
     public void setTopBillCycleId(String topBillCycleId) {
         this.topBillCycleId = topBillCycleId == null ? null : topBillCycleId.trim();
+    }
+
+    public Timestamp getCreditActiveTime() {
+        return creditActiveTime;
+    }
+
+    public void setCreditActiveTime(Timestamp creditActiveTime) {
+        this.creditActiveTime = creditActiveTime;
+    }
+
+    public Timestamp getCreditExpireTime() {
+        return creditExpireTime;
+    }
+
+    public void setCreditExpireTime(Timestamp creditExpireTime) {
+        this.creditExpireTime = creditExpireTime;
     }
 }
