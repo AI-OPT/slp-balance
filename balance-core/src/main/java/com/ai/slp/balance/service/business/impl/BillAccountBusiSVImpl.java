@@ -15,6 +15,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
 import com.ai.slp.balance.dao.mapper.bo.BillAccount;
@@ -47,6 +48,8 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 	
 	@Override
 	public void orderToBillAccount(BillGenRequest request) throws BusinessException, SystemException {
+		//判断当前用户授信时间是否失效
+		validateCreditActiveTimeAndCreditExpireTime(request);
 		//验证账户逾期是否欠费
 		validateArrearage(request);
 		
@@ -178,6 +181,19 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 					throw new BusinessException("000001","账户存在逾期欠费");
 				}
 			}
+		}
+	}
+	/**
+	 * 判断当前用户授信时间是否失效
+	 * @param request
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	public void validateCreditActiveTimeAndCreditExpireTime(BillGenRequest request){
+		FunAccountInfo funAccountInfo = this.funAccountInfoAtomSV.findFunAccountInfoByCreditActiveTimeAndCreditExpireTime(Long.valueOf(request.getAccountId()), DateUtil.getSysDate());
+		if(null == funAccountInfo){
+			throw new BusinessException("000003","此账户授信时间已失效");
 		}
 	}
 }
