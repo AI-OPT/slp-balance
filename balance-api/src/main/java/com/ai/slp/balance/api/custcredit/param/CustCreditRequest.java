@@ -12,8 +12,28 @@ public class CustCreditRequest extends BaseInfo {
 	private String accountId;
 
 	private String custId;
-	
+
 	private Long credit;
+
+	private String operId;
+
+	private String operCode;
+
+	public String getOperId() {
+		return operId;
+	}
+
+	public void setOperId(String operId) {
+		this.operId = operId;
+	}
+
+	public String getOperCode() {
+		return operCode;
+	}
+
+	public void setOperCode(String operCode) {
+		this.operCode = operCode;
+	}
 
 	public String getAccountId() {
 		return accountId;
