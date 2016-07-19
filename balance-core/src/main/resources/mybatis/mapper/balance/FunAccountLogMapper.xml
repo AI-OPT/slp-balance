@@ -26,6 +26,10 @@
     <result column="top_bill_cycle_id" property="topBillCycleId" jdbcType="VARCHAR" />
     <result column="credit_active_time" property="creditActiveTime" jdbcType="DATE" />
     <result column="credit_expire_time" property="creditExpireTime" jdbcType="DATE" />
+    <result column="old_credit" property="oldCredit" jdbcType="BIGINT" />
+    <result column="update_mask" property="updateMask" jdbcType="CHAR" />
+    <result column="oper_id" property="operId" jdbcType="BIGINT" />
+    <result column="oper_code" property="operCode" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -89,7 +93,8 @@
     tenant_id, account_id, acct_name, cust_id, acct_type, pay_type, post_type, acct_addr, 
     email, total_balance, credit, temp_credit, temp_valid_time, d_tot_quota, d_sig_quota, 
     d_trans_quota, acct_status, balance_chg_date, remark, update_time, bill_cycle_def_id, 
-    top_bill_cycle_id, credit_active_time, credit_expire_time
+    top_bill_cycle_id, credit_active_time, credit_expire_time, old_credit, update_mask, 
+    oper_id, oper_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountLogCriteria" >
     select
@@ -122,8 +127,9 @@
       temp_valid_time, d_tot_quota, d_sig_quota, 
       d_trans_quota, acct_status, balance_chg_date, 
       remark, update_time, bill_cycle_def_id, 
-      top_bill_cycle_id, credit_active_time, credit_expire_time
-      )
+      top_bill_cycle_id, credit_active_time, credit_expire_time, 
+      old_credit, update_mask, oper_id, 
+      oper_code)
     values (#{tenantId,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, #{acctName,jdbcType=VARCHAR}, 
       #{custId,jdbcType=VARCHAR}, #{acctType,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, 
       #{postType,jdbcType=VARCHAR}, #{acctAddr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
@@ -131,8 +137,9 @@
       #{tempValidTime,jdbcType=TIMESTAMP}, #{dTotQuota,jdbcType=BIGINT}, #{dSigQuota,jdbcType=BIGINT}, 
       #{dTransQuota,jdbcType=BIGINT}, #{acctStatus,jdbcType=VARCHAR}, #{balanceChgDate,jdbcType=TIMESTAMP}, 
       #{remark,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{billCycleDefId,jdbcType=BIGINT}, 
-      #{topBillCycleId,jdbcType=VARCHAR}, #{creditActiveTime,jdbcType=DATE}, #{creditExpireTime,jdbcType=DATE}
-      )
+      #{topBillCycleId,jdbcType=VARCHAR}, #{creditActiveTime,jdbcType=DATE}, #{creditExpireTime,jdbcType=DATE}, 
+      #{oldCredit,jdbcType=BIGINT}, #{updateMask,jdbcType=CHAR}, #{operId,jdbcType=BIGINT}, 
+      #{operCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.slp.balance.dao.mapper.bo.FunAccountLog" >
     insert into fun_account_log
@@ -209,6 +216,18 @@
       <if test="creditExpireTime != null" >
         credit_expire_time,
       </if>
+      <if test="oldCredit != null" >
+        old_credit,
+      </if>
+      <if test="updateMask != null" >
+        update_mask,
+      </if>
+      <if test="operId != null" >
+        oper_id,
+      </if>
+      <if test="operCode != null" >
+        oper_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tenantId != null" >
@@ -282,6 +301,18 @@
       </if>
       <if test="creditExpireTime != null" >
         #{creditExpireTime,jdbcType=DATE},
+      </if>
+      <if test="oldCredit != null" >
+        #{oldCredit,jdbcType=BIGINT},
+      </if>
+      <if test="updateMask != null" >
+        #{updateMask,jdbcType=CHAR},
+      </if>
+      <if test="operId != null" >
+        #{operId,jdbcType=BIGINT},
+      </if>
+      <if test="operCode != null" >
+        #{operCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -366,6 +397,18 @@
       <if test="record.creditExpireTime != null" >
         credit_expire_time = #{record.creditExpireTime,jdbcType=DATE},
       </if>
+      <if test="record.oldCredit != null" >
+        old_credit = #{record.oldCredit,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateMask != null" >
+        update_mask = #{record.updateMask,jdbcType=CHAR},
+      </if>
+      <if test="record.operId != null" >
+        oper_id = #{record.operId,jdbcType=BIGINT},
+      </if>
+      <if test="record.operCode != null" >
+        oper_code = #{record.operCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -396,7 +439,11 @@
       bill_cycle_def_id = #{record.billCycleDefId,jdbcType=BIGINT},
       top_bill_cycle_id = #{record.topBillCycleId,jdbcType=VARCHAR},
       credit_active_time = #{record.creditActiveTime,jdbcType=DATE},
-      credit_expire_time = #{record.creditExpireTime,jdbcType=DATE}
+      credit_expire_time = #{record.creditExpireTime,jdbcType=DATE},
+      old_credit = #{record.oldCredit,jdbcType=BIGINT},
+      update_mask = #{record.updateMask,jdbcType=CHAR},
+      oper_id = #{record.operId,jdbcType=BIGINT},
+      oper_code = #{record.operCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

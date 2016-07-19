@@ -1674,6 +1674,266 @@ public class FunAccountLogCriteria {
             addCriterion("credit_expire_time not between", value1, value2, "creditExpireTime");
             return (Criteria) this;
         }
+
+        public Criteria andOldCreditIsNull() {
+            addCriterion("old_credit is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditIsNotNull() {
+            addCriterion("old_credit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditEqualTo(Long value) {
+            addCriterion("old_credit =", value, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditNotEqualTo(Long value) {
+            addCriterion("old_credit <>", value, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditGreaterThan(Long value) {
+            addCriterion("old_credit >", value, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditGreaterThanOrEqualTo(Long value) {
+            addCriterion("old_credit >=", value, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditLessThan(Long value) {
+            addCriterion("old_credit <", value, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditLessThanOrEqualTo(Long value) {
+            addCriterion("old_credit <=", value, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditIn(List<Long> values) {
+            addCriterion("old_credit in", values, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditNotIn(List<Long> values) {
+            addCriterion("old_credit not in", values, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditBetween(Long value1, Long value2) {
+            addCriterion("old_credit between", value1, value2, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andOldCreditNotBetween(Long value1, Long value2) {
+            addCriterion("old_credit not between", value1, value2, "oldCredit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskIsNull() {
+            addCriterion("update_mask is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskIsNotNull() {
+            addCriterion("update_mask is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskEqualTo(String value) {
+            addCriterion("update_mask =", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskNotEqualTo(String value) {
+            addCriterion("update_mask <>", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskGreaterThan(String value) {
+            addCriterion("update_mask >", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskGreaterThanOrEqualTo(String value) {
+            addCriterion("update_mask >=", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskLessThan(String value) {
+            addCriterion("update_mask <", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskLessThanOrEqualTo(String value) {
+            addCriterion("update_mask <=", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskLike(String value) {
+            addCriterion("update_mask like", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskNotLike(String value) {
+            addCriterion("update_mask not like", value, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskIn(List<String> values) {
+            addCriterion("update_mask in", values, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskNotIn(List<String> values) {
+            addCriterion("update_mask not in", values, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskBetween(String value1, String value2) {
+            addCriterion("update_mask between", value1, value2, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateMaskNotBetween(String value1, String value2) {
+            addCriterion("update_mask not between", value1, value2, "updateMask");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdIsNull() {
+            addCriterion("oper_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdIsNotNull() {
+            addCriterion("oper_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdEqualTo(Long value) {
+            addCriterion("oper_id =", value, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdNotEqualTo(Long value) {
+            addCriterion("oper_id <>", value, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdGreaterThan(Long value) {
+            addCriterion("oper_id >", value, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("oper_id >=", value, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdLessThan(Long value) {
+            addCriterion("oper_id <", value, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdLessThanOrEqualTo(Long value) {
+            addCriterion("oper_id <=", value, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdIn(List<Long> values) {
+            addCriterion("oper_id in", values, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdNotIn(List<Long> values) {
+            addCriterion("oper_id not in", values, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdBetween(Long value1, Long value2) {
+            addCriterion("oper_id between", value1, value2, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperIdNotBetween(Long value1, Long value2) {
+            addCriterion("oper_id not between", value1, value2, "operId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeIsNull() {
+            addCriterion("oper_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeIsNotNull() {
+            addCriterion("oper_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeEqualTo(String value) {
+            addCriterion("oper_code =", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeNotEqualTo(String value) {
+            addCriterion("oper_code <>", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeGreaterThan(String value) {
+            addCriterion("oper_code >", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("oper_code >=", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeLessThan(String value) {
+            addCriterion("oper_code <", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeLessThanOrEqualTo(String value) {
+            addCriterion("oper_code <=", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeLike(String value) {
+            addCriterion("oper_code like", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeNotLike(String value) {
+            addCriterion("oper_code not like", value, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeIn(List<String> values) {
+            addCriterion("oper_code in", values, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeNotIn(List<String> values) {
+            addCriterion("oper_code not in", values, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeBetween(String value1, String value2) {
+            addCriterion("oper_code between", value1, value2, "operCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperCodeNotBetween(String value1, String value2) {
+            addCriterion("oper_code not between", value1, value2, "operCode");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -51,6 +51,14 @@ public class FunAccountLog {
 
     private Timestamp creditExpireTime;
 
+    private Long oldCredit;
+
+    private String updateMask;
+
+    private Long operId;
+
+    private String operCode;
+
     public String getTenantId() {
         return tenantId;
     }
@@ -241,5 +249,37 @@ public class FunAccountLog {
 
     public void setCreditExpireTime(Timestamp creditExpireTime) {
         this.creditExpireTime = creditExpireTime;
+    }
+
+    public Long getOldCredit() {
+        return oldCredit;
+    }
+
+    public void setOldCredit(Long oldCredit) {
+        this.oldCredit = oldCredit;
+    }
+
+    public String getUpdateMask() {
+        return updateMask;
+    }
+
+    public void setUpdateMask(String updateMask) {
+        this.updateMask = updateMask == null ? null : updateMask.trim();
+    }
+
+    public Long getOperId() {
+        return operId;
+    }
+
+    public void setOperId(Long operId) {
+        this.operId = operId;
+    }
+
+    public String getOperCode() {
+        return operCode;
+    }
+
+    public void setOperCode(String operCode) {
+        this.operCode = operCode == null ? null : operCode.trim();
     }
 }
