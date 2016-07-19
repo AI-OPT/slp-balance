@@ -1,5 +1,6 @@
 package com.ai.slp.balance.service.atom.interfaces;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
@@ -102,4 +103,14 @@ public interface IFunAccountInfoAtomSV {
      * @ApiCode
      */
     public void updateCredit(FunAccountInfo funAccountInfo);
+    /**
+     * 根据账户id和当前时间查询 此用户的授信时间是否在生效期内
+     * @param accountId
+     * @param nowTime
+     * @return
+     * @author zhangzd
+     * @ApiDocMethod
+     * @ApiCode
+     */
+    public FunAccountInfo findFunAccountInfoByCreditActiveTimeAndCreditExpireTime(long accountId,Timestamp nowTime);
 }
