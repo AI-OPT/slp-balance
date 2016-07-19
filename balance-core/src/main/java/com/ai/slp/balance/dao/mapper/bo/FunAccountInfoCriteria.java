@@ -1694,6 +1694,126 @@ public class FunAccountInfoCriteria {
             addCriterion("top_bill_cycle_id not between", value1, value2, "topBillCycleId");
             return (Criteria) this;
         }
+
+        public Criteria andCreditActiveTimeIsNull() {
+            addCriterion("credit_active_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeIsNotNull() {
+            addCriterion("credit_active_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeEqualTo(Timestamp value) {
+            addCriterion("credit_active_time =", value, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeNotEqualTo(Timestamp value) {
+            addCriterion("credit_active_time <>", value, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeGreaterThan(Timestamp value) {
+            addCriterion("credit_active_time >", value, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("credit_active_time >=", value, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeLessThan(Timestamp value) {
+            addCriterion("credit_active_time <", value, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("credit_active_time <=", value, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeIn(List<Timestamp> values) {
+            addCriterion("credit_active_time in", values, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeNotIn(List<Timestamp> values) {
+            addCriterion("credit_active_time not in", values, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("credit_active_time between", value1, value2, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditActiveTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("credit_active_time not between", value1, value2, "creditActiveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeIsNull() {
+            addCriterion("credit_expire_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeIsNotNull() {
+            addCriterion("credit_expire_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeEqualTo(Timestamp value) {
+            addCriterion("credit_expire_time =", value, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeNotEqualTo(Timestamp value) {
+            addCriterion("credit_expire_time <>", value, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeGreaterThan(Timestamp value) {
+            addCriterion("credit_expire_time >", value, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("credit_expire_time >=", value, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeLessThan(Timestamp value) {
+            addCriterion("credit_expire_time <", value, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("credit_expire_time <=", value, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeIn(List<Timestamp> values) {
+            addCriterion("credit_expire_time in", values, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeNotIn(List<Timestamp> values) {
+            addCriterion("credit_expire_time not in", values, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("credit_expire_time between", value1, value2, "creditExpireTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreditExpireTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("credit_expire_time not between", value1, value2, "creditExpireTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
