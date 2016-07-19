@@ -1,10 +1,12 @@
 package com.ai.slp.balance.service.atom.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdx;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfoByCustIdIdxCriteria;
@@ -86,5 +88,23 @@ public class FunAccountInfoAtomSVImpl implements IFunAccountInfoAtomSV {
     	funAccountInfoNew.setCredit(funAccountInfo.getCredit());
     	//
     	MapperFactory.getFunAccountInfoMapper().updateByPrimaryKeySelective(funAccountInfo);
+    }
+    @Override
+    public FunAccountInfo findFunAccountInfoByCreditActiveTimeAndCreditExpireTime(long accountId,Timestamp nowTime){
+    	FunAccountInfoCriteria example = new FunAccountInfoCriteria();
+    	FunAccountInfoCriteria.Criteria criteria = example.createCriteria();
+    	//
+    	criteria.andAccountIdEqualTo(accountId);
+    	criteria.andCreditActiveTimeLessThanOrEqualTo(nowTime);//生效日期小于等于当前时间
+    	criteria.andCreditExpireTimeGreaterThan(nowTime);//失效日期丹玉当前时间
+    	//
+    	List<FunAccountInfo> funAccountInfoList = MapperFactory.getFunAccountInfoMapper().selectByExample(example);
+    	FunAccountInfo funAccountInfo = null;
+    	//
+    	if(!CollectionUtil.isEmpty(funAccountInfoList)){
+    		funAccountInfo = funAccountInfoList.get(0);
+    	}
+    	//
+    	return funAccountInfo;
     }
 }
