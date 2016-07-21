@@ -190,7 +190,7 @@ public class DepositAtomSVImpl implements IDepositAtomSV {
             if (!vo.getFundTypes().contains(subjectJson.getFundType())) {
                 log.debug("科目的资金类型不符合条件,科目ID[" + subjectId + "]");
                 throw new BusinessException(ExceptCodeConstants.Subject.SUBJECT_NOT_VALID,
-                        "科目的资金类型不符合条件,科目ID[" + subjectId + "]");
+                        "科目的资金类型不符合条件,科目ID[" + subjectId + "] fundType："+subjectJson.getFundType());
             }
             subjectList.put(summary.getSubjectId(), subjectJson);
         }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.slp.balance.api.custcredit.interfaces.ICustCreditManageSV;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
 
@@ -24,9 +25,27 @@ public class CustCreditManageTest  extends TestCase {
 		CustCreditRequest request = new CustCreditRequest();
 		//
 		request.setAccountId("10001");
-		request.setCredit(15566l);
+		request.setCredit(15544l);
 		//
 		this.custCreditManageSV.updateCredit(request);
+	}
+	@Test
+	public void settingCredit(){
+		CustCreditRequest request = new CustCreditRequest();
+		request.setAccountId("11151");
+		request.setCredit(15541l);
+		request.setBillGenType("D");
+		request.setCashDeposit(8000l);
+		request.setCreditActiveTime(DateUtil.getSysDate());
+		request.setCreditExpireTime(DateUtil.getSysDate());
+		request.setCustId("12345678");
+		request.setOperCode("000");
+		request.setOperId("000");
+		request.setPostpayType("D");
+		request.setPostpayUnits(10);
+		request.setTenantId("SLP");
+		//
+		this.custCreditManageSV.settingCredit(request);
 	}
 
 }
