@@ -62,7 +62,7 @@ public interface ICustCreditManageSV {
 	@Path("/findCustCreditDetail")
 	public CustCreditDetailResponse findCustCreditDetail(CustCreditDetailRequest request) throws BusinessException,SystemException;
 	/**
-	 * 
+	 * 信用额度设置记录分页查询
 	 * @param request
 	 * @return
 	 * @throws BusinessException
