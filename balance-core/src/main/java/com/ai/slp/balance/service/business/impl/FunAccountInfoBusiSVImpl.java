@@ -14,6 +14,8 @@ import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
+import com.ai.slp.balance.api.custcredit.param.CustCreditDetailRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
 import com.ai.slp.balance.api.deposit.param.ForegiftDeposit;
 import com.ai.slp.balance.constants.BalancesCostants;
@@ -239,4 +241,42 @@ public class FunAccountInfoBusiSVImpl implements IFunAccountInfoBusiSV {
         depositAtomSV.sendAtsAddFunFundSerialByAcctIdIdx(depositVo);
         return paySerialCode;
     }
+	/**
+	 * 查询授信详情
+	 */
+	public CustCreditDetailResponse findCustCreditDetail(CustCreditDetailRequest request) throws BusinessException,SystemException{
+		//
+		CustCreditDetailResponse response = new CustCreditDetailResponse();
+		//
+		
+		//查询押金fun FundBook
+		FunFundBook funFundBook = this.funFundBookAtomSV.findFunFundBook(request.getAccountId(), request.getTenantId(), "8", 100001l);
+		if(null != funFundBook){
+			//押金信息
+			response.setCashDeposit(funFundBook.getBalance());
+		}
+		//查询授信额度
+		FunAccountInfo funAccountInfo = this.funAccountInfoAtomSV.getBeanByPrimaryKey(request.getAccountId());
+		if(null != funAccountInfo){
+			//授信额度
+			response.setCredit(funAccountInfo.getCredit());
+			response.setCreditActiveTime(funAccountInfo.getCreditActiveTime());
+			response.setCreditExpireTime(funAccountInfo.getCreditExpireTime());
+			//
+			if(null != funAccountInfo.getBillCycleDefId()){
+				//查询账期信息
+				BillCycleDef billCycleDef = this.billCycleDefAtomSV.getBillCycleDef(Integer.valueOf(funAccountInfo.getBillCycleDefId().toString()));
+				//
+				if(null != billCycleDef){
+					//
+					response.setBillGenType(billCycleDef.getBillGenType());
+					response.setPostpayType(billCycleDef.getPostpayType());
+					response.setPostpayUnits(billCycleDef.getPostpayUnits());
+				}
+			}
+			
+		}
+		//
+		return response;
+	}
 }
