@@ -129,7 +129,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		if(StringUtil.isBlank(request.getTenantId())){
 			throw new BusinessException("8888","租户id不能为空");
 		}
-		CustCreditDetailResponse response = null;
+		CustCreditDetailResponse response = new CustCreditDetailResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
 		
 		try{
@@ -201,8 +201,40 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 	@Override
 	public CustCreditUsedResponse findCustCreditUsed(CustCreditUsedRequest request)
 			throws BusinessException, SystemException {
-		this.funAccountInfoBusiSV.findCustCreditUsed(request);
-		return null;
+		CustCreditUsedResponse response = new CustCreditUsedResponse();
+		//
+		ResponseHeader responseHeader = new ResponseHeader();
+		//
+		if(null == request){
+			throw new BusinessException("8888","参数不能为空");
+		}
+		if(null == request.getAccountId()){
+			throw new BusinessException("8888","账户id不能为空");
+		}
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException("8888","租户id不能为空");
+		}
+		//
+		try{
+			response = this.funAccountInfoBusiSV.findCustCreditUsed(request);
+			//
+			responseHeader.setIsSuccess(true);
+			responseHeader.setResultCode("000000");
+			responseHeader.setResultMessage("成功");
+			response.setResponseHeader(responseHeader);
+		}catch(BusinessException e){
+			responseHeader.setResultCode(e.getErrorCode());
+			responseHeader.setResultMessage(e.getErrorMessage());
+			//
+			response.setResponseHeader(responseHeader);
+		}catch(Exception e){
+			responseHeader.setResultCode("999999");
+			responseHeader.setResultMessage("失败");
+			//
+			response.setResponseHeader(responseHeader);
+		}
+		
+		return response;
 	}
 	/**
 	 * 客户未使用额度查询
@@ -210,8 +242,41 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 	@Override
 	public CustCreditUnUsedResponse findCustCreditUnUsed(CustCreditUnUsedRequest request)
 			throws BusinessException, SystemException {
-		this.funAccountInfoBusiSV.findCustCreditUnUsed(request);
-		return null;
+		CustCreditUnUsedResponse response = new CustCreditUnUsedResponse();
+		//
+		ResponseHeader responseHeader = new ResponseHeader();
+		//
+		if(null == request){
+			throw new BusinessException("8888","参数不能为空");
+		}
+		if(null == request.getAccountId()){
+			throw new BusinessException("8888","账户id不能为空");
+		}
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException("8888","租户id不能为空");
+		}
+		//
+		try{
+			response = this.funAccountInfoBusiSV.findCustCreditUnUsed(request);
+			//
+			responseHeader.setIsSuccess(true);
+			responseHeader.setResultCode("000000");
+			responseHeader.setResultMessage("成功");
+			response.setResponseHeader(responseHeader);
+		}catch(BusinessException e){
+			responseHeader.setResultCode(e.getErrorCode());
+			responseHeader.setResultMessage(e.getErrorMessage());
+			//
+			response.setResponseHeader(responseHeader);
+		}catch(Exception e){
+			responseHeader.setResultCode("999999");
+			responseHeader.setResultMessage("失败");
+			//
+			response.setResponseHeader(responseHeader);
+		}
+		
+		//
+		return response;
 	}
 
 }
