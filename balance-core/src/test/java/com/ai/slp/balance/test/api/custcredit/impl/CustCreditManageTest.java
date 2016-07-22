@@ -13,6 +13,8 @@ import com.ai.slp.balance.api.custcredit.interfaces.ICustCreditManageSV;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
 import com.alibaba.fastjson.JSON;
 
 import junit.framework.TestCase;
@@ -75,6 +77,24 @@ public class CustCreditManageTest  extends TestCase {
 		response = this.custCreditManageSV.findCustCreditDetail(request);
 		//
 		log.info("findCustCreditDetail response:"+JSON.toJSONString(response));
+	}
+	/**
+	 * 客户授信记录查询
+	 * 
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	@Test
+	public void queryCustCreditSettingRecord(){
+		CustCreditSettingRecordRequest request = new CustCreditSettingRecordRequest();
+		//
+		request.setAccountId(11151l);
+		request.setTenantId("SLP");
+		//
+		log.info("request:"+JSON.toJSONString(request));
+		CustCreditSettingRecordResponse response = this.custCreditManageSV.queryCustCreditSettingRecord(request);
+		log.info("response:"+JSON.toJSONString(response));
 	}
 
 }

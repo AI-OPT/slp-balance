@@ -1,5 +1,8 @@
 package com.ai.slp.balance.service.business.impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
@@ -17,6 +21,9 @@ import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordVo;
 import com.ai.slp.balance.api.deposit.param.ForegiftDeposit;
 import com.ai.slp.balance.constants.BalancesCostants;
 import com.ai.slp.balance.constants.FunAccountLogConstants;
@@ -276,6 +283,49 @@ public class FunAccountInfoBusiSVImpl implements IFunAccountInfoBusiSV {
 			}
 			
 		}
+		//
+		return response;
+	}
+	/**
+	 * 查询信用额度调整记录
+	 */
+	public CustCreditSettingRecordResponse queryCustCreditSettingRecord(CustCreditSettingRecordRequest request) throws BusinessException,SystemException{
+		String tenantId = request.getTenantId();
+		Long accountId = request.getAccountId();
+		Timestamp startTime = request.getStartTime();
+		Timestamp endTime = request.getEndTime();
+		Integer pageNo = request.getPageNo();
+		Integer pageSize = request.getPageSize();
+		//
+		PageInfo<FunAccountLog> pageInfo = this.funAccountLogAtomSV.queryCreditSettingRecordPageInfo(tenantId, accountId, pageNo, pageSize, startTime, endTime);
+		
+		PageInfo<CustCreditSettingRecordVo> pageInfoNew = new PageInfo<CustCreditSettingRecordVo>();
+		
+		pageInfoNew.setCount(pageInfo.getCount());
+		pageInfoNew.setPageCount(pageInfo.getPageCount());
+		pageInfoNew.setPageNo(pageNo);
+		pageInfoNew.setPageSize(pageInfo.getPageSize());
+		
+		List<CustCreditSettingRecordVo> custCreditSettingRecordVoList = new ArrayList<CustCreditSettingRecordVo>();
+		//
+		CustCreditSettingRecordVo vo = null;
+		for(FunAccountLog funAccountLog : pageInfo.getResult()){
+			vo = new CustCreditSettingRecordVo();
+			//
+			vo.setOperCode(funAccountLog.getOperCode());
+			vo.setRemark(funAccountLog.getRemark());
+			vo.setSettingAfterCredit(funAccountLog.getCredit());
+			vo.setSettingBeforCredit(funAccountLog.getOldCredit());
+			vo.setSettingCredit(funAccountLog.getCredit() - funAccountLog.getOldCredit());
+			vo.setUpdateTime(funAccountLog.getUpdateTime());
+			//
+			custCreditSettingRecordVoList.add(vo);
+		}
+		pageInfoNew.setResult(custCreditSettingRecordVoList);
+		//
+		CustCreditSettingRecordResponse response = new CustCreditSettingRecordResponse();
+		//
+		response.setCustCreditSettingRecordVoPageInfo(pageInfoNew);
 		//
 		return response;
 	}
