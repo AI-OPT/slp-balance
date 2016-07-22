@@ -12,6 +12,8 @@ import com.ai.slp.balance.api.custcredit.interfaces.ICustCreditManageSV;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.business.interfaces.IFunAccountInfoBusiSV;
@@ -115,7 +117,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 	public CustCreditDetailResponse findCustCreditDetail(CustCreditDetailRequest request)
 			throws BusinessException, SystemException {
 		if(null == request){
-			throw new BusinessException("8888","参数贝能为空");
+			throw new BusinessException("8888","参数不能为空");
 		}
 		if(null == request.getAccountId()){
 			throw new BusinessException("8888","账户id不能为空");
@@ -146,6 +148,15 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		}
 		//
 		return response;
+	}
+	/**
+	 * 客户信用额度调整记录查询
+	 */
+	@Override
+	public CustCreditSettingRecordResponse queryCustCreditSettingRecord(CustCreditSettingRecordRequest request)
+			throws BusinessException, SystemException {
+		
+		return null;
 	}
 
 }
