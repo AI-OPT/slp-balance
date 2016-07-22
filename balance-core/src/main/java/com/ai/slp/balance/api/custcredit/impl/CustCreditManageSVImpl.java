@@ -14,6 +14,10 @@ import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedResponse;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.business.interfaces.IFunAccountInfoBusiSV;
@@ -190,6 +194,24 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		}
 		//
 		return response;
+	}
+	/**
+	 * 客户已使用额度查询
+	 */
+	@Override
+	public CustCreditUsedResponse findCustCreditUsed(CustCreditUsedRequest request)
+			throws BusinessException, SystemException {
+		this.funAccountInfoBusiSV.findCustCreditUsed(request);
+		return null;
+	}
+	/**
+	 * 客户未使用额度查询
+	 */
+	@Override
+	public CustCreditUnUsedResponse findCustCreditUnUsed(CustCreditUnUsedRequest request)
+			throws BusinessException, SystemException {
+		this.funAccountInfoBusiSV.findCustCreditUnUsed(request);
+		return null;
 	}
 
 }
