@@ -114,8 +114,38 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 	@Override
 	public CustCreditDetailResponse findCustCreditDetail(CustCreditDetailRequest request)
 			throws BusinessException, SystemException {
+		if(null == request){
+			throw new BusinessException("8888","参数贝能为空");
+		}
+		if(null == request.getAccountId()){
+			throw new BusinessException("8888","账户id不能为空");
+		}
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException("8888","租户id不能为空");
+		}
+		CustCreditDetailResponse response = null;
+		ResponseHeader responseHeader = new ResponseHeader();
 		
-		return null;
+		try{
+			response = this.funAccountInfoBusiSV.findCustCreditDetail(request);
+			responseHeader.setIsSuccess(true);
+			responseHeader.setResultCode("000000");
+			responseHeader.setResultMessage("成功");
+			//
+			response.setResponseHeader(responseHeader);
+		}catch(BusinessException e){
+			responseHeader.setResultCode(e.getErrorCode());
+			responseHeader.setResultMessage(e.getErrorMessage());
+			//
+			response.setResponseHeader(responseHeader);
+		}catch(Exception e){
+			responseHeader.setResultCode("");
+			responseHeader.setResultMessage("系统错误，未知异常");
+			//
+			response.setResponseHeader(responseHeader);
+		}
+		//
+		return response;
 	}
 
 }
