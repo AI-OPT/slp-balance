@@ -12,6 +12,8 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
 
 @Path("/custCreditManageService")
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -59,4 +61,19 @@ public interface ICustCreditManageSV {
 	@POST
 	@Path("/findCustCreditDetail")
 	public CustCreditDetailResponse findCustCreditDetail(CustCreditDetailRequest request) throws BusinessException,SystemException;
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode custCreditManageService-1004
+	 * @RestRelativeURL custCreditManageService/queryCustCreditSettingRecord
+	 */
+	@POST
+	@Path("/queryCustCreditSettingRecord")
+	public CustCreditSettingRecordResponse queryCustCreditSettingRecord( CustCreditSettingRecordRequest request)throws BusinessException,SystemException;
+
 }
