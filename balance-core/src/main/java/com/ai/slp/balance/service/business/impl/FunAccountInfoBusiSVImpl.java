@@ -16,6 +16,7 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.custcredit.param.CustCreditDetailRequest;
@@ -24,13 +25,19 @@ import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordVo;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedResponse;
 import com.ai.slp.balance.api.deposit.param.ForegiftDeposit;
 import com.ai.slp.balance.constants.BalancesCostants;
 import com.ai.slp.balance.constants.FunAccountLogConstants;
+import com.ai.slp.balance.dao.mapper.bo.BillAccount;
 import com.ai.slp.balance.dao.mapper.bo.BillCycleDef;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountLog;
 import com.ai.slp.balance.dao.mapper.bo.FunFundBook;
+import com.ai.slp.balance.service.atom.interfaces.IBillAccountAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IBillCycleDefAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IDepositAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
@@ -53,6 +60,9 @@ public class FunAccountInfoBusiSVImpl implements IFunAccountInfoBusiSV {
     private IBillCycleDefAtomSV billCycleDefAtomSV;
 	@Autowired
     private IFunFundBookAtomSV funFundBookAtomSV;
+	@Autowired
+	private IBillAccountAtomSV billAccountAtomSV;
+	
 	
 	/**
 	 * 客户信用额度修改
@@ -328,5 +338,64 @@ public class FunAccountInfoBusiSVImpl implements IFunAccountInfoBusiSV {
 		response.setCustCreditSettingRecordVoPageInfo(pageInfoNew);
 		//
 		return response;
+	}
+	/**
+	 * 客户已使用额度查询 
+	 */
+	@Override
+	public CustCreditUsedResponse findCustCreditUsed(CustCreditUsedRequest request)
+			throws BusinessException, SystemException {
+		CustCreditUsedResponse response = new CustCreditUsedResponse();
+		//查询当前账户的总透支额
+		Long overdraftQuotaTotal = 0l;
+		//
+		overdraftQuotaTotal = this.overdraftQuotaTotal(request.getTenantId(), request.getAccountId());
+		//
+		response.setUsedCredit(overdraftQuotaTotal);
+		//
+		return response;
+	}
+	/**
+	 * 客户未使用额度查询
+	 */
+	@Override
+	public CustCreditUnUsedResponse findCustCreditUnUsed(CustCreditUnUsedRequest request)
+			throws BusinessException, SystemException {
+		CustCreditUnUsedResponse response  = new CustCreditUnUsedResponse();
+		//
+		FunAccountInfo funAccountInfo = this.funAccountInfoAtomSV.getBeanByPrimaryKey(Long.valueOf(request.getAccountId()));
+		//查询当前账户的信用额度
+		Long credit = 0l;
+		if(null != funAccountInfo){
+			credit = funAccountInfo.getCredit();
+		}
+		Long overdraftQuotaTotal = 0l;
+		//
+		overdraftQuotaTotal = this.overdraftQuotaTotal(request.getTenantId(), request.getAccountId());
+		//
+		response.setUnUsedCredit(credit - overdraftQuotaTotal);
+		//
+		return response;
+	}
+	/**
+	 * 查询已使用透支额，公共调用
+	 * @param tenantId
+	 * @param accountId
+	 * @return
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	public Long overdraftQuotaTotal(String tenantId,Long accountId){
+		//查询当前账户的总透支额
+		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccountOverdraftQuotaGreaterThanZero(tenantId, accountId.toString());
+		Long overdraftQuotaTotal = 0l;
+		if(!CollectionUtil.isEmpty(billAccountList)){
+			for(BillAccount billAccount : billAccountList){
+				overdraftQuotaTotal += billAccount.getOverdraftQuota();
+			}
+		}
+		//
+		return overdraftQuotaTotal;
 	}
 }

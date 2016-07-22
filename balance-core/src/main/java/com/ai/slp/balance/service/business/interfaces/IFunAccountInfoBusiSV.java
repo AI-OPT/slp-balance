@@ -7,6 +7,10 @@ import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedResponse;
 
 public interface IFunAccountInfoBusiSV {
 	public void updateCredit(CustCreditRequest request) throws BusinessException,SystemException;
@@ -42,4 +46,27 @@ public interface IFunAccountInfoBusiSV {
 	 * @ApiCode
 	 */
 	public CustCreditSettingRecordResponse queryCustCreditSettingRecord(CustCreditSettingRecordRequest request) throws BusinessException,SystemException;
+	/**
+	 * 客户已使用额度查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	public CustCreditUsedResponse findCustCreditUsed(CustCreditUsedRequest request)throws BusinessException,SystemException;
+	/**
+	 * 客户未使用额度查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	public CustCreditUnUsedResponse findCustCreditUnUsed(CustCreditUnUsedRequest request)throws BusinessException,SystemException;
+	
 }
