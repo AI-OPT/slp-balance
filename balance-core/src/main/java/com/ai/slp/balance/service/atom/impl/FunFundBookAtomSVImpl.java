@@ -153,4 +153,34 @@ public class FunFundBookAtomSVImpl implements IFunFundBookAtomSV {
     public int deductBalance(long accountId, long bookId, long amount) {
         return MapperFactory.getFunFundBookAttachMapper().deductBalance(accountId, bookId, amount);
     }
+    /**
+     * 根据租户id、账户id、资金类型、科目id 查询账本信息
+     * @param accountId
+     * @param tenantId
+     * @param fundType
+     * @param subjectId
+     * @return
+     * @author zhangzd
+     * @ApiDocMethod
+     * @ApiCode
+     */
+    public FunFundBook findFunFundBook(Long accountId,String tenantId,String fundType,Long subjectId){
+    	FunFundBookCriteria example = new FunFundBookCriteria();
+    	//
+    	FunFundBookCriteria.Criteria criteria = example.createCriteria();
+    	//
+    	criteria.andTenantIdEqualTo(tenantId);
+    	criteria.andAccountIdEqualTo(accountId);
+    	criteria.andSubjectTypeEqualTo(fundType);
+    	criteria.andSubjectIdEqualTo(subjectId);
+    	//
+    	List<FunFundBook> funFundBookList = MapperFactory.getFunFundBookMapper().selectByExample(example);
+    	//
+    	FunFundBook funFundBook = null;
+    	if(!CollectionUtil.isEmpty(funFundBookList)){
+    		funFundBook = funFundBookList.get(0);
+    	}
+    	//
+    	return funFundBook;
+    }
 }

@@ -173,4 +173,16 @@ public interface IFunFundBookAtomSV {
      * @author lilg
      */
     public int deductBalance(long accountId, long bookId, long amount);
+    /**
+     * 根据租户id、账户id、资金类型、科目id 查询账本信息
+     * @param accountId
+     * @param tenantId
+     * @param fundType
+     * @param subjectId
+     * @return
+     * @author zhangzd
+     * @ApiDocMethod
+     * @ApiCode
+     */
+    public FunFundBook findFunFundBook(Long accountId,String tenantId,String fundType,Long subjectId);
 }

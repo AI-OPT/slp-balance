@@ -63,14 +63,17 @@ public class DeductTest extends TestCase {
         List<TransSummary> transSummaryList = new ArrayList<TransSummary>();
         transSummaryList.add(summary);
         param.setTransSummary(transSummaryList);
-        param.setAccountId(902l);
+        param.setAccountId(11211);
         param.setExternalId(SeqUtil.getNewId("lilg_test_external_Id").toString());
         param.setSystemId("1");
         param.setBusinessCode("1");
-        param.setTenantId("BIS-ST");
+        param.setTenantId("SLP");
         param.setTenantPwd("111");
         param.setTotalAmount(1);
+        param.setCheckPwd(1);
+        
         DeductResponse result = deductSV.deductFund(param);
+        log.info("result:"+JSON.toJSONString(result));
         assertNotNull("返回结果空，扣款失败", result);
         assertFalse("返回结果空，扣款失败", "".equals(result));
         log.debug("扣减成功，交易流水：" + result);

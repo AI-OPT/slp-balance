@@ -52,7 +52,7 @@ public class OrderToBillAccountTest extends TestCase {
     	billgenRequest.setProductCatId("111");
     	billgenRequest.setTenantId("SLP");
     	billgenRequest.setUserId("USER001");
-    	
+    	System.out.println("入参："+JSON.toJSONString(billgenRequest));
     	this.orderToBillAccountSV.orderToBillAccount(billgenRequest);
     }
 }

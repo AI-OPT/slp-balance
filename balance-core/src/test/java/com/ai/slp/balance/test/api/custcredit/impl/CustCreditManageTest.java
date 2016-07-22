@@ -35,7 +35,7 @@ public class CustCreditManageTest  extends TestCase {
 		request.setAccountId("11151");
 		request.setCredit(15541l);
 		request.setBillGenType("D");
-		request.setCashDeposit(8000l);
+		request.setCashDeposit(9001l);
 		request.setCreditActiveTime(DateUtil.getSysDate());
 		request.setCreditExpireTime(DateUtil.getSysDate());
 		request.setCustId("12345678");

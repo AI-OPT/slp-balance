@@ -21,10 +21,12 @@ import com.ai.slp.balance.constants.FunAccountLogConstants;
 import com.ai.slp.balance.dao.mapper.bo.BillCycleDef;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountLog;
+import com.ai.slp.balance.dao.mapper.bo.FunFundBook;
 import com.ai.slp.balance.service.atom.interfaces.IBillCycleDefAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IDepositAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountLogAtomSV;
+import com.ai.slp.balance.service.atom.interfaces.IFunFundBookAtomSV;
 import com.ai.slp.balance.service.business.interfaces.IFunAccountInfoBusiSV;
 import com.ai.slp.balance.vo.DepositVo;
 import com.ai.slp.balance.vo.SubjectFundVo;
@@ -40,6 +42,9 @@ public class FunAccountInfoBusiSVImpl implements IFunAccountInfoBusiSV {
     private IDepositAtomSV depositAtomSV;
 	@Autowired
     private IBillCycleDefAtomSV billCycleDefAtomSV;
+	@Autowired
+    private IFunFundBookAtomSV funFundBookAtomSV;
+	
 	/**
 	 * 客户信用额度修改
 	 */
@@ -116,22 +121,53 @@ public class FunAccountInfoBusiSVImpl implements IFunAccountInfoBusiSV {
 		
 		//更新日志信息
 		toFunAccountLog(oldCredit,Long.valueOf(request.getAccountId()));
-		
-		// 2、押金存入
-		ForegiftDeposit params = new ForegiftDeposit();
-		params.setAccountId(Long.valueOf(request.getAccountId()));
-		params.setBusiSerialNo("");
-		params.setAmount(request.getCashDeposit());
-		params.setFundeffDate(DateUtil.getDateString(request.getCreditActiveTime(), DateUtil.DATETIME_FORMAT));
-		params.setFundexpDate(DateUtil.getDateString(request.getCreditExpireTime(), DateUtil.DATETIME_FORMAT));
-		params.setSubjectId(100001l);
-		params.setTenantId(request.getTenantId());
-		params.setSystemId("SLP");
-		
-		//
-		this.depositForegift(params);
+		//押金存入
+		this.toCashDeposit(request);
 		
 						
+	}
+	/**
+	 * 押金存入
+	 * @param request
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode
+	 */
+	public void toCashDeposit(CustCreditRequest request){
+		FunFundBook funFundBook = this.funFundBookAtomSV.findFunFundBook(Long.valueOf(request.getAccountId()), request.getTenantId(), "8", Long.valueOf(100001));
+		//
+		if(null != funFundBook){
+			FunFundBook funFundBookUpdate = new FunFundBook();
+			//
+			funFundBookUpdate.setBookId(funFundBook.getBookId());//主键条件
+			//
+			funFundBookUpdate.setBalance(request.getCashDeposit());//押金
+			funFundBookUpdate.setEffectDate(request.getCreditActiveTime());
+			funFundBookUpdate.setExpireDate(request.getCreditExpireTime());
+			//
+			this.funFundBookAtomSV.updateByPrimaryKeySelective(funFundBookUpdate);
+		}else{
+			Long bookId = SeqUtil.getNewId("fun_fund_book$book_id");
+			
+			funFundBook = new FunFundBook();
+			//
+			funFundBook.setAccountId(Long.valueOf(request.getAccountId()));
+			funFundBook.setBalance(request.getCashDeposit());
+			funFundBook.setBookId(bookId);
+			funFundBook.setBookStatus("1");
+			funFundBook.setCreateTime(DateUtil.getSysDate());
+			funFundBook.setEffectDate(request.getCreditActiveTime());
+			funFundBook.setExpireDate(request.getCreditExpireTime());
+			funFundBook.setFeatureCode(null);
+			funFundBook.setSubjectId(100001l);
+			funFundBook.setSubjectType("8");//8为押金
+			funFundBook.setSubsFreezeId(null);
+			funFundBook.setSubsId(null);
+			funFundBook.setTenantId(request.getTenantId());
+			//
+			this.funFundBookAtomSV.insertFunFundBook(funFundBook);
+			
+		}
 	}
 	/**
 	 * 写入日志
@@ -170,6 +206,7 @@ public class FunAccountInfoBusiSVImpl implements IFunAccountInfoBusiSV {
 	 * @ApiDocMethod
 	 * @ApiCode
 	 */
+	@Deprecated
 	public String depositForegift(ForegiftDeposit params) throws BusinessException {
         log.debug("进入押金存入业务服务");
         /* 参数转化 */

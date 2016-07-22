@@ -24,7 +24,7 @@ public class PayFeeManageTest extends TestCase {
 	@Test
 	public void payfee(){
 		PayFeeRequest request = new PayFeeRequest();
-		request.setAccountId("1111");
+		request.setAccountId("10001");
 		request.setCustId("aaa");
 		request.setPayFee(1l);
 		request.setPayFeeTime(DateUtil.getSysDate());
