@@ -14,6 +14,10 @@ import com.ai.slp.balance.api.custcredit.param.CustCreditDetailResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditSettingRecordResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedResponse;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedRequest;
+import com.ai.slp.balance.api.custcredit.param.CustCreditUsedResponse;
 
 @Path("/custCreditManageService")
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -75,5 +79,34 @@ public interface ICustCreditManageSV {
 	@POST
 	@Path("/queryCustCreditSettingRecord")
 	public CustCreditSettingRecordResponse queryCustCreditSettingRecord( CustCreditSettingRecordRequest request)throws BusinessException,SystemException;
+	/**
+	 * 客户已使用额度查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode custCreditManageService-1005
+	 * @RestRelativeURL custCreditManageService/findCustCreditUsed
+	 */
+	@POST
+	@Path("/findCustCreditUsed")
+	public CustCreditUsedResponse findCustCreditUsed(CustCreditUsedRequest request)throws BusinessException,SystemException;
+
+	/**
+	 * 客户未使用额度查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode custCreditManageService-1006
+	 * @RestRelativeURL custCreditManageService/findCustCreditUnUsed
+	 */
+	@POST
+	@Path("/findCustCreditUnUsed")
+	public CustCreditUnUsedResponse findCustCreditUnUsed(CustCreditUnUsedRequest request)throws BusinessException,SystemException;
 
 }
