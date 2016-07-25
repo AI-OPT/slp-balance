@@ -42,7 +42,7 @@ public class PayFeeManageTest extends TestCase {
 		request.setTenantId("SLP");
 		request.setCustId("aaa");
 		request.setPageNo(1);
-		request.setPageNo(5);
+		request.setPageSize(5);
 		//
 		log.info("request:"+JSON.toJSONString(request));
 		
