@@ -113,7 +113,7 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		 //如果存在
 		 if(null != billAccountPrimaryKey){
 			 billAccount.setFee(fee+billAccountPrimaryKey.getFee());
-			 billAccount.setOverdraftQuota(overdraftQuota+billAccountPrimaryKey.getFee());
+			 billAccount.setOverdraftQuota(overdraftQuota+billAccountPrimaryKey.getOverdraftQuota());
 			 billAccount.setUserId(userId);
 			 billAccount.setTenantId(tenantId);
 			 billAccount.setAccountId(accountId);
@@ -251,7 +251,7 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		 BillAccount billAccount = new BillAccount();
 		 if(null != billAccountPrimaryKey){
 			 billAccount.setFee(billAccountPrimaryKey.getFee() - fee);
-			 billAccount.setOverdraftQuota(billAccountPrimaryKey.getFee() - overdraftQuota);
+			 billAccount.setOverdraftQuota(billAccountPrimaryKey.getOverdraftQuota() - overdraftQuota);
 			 billAccount.setUserId(userId);
 			 billAccount.setTenantId(tenantId);
 			 billAccount.setAccountId(accountId);
