@@ -10,8 +10,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.slp.balance.api.payfee.interfaces.IPayFeeManageSV;
+import com.ai.slp.balance.api.payfee.param.PayFeeRecordRequest;
+import com.ai.slp.balance.api.payfee.param.PayFeeRecordResponse;
 import com.ai.slp.balance.api.payfee.param.PayFeeRequest;
 import com.ai.slp.balance.test.api.custcredit.impl.CustCreditManageTest;
+import com.alibaba.fastjson.JSON;
 
 import junit.framework.TestCase;
 
@@ -31,5 +34,20 @@ public class PayFeeManageTest extends TestCase {
 		request.setTenantId("SLP");
 		
 		this.payFeeManageSV.payFee(request);
+	}
+	@Test
+	public void payFeeRecord(){
+		PayFeeRecordRequest request = new PayFeeRecordRequest();
+		request.setAccountId(10001l);
+		request.setTenantId("SLP");
+		request.setCustId("aaa");
+		request.setPageNo(1);
+		request.setPageNo(5);
+		//
+		log.info("request:"+JSON.toJSONString(request));
+		
+		PayFeeRecordResponse response = this.payFeeManageSV.payFeeRecord(request);
+		//
+		log.info("response:"+JSON.toJSONString(response));
 	}
 }

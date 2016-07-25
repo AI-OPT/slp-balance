@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
+import com.ai.slp.balance.api.payfee.param.PayFeeRecordRequest;
+import com.ai.slp.balance.api.payfee.param.PayFeeRecordResponse;
 import com.ai.slp.balance.api.payfee.param.PayFeeRequest;
 
 @Path("/payFeeManageService")
@@ -28,4 +30,18 @@ public interface IPayFeeManageSV {
 	@POST
 	@Path("/payFee")
 	public BaseResponse payFee(PayFeeRequest request) throws BusinessException,SystemException;
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode payFeeManageService-1002
+	 * @RestRelativeURL payFeeManageService/payFeeRecord
+     */
+	@POST
+	@Path("/payFeeRecord")
+	public PayFeeRecordResponse payFeeRecord(PayFeeRecordRequest request) throws BusinessException,SystemException;
 }
