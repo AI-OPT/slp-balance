@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.ai.opt.base.exception.BusinessException;
@@ -18,6 +19,7 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
+import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRollBackRequest;
 import com.ai.slp.balance.dao.mapper.bo.BillAccount;
 import com.ai.slp.balance.dao.mapper.bo.BillAccountKey;
 import com.ai.slp.balance.dao.mapper.bo.BillCycleDef;
@@ -47,7 +49,8 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 	private IFunAccountInfoAtomSV funAccountInfoAtomSV;
 	
 	@Override
-	public void orderToBillAccount(BillGenRequest request) throws BusinessException, SystemException {
+	@Transactional
+	public void updateOrderToBillAccount(BillGenRequest request) throws BusinessException, SystemException {
 		//判断当前用户授信时间是否失效
 		validateCreditActiveTimeAndCreditExpireTime(request);
 		//验证账户逾期是否欠费
@@ -195,5 +198,69 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		if(null == funAccountInfo){
 			throw new BusinessException("000003","此账户授信时间已失效");
 		}
+	}
+	@Transactional
+	public void updateOrderToBillAccountRollBack(BillGenRollBackRequest request) throws BusinessException,SystemException{
+		 Long accountId = Long.valueOf(request.getAccountId()); 
+		 Long fee = request.getFee();
+		 Long overdraftQuota = request.getOverdraftQuota();
+		 String userId = request.getUserId();
+		 String tenantId = request.getTenantId();
+		 
+		//查询账期id
+		 FunAccountInfo funAccountInfo = this.funAccountInfoAtomSV.getBeanByPrimaryKey(accountId);
+		 String billCycleId = "";
+		 //
+		 BillCycleDef billCycleDef = new BillCycleDef();
+		 if(null != funAccountInfo){
+			 //
+			 if(!StringUtils.isEmpty(funAccountInfo.getBillCycleDefId())){
+				 billCycleDef = this.billCycleDefAtomSV.getBillCycleDef(Integer.valueOf(funAccountInfo.getBillCycleDefId().toString())); 
+			 }else{
+				 throw new BusinessException("", "fun_account_info未配置账期信息"); 
+			 }
+		 }else {
+			 throw new BusinessException("", "fun_account_info 信息表为空");
+		 }
+		 String billGenType = billCycleDef.getBillGenType();
+		 Integer amount = billCycleDef.getPostpayUnits();
+		 //
+		 if(!StringUtil.isBlank(billGenType)){
+			 Map<String,Object> billCycleMap = new HashMap<String,Object>();
+			 //
+			 billCycleMap = BillCycleUtil.getBillCycleIdAndPayDate(billGenType, amount);
+			 billCycleId = billCycleMap.get(BillCycleUtil.BILL_CYCLE_ID).toString();
+		 }
+		//根据商品类目id查询科目id
+		 BillOrder2fee billOrder2fee = this.billOrder2feeAtomSV.getBillOrder2fee(request.getProductCatId());
+		 
+		 String subjectId = "1";
+		 if(null != billOrder2fee){
+			if(!StringUtil.isBlank(billOrder2fee.getSubjectId())){
+				subjectId = billOrder2fee.getSubjectId();
+			}
+		 }
+		//判断根据主键查询 信息是否存在
+		 BillAccountKey billAccountKey = new BillAccountKey();
+		 billAccountKey.setAccountId(accountId);
+		 billAccountKey.setBillCycleId(billCycleId);
+		 billAccountKey.setSubjectId(subjectId);
+		 //
+		 BillAccount billAccountPrimaryKey = this.billAccountAtomSV.getBillAccount(billAccountKey);
+		 //如果存在
+		 BillAccount billAccount = new BillAccount();
+		 if(null != billAccountPrimaryKey){
+			 billAccount.setFee(billAccountPrimaryKey.getFee() - fee);
+			 billAccount.setOverdraftQuota(billAccountPrimaryKey.getFee() - overdraftQuota);
+			 billAccount.setUserId(userId);
+			 billAccount.setTenantId(tenantId);
+			 billAccount.setAccountId(accountId);
+			 billAccount.setSubjectId(subjectId);
+			 billAccount.setBillCycleId(billCycleId);
+			 //修改信息
+			 this.billAccountAtomSV.updateBillAccountByPrimaryKeySelective(billAccount);
+		 }else{
+			 throw new BusinessException("000001","回退账单不存在");
+		 }
 	}
 }
