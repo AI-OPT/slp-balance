@@ -52,6 +52,7 @@ public class BillPayLogBusiSVImpl implements IBillPayLogBusiSV {
 		billPayLog.setTenantId(request.getTenantId());
 		billPayLog.setUserId(request.getCustId());
 		billPayLog.setRollbackDate(null);
+		billPayLog.setOverdraft(Long.valueOf(payFeeTotal.toString()));
 		//
 		this.billPayLogAtomSV.insert(billPayLog);
 		
