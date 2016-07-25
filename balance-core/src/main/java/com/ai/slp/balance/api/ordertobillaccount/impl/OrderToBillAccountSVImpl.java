@@ -48,7 +48,7 @@ public class OrderToBillAccountSVImpl implements IOrderToBillAccountSV {
 		}
 		//
 		try{
-			this.billAccountBusiSV.orderToBillAccount(billgenRequest);
+			this.billAccountBusiSV.updateOrderToBillAccount(billgenRequest);
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode("000000");
 			responseHeader.setResultMessage("订单入账成功");
