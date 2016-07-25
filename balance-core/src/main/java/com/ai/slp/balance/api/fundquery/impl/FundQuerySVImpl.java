@@ -67,7 +67,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
         	fundInfo = fundQueryBusiSV.queryFund(accountId);
         	LOG.debug("余额查询结束");
         	if(!CollectionUtil.isEmpty(fundInfo.getFundBooks())){
-        		responseHeader.setResultCode("000000");
+        		responseHeader.setResultCode("0000");
         		responseHeader.setResultMessage("成功");
         		responseHeader.setIsSuccess(true);
         		fundInfo.setResponseHeader(responseHeader);
@@ -79,7 +79,7 @@ public class FundQuerySVImpl implements IFundQuerySV {
         	//
         	return fundInfo;
         }catch(Exception e){
-        	responseHeader.setResultCode("999999");
+        	responseHeader.setResultCode("0002");
     		responseHeader.setResultMessage("账户余额查询失败");
     		fundInfo.setResponseHeader(responseHeader);
     		return fundInfo;
