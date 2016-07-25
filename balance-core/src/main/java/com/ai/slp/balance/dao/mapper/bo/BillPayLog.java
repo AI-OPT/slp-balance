@@ -19,6 +19,8 @@ public class BillPayLog {
 
     private Timestamp rollbackDate;
 
+    private Long overdraft;
+
     public String getPayLogSeq() {
         return payLogSeq;
     }
@@ -81,5 +83,13 @@ public class BillPayLog {
 
     public void setRollbackDate(Timestamp rollbackDate) {
         this.rollbackDate = rollbackDate;
+    }
+
+    public Long getOverdraft() {
+        return overdraft;
+    }
+
+    public void setOverdraft(Long overdraft) {
+        this.overdraft = overdraft;
     }
 }

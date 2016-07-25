@@ -634,6 +634,66 @@ public class BillPayLogCriteria {
             addCriterion("rollback_date not between", value1, value2, "rollbackDate");
             return (Criteria) this;
         }
+
+        public Criteria andOverdraftIsNull() {
+            addCriterion("overdraft is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftIsNotNull() {
+            addCriterion("overdraft is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftEqualTo(Long value) {
+            addCriterion("overdraft =", value, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftNotEqualTo(Long value) {
+            addCriterion("overdraft <>", value, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftGreaterThan(Long value) {
+            addCriterion("overdraft >", value, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftGreaterThanOrEqualTo(Long value) {
+            addCriterion("overdraft >=", value, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftLessThan(Long value) {
+            addCriterion("overdraft <", value, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftLessThanOrEqualTo(Long value) {
+            addCriterion("overdraft <=", value, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftIn(List<Long> values) {
+            addCriterion("overdraft in", values, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftNotIn(List<Long> values) {
+            addCriterion("overdraft not in", values, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftBetween(Long value1, Long value2) {
+            addCriterion("overdraft between", value1, value2, "overdraft");
+            return (Criteria) this;
+        }
+
+        public Criteria andOverdraftNotBetween(Long value1, Long value2) {
+            addCriterion("overdraft not between", value1, value2, "overdraft");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
