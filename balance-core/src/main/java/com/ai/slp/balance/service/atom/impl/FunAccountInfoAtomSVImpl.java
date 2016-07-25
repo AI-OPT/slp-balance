@@ -96,7 +96,7 @@ public class FunAccountInfoAtomSVImpl implements IFunAccountInfoAtomSV {
     	//
     	criteria.andAccountIdEqualTo(accountId);
     	criteria.andCreditActiveTimeLessThanOrEqualTo(nowTime);//生效日期小于等于当前时间
-    	criteria.andCreditExpireTimeGreaterThan(nowTime);//失效日期丹玉当前时间
+    	criteria.andCreditExpireTimeGreaterThan(nowTime);//失效日期大于当前时间
     	//
     	List<FunAccountInfo> funAccountInfoList = MapperFactory.getFunAccountInfoMapper().selectByExample(example);
     	FunAccountInfo funAccountInfo = null;
