@@ -24,9 +24,6 @@ import com.ai.slp.balance.api.custcredit.param.CustCreditUsedResponse;
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface ICustCreditManageSV {
 	
-//	@POST
-//	@Path("/updateCredit")
-//	public BaseResponse updateCredit(CustCreditRequest request) throws BusinessException,SystemException;
 	/**
 	 * 信用度设置调整
 	 * @param request
