@@ -93,7 +93,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款时限周期类型不能为空");
 		}
 		if(null == request.getPostpayUnits() || 0 == request.getPostpayUnits()){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款时限周期类型不能为空或0");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款时限周期数不能为空或0");
 		}
 		try{
 			this.funAccountInfoBusiSV.updateSettingCredit(request);
