@@ -10,6 +10,7 @@ import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.balance.api.ordertobillaccount.interfaces.IOrderToBillAccountSV;
 import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
+import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.service.business.interfaces.IBillAccountBusiSV;
 import com.alibaba.dubbo.config.annotation.Service;
 @Service
@@ -25,32 +26,32 @@ public class OrderToBillAccountSVImpl implements IOrderToBillAccountSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		
 		if(StringUtil.isBlank(billgenRequest.getAccountId())){
-			throw new BusinessException("8888","账户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
 		if(StringUtil.isBlank(billgenRequest.getProductCatId())){
-			throw new BusinessException("8888","商品类目id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"商品类目id不能为空");
 		}
 		if(StringUtil.isBlank(billgenRequest.getTenantId())){
-			throw new BusinessException("8888","租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
 		}
 		if(StringUtil.isBlank(billgenRequest.getUserId())){
-			throw new BusinessException("8888","用户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"用户id不能为空");
 		}
 		if(null != billgenRequest.getFee() && StringUtil.isBlank(String.valueOf(billgenRequest.getFee()))){
-			throw new BusinessException("8888","订单费用不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单费用不能为空");
 		}
 		if(null != billgenRequest.getOverdraftQuota() && StringUtil.isBlank(String.valueOf(billgenRequest.getOverdraftQuota()))){
-			throw new BusinessException("8888","透支额不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"透支额不能为空");
 		}
 		
 		if(null != billgenRequest.getOrderTime()){
-			throw new BusinessException("8888","下单时间不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"下单时间不能为空");
 		}
 		//
 		try{
 			this.billAccountBusiSV.updateOrderToBillAccount(billgenRequest);
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("订单入账成功");
 			response.setResponseHeader(responseHeader);
 			//
@@ -64,7 +65,7 @@ public class OrderToBillAccountSVImpl implements IOrderToBillAccountSV {
 			return response;
 		}catch(Exception e){
 			responseHeader.setIsSuccess(false);
-			responseHeader.setResultCode("000001");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("订单入账失败");
 			response.setResponseHeader(responseHeader);
 			//

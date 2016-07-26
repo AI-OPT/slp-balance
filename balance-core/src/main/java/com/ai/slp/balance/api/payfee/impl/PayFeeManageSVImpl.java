@@ -12,6 +12,7 @@ import com.ai.slp.balance.api.payfee.interfaces.IPayFeeManageSV;
 import com.ai.slp.balance.api.payfee.param.PayFeeRecordRequest;
 import com.ai.slp.balance.api.payfee.param.PayFeeRecordResponse;
 import com.ai.slp.balance.api.payfee.param.PayFeeRequest;
+import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.service.business.interfaces.IBillPayLogBusiSV;
 import com.alibaba.dubbo.config.annotation.Service;
 
@@ -30,14 +31,14 @@ public class PayFeeManageSVImpl implements IPayFeeManageSV {
 			this.billPayLogBusiSV.payFee(request);
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("还款成功");
 			response.setResponseHeader(responseHeader);
 		} catch (Exception e) {
 			e.printStackTrace();
 			//
 			responseHeader.setIsSuccess(false);
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("还款失败");
 			response.setResponseHeader(responseHeader);
 		}
@@ -49,13 +50,13 @@ public class PayFeeManageSVImpl implements IPayFeeManageSV {
 	@Override
 	public PayFeeRecordResponse payFeeRecord(PayFeeRecordRequest request) throws BusinessException, SystemException {
 		if(null == request){
-			throw new BusinessException("8888","请求参数不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"请求参数不能为空");
 		}
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("8888","租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
 		}
 		if(null == request.getAccountId()){
-			throw new BusinessException("8888","账户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
 		//
 		PayFeeRecordResponse response = new PayFeeRecordResponse();
@@ -65,7 +66,7 @@ public class PayFeeManageSVImpl implements IPayFeeManageSV {
 			response = this.billPayLogBusiSV.payFeeRecord(request);
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("成功");
 			//
 			response.setResponseHeader(responseHeader);
@@ -78,7 +79,7 @@ public class PayFeeManageSVImpl implements IPayFeeManageSV {
 			
 		}catch(Exception e){
 			
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("查询失败");
 			//
 			response.setResponseHeader(responseHeader);

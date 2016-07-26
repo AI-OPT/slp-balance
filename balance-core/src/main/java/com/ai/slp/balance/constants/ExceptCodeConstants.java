@@ -14,7 +14,10 @@ public final class ExceptCodeConstants {
         private Special() {
 
         }
-
+        /**
+         * 成功
+         */
+        public static final String SYSTEM_SUCCESS = "000000";
         /**
          * 系统级异常
          */

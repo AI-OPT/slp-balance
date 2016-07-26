@@ -18,6 +18,7 @@ import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditUnUsedResponse;
 import com.ai.slp.balance.api.custcredit.param.CustCreditUsedRequest;
 import com.ai.slp.balance.api.custcredit.param.CustCreditUsedResponse;
+import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.dao.mapper.bo.FunAccountInfo;
 import com.ai.slp.balance.service.atom.interfaces.IFunAccountInfoAtomSV;
 import com.ai.slp.balance.service.business.interfaces.IFunAccountInfoBusiSV;
@@ -37,12 +38,12 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			this.funAccountInfoBusiSV.updateCredit(request);
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("信用度额度设置成功");
 			response.setResponseHeader(responseHeader);
 		} catch (Exception e) {
 			responseHeader.setIsSuccess(false);
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("信用度额度设置失败");
 			response.setResponseHeader(responseHeader);
 		}
@@ -56,49 +57,49 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
 		if(null == request){
-			throw new BusinessException("8888","参数不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"参数不能为空");
 		}
 		if(StringUtil.isBlank(request.getAccountId())){
-			throw new BusinessException("8888","账户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
 		if(StringUtil.isBlank(request.getBillGenType())){
-			throw new BusinessException("8888","账单周期类型不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账单周期类型不能为空");
 		}
 		if(StringUtil.isBlank(request.getCustId())){
-			throw new BusinessException("8888","客户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"客户id不能为空");
 		}
 		if(StringUtil.isBlank(request.getOperCode())){
-			throw new BusinessException("8888","操作者编码不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者编码不能为空");
 		}
 		if(StringUtil.isBlank(request.getOperId())){
-			throw new BusinessException("8888","操作者id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者id不能为空");
 		}
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("8888","租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
 		}
 		if(null == request.getCashDeposit() || 0 == request.getCashDeposit()){
-			throw new BusinessException("8888","押金不能为为空或0");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"押金不能为为空或0");
 		}
 		if(null == request.getCredit() || 0 == request.getCredit()){
-			throw new BusinessException("8888","信用额度不能为空或0");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"信用额度不能为空或0");
 		}
 		if(null == request.getCreditActiveTime()){
-			throw new BusinessException("8888","信用额度生效时间不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"信用额度生效时间不能为空");
 		}
 		if(null == request.getCreditExpireTime()){
-			throw new BusinessException("8888","信用额度失效时间不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"信用额度失效时间不能为空");
 		}
 		if(StringUtil.isBlank(request.getPostpayType())){
-			throw new BusinessException("8888","还款时限周期类型不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款时限周期类型不能为空");
 		}
 		if(null == request.getPostpayUnits() || 0 == request.getPostpayUnits()){
-			throw new BusinessException("8888","还款时限周期类型不能为空或0");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款时限周期类型不能为空或0");
 		}
 		try{
 			this.funAccountInfoBusiSV.updateSettingCredit(request);
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("信用额度设置成功");
 			response.setResponseHeader(responseHeader);
 		}catch(BusinessException|SystemException e){
@@ -108,7 +109,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			response.setResponseHeader(responseHeader);
 		}catch(Exception e){
 			//
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("信用额度设置失败");
 			response.setResponseHeader(responseHeader);
 		}
@@ -121,13 +122,13 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 	public CustCreditDetailResponse findCustCreditDetail(CustCreditDetailRequest request)
 			throws BusinessException, SystemException {
 		if(null == request){
-			throw new BusinessException("8888","参数不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"参数不能为空");
 		}
 		if(null == request.getAccountId()){
-			throw new BusinessException("8888","账户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("8888","租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
 		}
 		CustCreditDetailResponse response = new CustCreditDetailResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
@@ -135,7 +136,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		try{
 			response = this.funAccountInfoBusiSV.findCustCreditDetail(request);
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("成功");
 			//
 			response.setResponseHeader(responseHeader);
@@ -145,7 +146,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			//
 			response.setResponseHeader(responseHeader);
 		}catch(Exception e){
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("失败");
 			//
 			response.setResponseHeader(responseHeader);
@@ -164,13 +165,13 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		//
 		if(null == request){
-			throw new BusinessException("8888","请求参数不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"请求参数不能为空");
 		}
 		if(null == request.getAccountId()){
-			throw new BusinessException("8888","账户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("8888","租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
 		}
 		
 		//
@@ -178,7 +179,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			response = this.funAccountInfoBusiSV.queryCustCreditSettingRecord(request);
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("成功");
 			response.setResponseHeader(responseHeader);
 		}catch(BusinessException e){
@@ -187,7 +188,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			//
 			response.setResponseHeader(responseHeader);
 		}catch(Exception e){
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("失败");
 			//
 			response.setResponseHeader(responseHeader);
@@ -206,20 +207,20 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		//
 		if(null == request){
-			throw new BusinessException("8888","参数不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"参数不能为空");
 		}
 		if(null == request.getAccountId()){
-			throw new BusinessException("8888","账户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("8888","租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
 		}
 		//
 		try{
 			response = this.funAccountInfoBusiSV.findCustCreditUsed(request);
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("成功");
 			response.setResponseHeader(responseHeader);
 		}catch(BusinessException e){
@@ -228,7 +229,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			//
 			response.setResponseHeader(responseHeader);
 		}catch(Exception e){
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("失败");
 			//
 			response.setResponseHeader(responseHeader);
@@ -247,20 +248,20 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		//
 		if(null == request){
-			throw new BusinessException("8888","参数不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"参数不能为空");
 		}
 		if(null == request.getAccountId()){
-			throw new BusinessException("8888","账户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
 		if(StringUtil.isBlank(request.getTenantId())){
-			throw new BusinessException("8888","租户id不能为空");
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户id不能为空");
 		}
 		//
 		try{
 			response = this.funAccountInfoBusiSV.findCustCreditUnUsed(request);
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("成功");
 			response.setResponseHeader(responseHeader);
 		}catch(BusinessException e){
@@ -269,7 +270,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			//
 			response.setResponseHeader(responseHeader);
 		}catch(Exception e){
-			responseHeader.setResultCode("999999");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
 			responseHeader.setResultMessage("失败");
 			//
 			response.setResponseHeader(responseHeader);
