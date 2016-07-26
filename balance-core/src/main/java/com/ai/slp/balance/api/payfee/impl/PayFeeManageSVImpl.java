@@ -36,7 +36,7 @@ public class PayFeeManageSVImpl implements IPayFeeManageSV {
 		if(null == request.getAccountId()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
 		}
-		if(null == request.getPayFee()){
+		if(null == request.getPayFee() || 0 == request.getPayFee()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款金额不能为空或0");
 		}
 		if(null == request.getPayFeeTime()){
