@@ -13,6 +13,7 @@ import com.ai.slp.balance.api.ordertobillaccount.param.BillGenRequest;
 import com.ai.slp.balance.constants.ExceptCodeConstants;
 import com.ai.slp.balance.service.business.interfaces.IBillAccountBusiSV;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.remoting.exchange.Request;
 @Service
 @Component
 public class OrderToBillAccountSVImpl implements IOrderToBillAccountSV {
@@ -37,14 +38,14 @@ public class OrderToBillAccountSVImpl implements IOrderToBillAccountSV {
 		if(StringUtil.isBlank(billgenRequest.getUserId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"用户id不能为空");
 		}
-		if(null != billgenRequest.getFee() && StringUtil.isBlank(String.valueOf(billgenRequest.getFee()))){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单费用不能为空");
+		if(null == billgenRequest.getFee() || 0 == billgenRequest.getFee()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单费用不能为空或0");
 		}
-		if(null != billgenRequest.getOverdraftQuota() && StringUtil.isBlank(String.valueOf(billgenRequest.getOverdraftQuota()))){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"透支额不能为空");
+		if(null == billgenRequest.getOverdraftQuota() || 0 == billgenRequest.getOverdraftQuota()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"透支额不能为空或0");
 		}
 		
-		if(null != billgenRequest.getOrderTime()){
+		if(null == billgenRequest.getOrderTime()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"下单时间不能为空");
 		}
 		//
