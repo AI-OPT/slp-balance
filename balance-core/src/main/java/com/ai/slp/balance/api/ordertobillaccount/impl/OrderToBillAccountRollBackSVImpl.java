@@ -38,14 +38,14 @@ public class OrderToBillAccountRollBackSVImpl implements IOrderToBillAccountRoll
 		if(StringUtil.isBlank(request.getUserId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"用户id不能为空");
 		}
-		if(null != request.getFee() && StringUtil.isBlank(String.valueOf(request.getFee()))){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单费用不能为空");
+		if(null == request.getFee() || 0 == request.getFee()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单费用不能为空或0");
 		}
-		if(null != request.getOverdraftQuota() && StringUtil.isBlank(String.valueOf(request.getOverdraftQuota()))){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"透支额不能为空");
+		if(null == request.getOverdraftQuota() || 0 == request.getOverdraftQuota()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"透支额不能为空或0");
 		}
 		
-		if(null != request.getOrderTime()){
+		if(null == request.getOrderTime()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"下单时间不能为空");
 		}
 		try{
