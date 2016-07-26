@@ -49,7 +49,13 @@ public class PayFeeManageSVImpl implements IPayFeeManageSV {
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_SUCCESS);
 			responseHeader.setResultMessage("还款成功");
 			response.setResponseHeader(responseHeader);
-		} catch (Exception e) {
+		}catch(BusinessException e){
+			responseHeader.setResultCode(e.getErrorCode());
+			responseHeader.setResultMessage(e.getErrorMessage());
+			//
+			response.setResponseHeader(responseHeader);
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 			//
 			responseHeader.setIsSuccess(false);
