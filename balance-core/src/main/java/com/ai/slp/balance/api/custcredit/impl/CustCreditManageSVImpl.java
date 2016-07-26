@@ -30,7 +30,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 	@Autowired
 	private IFunAccountInfoBusiSV funAccountInfoBusiSV;
 
-	@Override
+	/*@Override
 	public BaseResponse updateCredit(CustCreditRequest request) throws BusinessException, SystemException {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
@@ -48,7 +48,7 @@ public class CustCreditManageSVImpl implements ICustCreditManageSV {
 			response.setResponseHeader(responseHeader);
 		}
 		return response;
-	}
+	}*/
 	/**
 	 * 客户授信设置
 	 */

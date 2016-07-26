@@ -33,9 +33,9 @@ public interface ICustCreditManageSV {
 	 * @ApiCode custCreditManageService-1001
 	 * @RestRelativeURL custCreditManageService/updateCredit
      */
-	@POST
-	@Path("/updateCredit")
-	public BaseResponse updateCredit(CustCreditRequest request) throws BusinessException,SystemException;
+//	@POST
+//	@Path("/updateCredit")
+//	public BaseResponse updateCredit(CustCreditRequest request) throws BusinessException,SystemException;
 	/**
 	 * 信用度设置调整
 	 * @param request

@@ -29,7 +29,7 @@ public class CustCreditManageTest  extends TestCase {
 	private static final Logger log = LogManager.getLogger(CustCreditManageTest.class);
 	@Autowired 
 	private ICustCreditManageSV custCreditManageSV; 
-	@Test
+	/*@Test
 	public void updateCredit(){
 		CustCreditRequest request = new CustCreditRequest();
 		//
@@ -37,7 +37,7 @@ public class CustCreditManageTest  extends TestCase {
 		request.setCredit(15544l);
 		//
 		this.custCreditManageSV.updateCredit(request);
-	}
+	}*/
 	/**
 	 * 授信额度设置
 	 * 
