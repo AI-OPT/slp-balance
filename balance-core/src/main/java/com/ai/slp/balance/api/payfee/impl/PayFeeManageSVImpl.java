@@ -27,6 +27,21 @@ public class PayFeeManageSVImpl implements IPayFeeManageSV {
 	public BaseResponse payFee(PayFeeRequest request) throws BusinessException, SystemException {
 		BaseResponse response = new BaseResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
+		if(null == request){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"参数不能为空");
+		}
+		if(StringUtil.isBlank(request.getTenantId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"租户Id不能为空");
+		}
+		if(null == request.getAccountId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"账户id不能为空");
+		}
+		if(null == request.getPayFee()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款金额不能为空或0");
+		}
+		if(null == request.getPayFeeTime()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"还款时间不能为空");
+		}
 		try {
 			this.billPayLogBusiSV.payFee(request);
 			//
