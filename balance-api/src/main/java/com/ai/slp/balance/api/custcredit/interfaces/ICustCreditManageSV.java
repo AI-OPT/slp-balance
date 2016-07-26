@@ -23,16 +23,7 @@ import com.ai.slp.balance.api.custcredit.param.CustCreditUsedResponse;
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface ICustCreditManageSV {
-	/**
-	 * 
-	 * @param CustCreditRequest
-	 * @throws BusinessException
-	 * @throws SystemException
-	 * @author zhangzd
-	 * @ApiDocMethod
-	 * @ApiCode custCreditManageService-1001
-	 * @RestRelativeURL custCreditManageService/updateCredit
-     */
+	
 //	@POST
 //	@Path("/updateCredit")
 //	public BaseResponse updateCredit(CustCreditRequest request) throws BusinessException,SystemException;
