@@ -11,6 +11,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ai.opt.sdk.util.DateUtil;
+
 public final class BillCycleUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(BillCycleUtil.class);
@@ -172,6 +174,12 @@ public final class BillCycleUtil {
     	//DateUtil.getTimeInterval(Calendar.DAY_OF_MONTH, -5);
     	Map<String,Object> map = BillCycleUtil.getBillCycleIdAndPayDate("W",28);
     	System.out.println("日期转换timstamp："+Timestamp.valueOf(map.get(PAY_DATE_NEW).toString()));
-    	System.out.println(Timestamp.valueOf("2018-11-30 00:00:00"));  
+    	System.out.println(Timestamp.valueOf("2018-11-30 00:00:00")); 
+    	
+    	//
+    	String timeStr = DateUtil.getDateString(DateUtil.getSysDate(),DATE_FORMAT );
+    	Timestamp timestamp = DateUtil.getTimestamp(timeStr+" 23:59:59", DATETIME_FORMAT);
+    	System.out.println("timeStr:"+timeStr);
+    	System.out.println("timestamp:"+timestamp);
     }
 }
