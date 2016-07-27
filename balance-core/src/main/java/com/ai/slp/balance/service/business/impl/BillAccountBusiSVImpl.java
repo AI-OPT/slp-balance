@@ -179,7 +179,11 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		List<BillAccount> billAccountList = this.billAccountAtomSV.queryBillAccountOverdraftQuotaGreaterThanZero(request.getTenantId(), request.getAccountId());
 		if(!CollectionUtil.isEmpty(billAccountList)){
 			for(BillAccount billAccount : billAccountList){
-				log.info("是否逾期欠费："+request.getOrderTime().after(billAccount.getPayDay()));
+				//
+				String timeStr = DateUtil.getDateString(billAccount.getPayDay(), BillCycleUtil.DATE_FORMAT );
+		    	Timestamp payDay = DateUtil.getTimestamp(timeStr+" 23:59:59", BillCycleUtil.DATETIME_FORMAT);
+		    	//
+				log.info("是否逾期欠费："+request.getOrderTime().after(payDay));
 				if(request.getOrderTime().after(billAccount.getPayDay())){
 					throw new BusinessException("000001","账户存在逾期欠费");
 				}
