@@ -251,6 +251,10 @@ public class BillAccountBusiSVImpl implements IBillAccountBusiSV {
 		 billAccountKey.setSubjectId(subjectId);
 		 //
 		 BillAccount billAccountPrimaryKey = this.billAccountAtomSV.getBillAccount(billAccountKey);
+		 //
+		 if(billAccountPrimaryKey.getFee() - fee < 0 || billAccountPrimaryKey.getOverdraftQuota() - overdraftQuota < 0){
+			 throw new BusinessException("000002","订单回退金额超限"); 
+		 }
 		 //如果存在
 		 BillAccount billAccount = new BillAccount();
 		 if(null != billAccountPrimaryKey){
